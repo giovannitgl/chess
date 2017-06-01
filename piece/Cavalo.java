@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 
 public class Cavalo extends Piece{
 	
-	Cavalo(int x, int y, int time){
+	public Cavalo(int x, int y, int time){
 		super(x, y, time);
 		if(time == 0){}//Time debaixo
 		else{} //Time de cima

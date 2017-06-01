@@ -9,7 +9,7 @@ public class Bispo extends Piece{
 		Nordeste, Sudeste, Noroeste, Sudoeste
 	}
 
-	Bispo(int x, int y, int time){
+	public Bispo(int x, int y, int time){
 		super(x, y, time);
 		if(time == 0){}//Time debaixo
 		else{} //Time de cima
@@ -34,7 +34,7 @@ public class Bispo extends Piece{
 		}	
 	}
 
-	public void evaluatePosition(int x, int y, Direction d){
+	public void evaluatePosition(int x, int y, Direction direction){
 		if(true)//se existe uma peca inimiga
 			validMoves.add(new Point(x, y));
 		else if(false){//se nao existe inimigo mas a posicao esta vazia
@@ -49,7 +49,7 @@ public class Bispo extends Piece{
 					break;
 
 				case Nordeste:
-					if(x-1 >= && y+1 < 8){
+					if(x-1 >= 0 && y+1 < 8){
 						x = x-1;
 						y = y+1;
 						evaluatePosition(x,y,direction);

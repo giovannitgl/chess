@@ -6,13 +6,20 @@ import javax.swing.JLabel;
 public class Piece{
 	protected Point location;
 	protected int team;
-	protected ArrayList<Point> validMoves;
+	public ArrayList<Point> validMoves;
 	protected JLabel icon;
 
-	Piece(int x, int y, int time){
+	public Piece(int x, int y, int time){
 		team = time;
 		location  = new Point(x, y);
 		validMoves = new ArrayList<Point>();
+	}
+
+	public Piece(){
+		team = 0;
+		icon = null;
+		validMoves = null;
+		location = null;
 	}
 
 	public void updatePosition(int x, int y){
@@ -21,5 +28,24 @@ public class Piece{
 
 	public void evaluatePosition(int x, int y){
 		return;
+	}
+
+	public void deletePiece(){
+		team = 0;
+		icon = null;
+		validMoves = null;
+		location = null;
+	}
+
+	public int getLocX(){
+		return (int)location.getX();
+	}
+
+	public int getLocY(){
+		return (int)location.getY();
+	}
+
+	public void setLocation(int x, int y){
+		location.setLocation(x,y);
 	}
 }
