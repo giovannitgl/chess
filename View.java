@@ -33,7 +33,7 @@ public class View{
     }
     public void clearOneRende(int x, int y){
     	//Unrender one chess piece
-    	this.panels[i][j].removeAll();
+    	this.panels[x][y].removeAll();
     }
     public void clearAllRender(){
     	//Unrender all chess pieces

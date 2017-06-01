@@ -5,4 +5,4 @@ clean:
 	rm -rf *.class
 
 run:
-	java Chess
+	java Teste
