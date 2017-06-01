@@ -1,12 +1,16 @@
-public class Model{
-	private Tabuleiro t;
-	View v;
-	Model(View v){
+public final class Model{
+	private  Tabuleiro t;
+	private View v;
+	private static final Model INSTANCE = new Model();
+	private Model(){
+	}
+	public static Model getInstance(){
+		return INSTANCE;
+	}
+	public void setView(View v){
 		this.v = v;
-		this.buildTabuleiro();
 	}
 	public void buildTabuleiro(){
-		this.v = v;
 		t = new Tabuleiro();
 		t.buildTabuleiro();
 		for(int i = 0; i < 8; i++){
