@@ -9,7 +9,7 @@ import piece.*;
 public class Controller implements MouseListener{
 
 	Controller(){
-		Chess c = new Chess(this);
+		View c = new View(this);
 	}
 
 	@Override
