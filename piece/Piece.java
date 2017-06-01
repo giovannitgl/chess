@@ -52,4 +52,7 @@ public class Piece{
 	public int getTeam(){
 		return this.team;
 	}
+	public PieceType getType(){
+		return this.pt;
+	}
 }

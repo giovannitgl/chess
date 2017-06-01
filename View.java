@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.Color;
+import piece.PieceType;
 
 public class View{
     private BoardPanel [][] panels = new BoardPanel[8][8];

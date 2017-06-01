@@ -1,4 +1,5 @@
-enum PieceType{
+package piece;
+public enum PieceType{
 	PAWN,
 	KNIGHT,
 	BISHOP,

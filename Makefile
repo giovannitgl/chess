@@ -3,6 +3,7 @@ all:
 
 clean:
 	rm -rf *.class
+	rm -rf piece/*.class
 
 run:
 	java Teste
