@@ -15,6 +15,7 @@ public class Tabuleiro{
 	public void buildTabuleiro(){
 		buildWhite();
 		buildBlack();
+		buildMiddle();
 	}
 
 	private void buildWhite(){
@@ -22,7 +23,6 @@ public class Tabuleiro{
 			Peao p = new Peao(6,i,0);
 			tabuleiro[6][i] = p;
 		}
-
 		Torre t1 = new Torre(7,0,0);
 		Torre t2 = new Torre(7,7,0);
 		tabuleiro[7][0] = t1;
@@ -65,6 +65,13 @@ public class Tabuleiro{
 		tabuleiro[0][3] = new Rainha(0,3,1);
 		tabuleiro[0][4] = new Rei(0,4,1);
 	}
+	private void buildMiddle(){
+		for(int i = 2; i < 6; i ++){
+			for(int j = 0; j < 8; j++){
+				tabuleiro[i][j] = new Piece(i,j,-1);
+			}
+		}
+	}
 
 	public void changePosition(int x, int y, Piece p){
 		tabuleiro[p.getLocX()][p.getLocY()].deletePiece();
@@ -84,7 +91,12 @@ public class Tabuleiro{
 		}
 		return false;
 	}
-
+	public boolean pieceExists(int x, int y){
+		if (tabuleiro[x][y] == null)
+			return false;
+		else
+			return true;
+	}
 	public boolean isPlayerPiece(int x, int y,int p){
 		if(tabuleiro[x][y].getTeam() == p)
 			return true;

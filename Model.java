@@ -2,6 +2,7 @@ public final class Model{
 	private  Tabuleiro t;
 	private View v;
 	private int currentTurn;
+	private int selX,selY;
 	enum RoundState{
 		NOCLICK, FIRSTCLICK
 	} 
@@ -22,8 +23,9 @@ public final class Model{
 		switch(rs){
 			case NOCLICK:
 				if(t.isPlayerPiece(x,y,currentTurn)){
-					System.out.println("AQUI");
 					v.selectTile(x,y);
+					selX = x;
+					selY = y;
 					rs = RoundState.FIRSTCLICK;
 				}
 			break;
@@ -34,7 +36,8 @@ public final class Model{
 				// 	currentTurn = (currentTurn + 1) % 2;
 				// }
 				// else{
-					v.desselectTile(x,y);
+					v.desselectTile(selX,selY);
+					selX = selY = -1;
 					rs = RoundState.NOCLICK;
 				// }
 			break;

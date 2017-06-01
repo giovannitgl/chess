@@ -17,7 +17,7 @@ public class Piece{
 	}
 
 	public Piece(){
-		team = 0;
+		team = -1;
 		icon = null;
 		validMoves = null;
 		location = null;
@@ -32,7 +32,7 @@ public class Piece{
 	}
 
 	public void deletePiece(){
-		team = 0;
+		team = -1;
 		icon = null;
 		validMoves = null;
 		location = null;
