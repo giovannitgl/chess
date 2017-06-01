@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 
 public class Piece{
 	protected Point location;
+	protected PieceType pt;
 	protected int team;
 	public ArrayList<Point> validMoves;
 	protected JLabel icon;
@@ -47,5 +48,8 @@ public class Piece{
 
 	public void setLocation(int x, int y){
 		location.setLocation(x,y);
+	}
+	public int getTeam(){
+		return this.team;
 	}
 }

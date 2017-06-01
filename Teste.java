@@ -1,5 +1,5 @@
 public class Teste{
 	public static void main(String[]args){
-		Controller c = new Controller();
+		MVC mvc = new MVC();
 	}
 }

@@ -1,5 +1,5 @@
 all:
-	javac *.java
+	javac *.java piece/*.java
 
 clean:
 	rm -rf *.class

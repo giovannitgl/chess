@@ -11,6 +11,7 @@ public class Torre extends Piece{
 
 	public Torre(int x, int y, int time){
 		super(x, y, time);
+		this.pt = PieceType.ROOK;
 		if(time == 0){}//Time debaixo
 		else{} //Time de cima
 	}

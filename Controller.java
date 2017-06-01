@@ -8,9 +8,9 @@ import piece.*;
 
 public class Controller implements MouseListener{
 
-	Controller(){
-		View c = new View(this);
-	}
+	// Controller(){
+	// 	// View c = new View(this);
+	// }
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {

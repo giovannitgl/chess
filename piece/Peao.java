@@ -8,6 +8,7 @@ public class Peao extends Piece{
 	private boolean firstMove;
 	public Peao(int x, int y, int time){
 		super(x, y, time);
+		this.pt = PieceType.PAWN;
 		if(time == 0){}//Time debaixo
 		else //Time de cima
 		firstMove = true;
