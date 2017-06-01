@@ -25,7 +25,6 @@ public class View{
                 }
                 panels[i][j] = new BoardPanel(clr, i, j);
                 panels[i][j].addMouseListener(controller);
-                addPiece(i, j, PieceType.PAWN,0);
                 f.getContentPane().add(panels[i][j]);
 
             }
