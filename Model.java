@@ -16,6 +16,8 @@ public class Model{
 				}
 			}
 		}
+		v.selectTile(1,1);
+		v.desselectTile(1,1);
 		v.render();
 	}
 }

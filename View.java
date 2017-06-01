@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.Color;
 import piece.PieceType;
+import javax.swing.BorderFactory;
 
 public class View{
     private BoardPanel [][] panels = new BoardPanel[8][8];
@@ -31,6 +32,18 @@ public class View{
             }
         }
         show(f);
+    }
+    public void selectTile(int x, int y){
+    	panels[x][y].setBackground(Color.YELLOW);
+    	panels[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
+    }
+    public void desselectTile(int x, int y){
+    	if((x+y)%2 == 0){
+    		panels[x][y].setBackground(Color.WHITE);
+    	}
+    	else
+    		panels[x][y].setBackground(new Color(100,100,100));
+    	panels[x][y].setBorder(null);
     }
     public void clearOneRende(int x, int y){
     	//Unrender one chess piece
