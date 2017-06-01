@@ -7,14 +7,17 @@ import javax.swing.JLabel;
 import piece.*;
 
 public class Controller implements MouseListener{
-
+	private Model m;
+	public void setModel(Model m){
+		this.m = m;
+	}
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		BoardPanel panel = (BoardPanel)arg0.getSource();
 		int x = panel.getRelativeX();
 	    int y = panel.getRelativeY();
 	    System.out.println("X" + x + "Y" + y);
-
+	    m.clickedPanel(x,y);
 	}
 	/**
      * Not implemented

@@ -18,11 +18,13 @@ public final class Model{
 		this.v = v;
 	}
 	public void clickedPanel(int x, int y){
+		System.out.println(rs);
 		switch(rs){
 			case NOCLICK:
 				if(t.isPlayerPiece(x,y,currentTurn)){
+					System.out.println("AQUI");
 					v.selectTile(x,y);
-					rs = RoundState.NOCLICK;
+					rs = RoundState.FIRSTCLICK;
 				}
 			break;
 			case FIRSTCLICK:

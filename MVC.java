@@ -8,6 +8,7 @@ public class MVC {
     v = new View(c);
     m.setView(v);
     m.buildTabuleiro();
+    c.setModel(m);
     // m = new Model(v);
   }
 
