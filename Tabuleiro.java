@@ -5,18 +5,19 @@ import java.util.ArrayList;
 public class Tabuleiro{
 	//Player p1
 	//Player p2
-	Point 
+	// Point 
 	protected Piece[][] tabuleiro;
 	Tabuleiro(){
 		tabuleiro = new Piece[8][8];
+		buildTabuleiro();
 	}
 
-	public void buildTabuleiro(Piece[][] tabuleiro){
-		buildWhite(tabuleiro);
-		buildBlack(tabuleiro);
+	public void buildTabuleiro(){
+		buildWhite();
+		buildBlack();
 	}
 
-	private void buildWhite(Piece[][] tabuleiro){
+	private void buildWhite(){
 		for(int i = 0; i < 8; i++){
 			Peao p = new Peao(6,i,0);
 			tabuleiro[6][i] = p;
@@ -38,7 +39,7 @@ public class Tabuleiro{
 		tabuleiro[7][5] = b2;
 	}
 
-	private void buildBlack(Piece[][] tabuleiro){
+	private void buildBlack(){
 		for(int i = 0; i < 8; i++){
 			Peao p = new Peao(1,i,0);
 			tabuleiro[6][i] = p;
