@@ -8,10 +8,6 @@ import piece.*;
 
 public class Controller implements MouseListener{
 
-	// Controller(){
-	// 	// View c = new View(this);
-	// }
-
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		BoardPanel panel = (BoardPanel)arg0.getSource();

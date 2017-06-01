@@ -1,14 +1,42 @@
 public final class Model{
 	private  Tabuleiro t;
 	private View v;
+	private int currentTurn;
+	enum RoundState{
+		NOCLICK, FIRSTCLICK
+	} 
+	RoundState rs;
 	private static final Model INSTANCE = new Model();
 	private Model(){
+		currentTurn = 0;
+		rs = RoundState.NOCLICK;
 	}
 	public static Model getInstance(){
 		return INSTANCE;
 	}
 	public void setView(View v){
 		this.v = v;
+	}
+	public void clickedPanel(int x, int y){
+		switch(rs){
+			case NOCLICK:
+				if(t.isPlayerPiece(x,y,currentTurn)){
+					v.selectTile(x,y);
+					rs = RoundState.NOCLICK;
+				}
+			break;
+			case FIRSTCLICK:
+				// if(isValide(x,y,piece)){
+				// 	v.desselectTile(x,y);
+				// 	rs = RoundState.NOCLICK;
+				// 	currentTurn = (currentTurn + 1) % 2;
+				// }
+				// else{
+					v.desselectTile(x,y);
+					rs = RoundState.NOCLICK;
+				// }
+			break;
+		}
 	}
 	public void buildTabuleiro(){
 		t = new Tabuleiro();

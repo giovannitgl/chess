@@ -84,4 +84,11 @@ public class Tabuleiro{
 		}
 		return false;
 	}
+
+	public boolean isPlayerPiece(int x, int y,int p){
+		if(tabuleiro[x][y].getTeam() == p)
+			return true;
+		else
+			return false;
+	}
 }
