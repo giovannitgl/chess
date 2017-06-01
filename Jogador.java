@@ -5,9 +5,13 @@ import java.util.ArrayList;
 public class Jogador{
 	private ArrayList<Piece> playerPieces;
 	private int team;
+	private int pieces_killed;
+	private int score;
 
 	Jogador(){
 		team = 0;
+		score = 0;
+		pieces_killed = 0;
 		playerPieces = new ArrayList<Piece>();
 	}
 
@@ -36,4 +40,17 @@ public class Jogador{
 	public ArrayList<Piece> getPlayerPieces(){
 		return playerPieces;
 	}
+
+	public void setPiecesKilled(){
+		pieces_killed++;
+	}
+
+	public void setScore(){
+		score++;
+	}
+
+	public int getScore(){
+		return score;
+	}
 }
+
