@@ -55,4 +55,7 @@ public class Piece{
 	public PieceType getType(){
 		return this.pt;
 	}
+	protected void setTeam(int x){
+		this.team = x;
+	}
 }

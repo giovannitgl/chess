@@ -9,6 +9,8 @@ public class Peao extends Piece{
 	public Peao(int x, int y, int time){
 		super(x, y, time);
 		this.pt = PieceType.PAWN;
+		this.setTeam(time);
+		// System.out.println("TIME" + this.team);
 		if(time == 0){}//Time debaixo
 		else //Time de cima
 		firstMove = true;

@@ -3,6 +3,10 @@ public class Model{
 	View v;
 	Model(View v){
 		this.v = v;
+		this.buildTabuleiro();
+	}
+	public void buildTabuleiro(){
+		this.v = v;
 		t = new Tabuleiro();
 		t.buildTabuleiro();
 		for(int i = 0; i < 8; i++){

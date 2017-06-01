@@ -11,6 +11,7 @@ public class Bispo extends Piece{
 
 	public Bispo(int x, int y, int time){
 		super(x, y, time);
+		this.setTeam(time);
 		this.pt = PieceType.BISHOP;
 		if(time == 0){}//Time debaixo
 		else{} //Time de cima
