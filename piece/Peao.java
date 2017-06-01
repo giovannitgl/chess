@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 public class Peao extends Piece{
 	
 	private boolean firstMove;
-	Peao(int x, int y, int time){
+	public Peao(int x, int y, int time){
 		super(x, y, time);
 		if(time == 0){}//Time debaixo
 		else //Time de cima

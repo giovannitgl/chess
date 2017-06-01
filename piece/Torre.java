@@ -9,7 +9,7 @@ public class Torre extends Piece{
 		Norte, Sul, Esquerda, Direita
 	}
 
-	Torre(int x, int y, int time){
+	public Torre(int x, int y, int time){
 		super(x, y, time);
 		if(time == 0){}//Time debaixo
 		else{} //Time de cima
