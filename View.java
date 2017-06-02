@@ -2,19 +2,52 @@ import javax.swing.*;
 import java.awt.Color;
 import piece.PieceType;
 import javax.swing.BorderFactory;
+import java.awt.GridLayout;
 
 public class View{
     private BoardPanel [][] panels = new BoardPanel[8][8];
-    private BoardFrame f;
-    
-    public void show(BoardFrame f){
+    private MenuText [] menuText = new MenuText[3];
+    private JPanel [] menuPanel = new JPanel[2];
+    private JFrame f;
+    private Controller control;
+    public void show(){
         this.f.pack();
         this.f.setVisible(true);
         this.f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     View(Controller controller){
-        f = new BoardFrame();
+        this.control = controller;
+         createMenu();
+    }
+    public void createMenu(){
+        f = new JFrame();
+        GridLayout layout = new GridLayout(3,0,-1,1);
+        f.setTitle("Chess");
+        menuPanel[0] = new JPanel();
+        menuPanel[1] = new JPanel();
+        // layout.setVgap(1);
+        menuPanel[1].setLayout(layout);
+        for (int i = 0; i < 2; i++)
+            this.menuPanel[i].setBackground(Color.BLACK);
+        menuPanel[0].add(new JLabel(new ImageIcon(getClass().getResource("/icons/menu.png"))));
+        menuText[0] = new MenuText("Player vs Player",0);
+        menuText[1] = new MenuText("Player vs AI",1);
+        menuText[2] = new MenuText("Player vs Player (Online)",2);
+        // menuPanel[1].addMouseListener(control);
+        for (int i = 0; i < 3; i++){
+            menuText[i].setForeground(Color.WHITE);
+            menuPanel[1].add(menuText[i]);
+            menuText[i].addMouseListener(control);
+        }
+        f.getContentPane().add(menuPanel[0]);
+        f.getContentPane().add(menuPanel[1]);
+        show();
+    }
+    public void createTable(){
+        JFrame f = new JFrame();
+        f.setTitle("Chess");
+        f.setLayout(new GridLayout(8,8));
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 Color clr;
@@ -26,12 +59,13 @@ public class View{
                     default: clr = new Color(240,20,20);
                 }
                 panels[i][j] = new BoardPanel(clr, i, j);
-                panels[i][j].addMouseListener(controller);
+                panels[i][j].addMouseListener(control);
                 f.getContentPane().add(panels[i][j]);
 
             }
         }
-        show(f);
+        this.f = f;
+        show();
     }
     public void selectTile(int x, int y){
     	panels[x][y].setBackground(Color.YELLOW);
@@ -59,7 +93,7 @@ public class View{
     }
     public void render(){
     	//renders the screen
-    	this.show(f);
+    	this.show();
     }
     public void addPiece(int x, int y, PieceType t, int player){
         JLabel pieceIcon = null;

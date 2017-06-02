@@ -43,9 +43,14 @@ public final class Model{
 			break;
 		}
 	}
+	public void clickedMenu(int x){
+		if (x == 0){
+			this.buildTabuleiro();
+		}
+	}
 	public void buildTabuleiro(){
 		t = new Tabuleiro();
-		t.buildTabuleiro();
+		v.createTable();
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if(t.tabuleiro[i][j] != null){
