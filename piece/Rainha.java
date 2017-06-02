@@ -58,9 +58,37 @@ public class Rainha extends Piece{
 	  validMoves.add( new Point(x,y) )
     switch(direction) {
       Sul:
-        if(x + 1 < 8) {
-          evaluatePosition(x + 1, y, Sul);
-        }
+      if(x + 1 < 8) {
+        evaluatePosition(x + 1, y, Sul);
+      }
+      Norte:
+      if( x - 1 >= 0 ) {
+        evaluatePosition(x - 1, y, Norte);
+      }
+      Leste:
+      if( y + 1 < 8 ) {
+        evaluatePosition(x, y + 1, Leste);
+      }
+      Oeste:
+      if( y - 1 >= 0 ) {
+        evaluatePosition(x, y - 1, Oeste);
+      }
+      Noroeste:
+      if( x - 1 >= 0 && y - 1 >= 0 )  {
+        evaluatePosition(x - 1, y - 1, Noroeste);
+      }
+      Nordeste:
+      if( x - 1 >= 0 && y + 1 < 8 )  {
+        evaluatePosition(x - 1, y + 1, Nordeste);
+      }
+      Sudoeste:
+      if( x + 1 >= 0 && y - 1 >= 0 )  {
+        evaluatePosition(x + 1, y - 1, Sudoeste);
+      }
+      Sudeste:
+      if( x + 1 >= 0 && y + 1 < 8 )  {
+        evaluatePosition(x + 1, y + 1, Sudeste);
+      }
     }
 	}
 }
