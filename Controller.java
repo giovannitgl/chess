@@ -10,6 +10,7 @@ public class Controller implements MouseListener{
 	private Model m;
 	private int mode;
 	private int hl;
+	private int dndX,dndY;
 	public void setModel(Model m){
 		this.m = m;
 	}
@@ -65,7 +66,12 @@ public class Controller implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(mode == 1){
+			BoardPanel panel = (BoardPanel)arg0.getSource();
+			int x = panel.getRelativeX();
+			int y = panel.getRelativeY();
+			m.cursorPressed(x,y);
+		}
 	}
 	/**
      * Not implemented
@@ -73,7 +79,7 @@ public class Controller implements MouseListener{
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		m.cursorReleased();
 	}
 }
 

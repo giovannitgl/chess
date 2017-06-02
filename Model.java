@@ -3,6 +3,7 @@ public final class Model{
 	private View v;
 	private int currentTurn;
 	private int selX,selY;
+	private int dragX,dragY;
 	enum RoundState{
 		NOCLICK, FIRSTCLICK
 	} 
@@ -67,5 +68,15 @@ public final class Model{
 	}
 	public void leftText(int x){
 		v.unhighlight(x);
+	}
+	public void cursorPressed(int x, int y){
+		v.changeCursor(t.getType(x,y), t.getTeam(x,y));
+		v.setPieceVisibility(x,y,false);
+		dragX = x;
+		dragY = y;
+	}
+	public void cursorReleased(){
+		v.changeCursor();
+		v.setPieceVisibility(dragX,dragY,true);
 	}
 }

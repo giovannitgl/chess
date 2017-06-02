@@ -103,4 +103,10 @@ public class Tabuleiro{
 		else
 			return false;
 	}
+	public PieceType getType(int x, int y){
+		return tabuleiro[x][y].getType();
+	}
+	public int getTeam(int x, int y){
+		return tabuleiro[x][y].getTeam();
+	}
 }
