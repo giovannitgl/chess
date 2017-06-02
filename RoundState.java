@@ -1,0 +1,3 @@
+enum RoundState{
+	NOCLICK, FIRSTCLICK
+}

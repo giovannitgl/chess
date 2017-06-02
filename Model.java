@@ -4,9 +4,6 @@ public final class Model{
 	private int currentTurn;
 	private int selX,selY;
 	private int dragX,dragY;
-	enum RoundState{
-		NOCLICK, FIRSTCLICK
-	} 
 	RoundState rs;
 	private static final Model INSTANCE = new Model();
 	private Model(){

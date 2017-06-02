@@ -11,6 +11,10 @@ public class Controller implements MouseListener{
 	private int mode;
 	private int hl;
 	private int dndX,dndY;
+	RoundState rs;
+	Controller(){
+		rs = RoundState.NOCLICK;
+	}
 	public void setModel(Model m){
 		this.m = m;
 	}
@@ -26,7 +30,6 @@ public class Controller implements MouseListener{
 			if(x == 0){
 				m.clickedMenu(x);
 				this.setMode(1);
-				
 			}
 		}
 		else{
@@ -34,7 +37,8 @@ public class Controller implements MouseListener{
 			int x = panel.getRelativeX();
 		    int y = panel.getRelativeY();
 		    System.out.println("X" + x + "Y" + y);
-		    m.clickedPanel(x,y);	
+		    m.clickedPanel(x,y);
+		    rs = RoundState.FIRSTCLICK;	
 		}
 	}
 	/**
@@ -67,10 +71,12 @@ public class Controller implements MouseListener{
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		if(mode == 1){
-			BoardPanel panel = (BoardPanel)arg0.getSource();
-			int x = panel.getRelativeX();
-			int y = panel.getRelativeY();
-			m.cursorPressed(x,y);
+			if(rs == RoundState.NOCLICK){
+				BoardPanel panel = (BoardPanel)arg0.getSource();
+				int x = panel.getRelativeX();
+				int y = panel.getRelativeY();
+				m.cursorPressed(x,y);
+			}
 		}
 	}
 	/**
@@ -79,7 +85,11 @@ public class Controller implements MouseListener{
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		m.cursorReleased();
+		if(mode == 1){
+			m.cursorReleased();
+			rs = RoundState.NOCLICK;
+		}
+
 	}
 }
 
