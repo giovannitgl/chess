@@ -186,7 +186,7 @@ public class View{
                     cursor = tk.getImage(getClass().getResource("/icons/images/whiteKing.png"));
                 break;
                 default:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/whitePawn.png"));
+                    cursor = null;
                 break;
                 }
             break;
@@ -211,17 +211,18 @@ public class View{
                     cursor = tk.getImage(getClass().getResource("/icons/images/blackKing.png"));
                 break;
                 default:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/blackPawn.png"));
+                    cursor = null;
                 break;
             }
         break;
         default:
-            cursor = tk.getImage(getClass().getResource("/icons/images/blackPawn.png"));
+            cursor = null;
         break;
         }
-        System.out.println(cursor);
-        Cursor c = tk.createCustomCursor(cursor , new Point(32,32), "cursor");
-       f.setCursor(c);
+        if(cursor != null){
+            Cursor c = tk.createCustomCursor(cursor , new Point(32,32), "cursor");
+            f.setCursor(c);
+        }
     }
     public void setPieceVisibility(int x, int y, boolean f){
         Component[] components = panels[x][y].getComponents();
