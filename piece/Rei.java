@@ -14,7 +14,7 @@ public class Rei extends Piece{
 	}
 
 	public void updatePosition(int x, int y){
-    validMoves.clearAll();
+    validMoves.clear();
     // Sul
     if( x + 1 < 8 ) {
       evaluatePosition(x + 1, y);
