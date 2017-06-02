@@ -67,10 +67,13 @@ public final class Model{
 		v.unhighlight(x);
 	}
 	public void cursorPressed(int x, int y){
-		v.changeCursor(t.getType(x,y), t.getTeam(x,y));
-		v.setPieceVisibility(x,y,false);
-		dragX = x;
-		dragY = y;
+		if(t.getTeam(x,y) != -1){
+			v.changeCursor(t.getType(x,y), t.getTeam(x,y));
+			v.setPieceVisibility(x,y,false);
+			dragX = x;
+			dragY = y;
+			
+		}
 	}
 	public void cursorReleased(){
 		v.changeCursor();
