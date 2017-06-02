@@ -9,6 +9,7 @@ import piece.*;
 public class Controller implements MouseListener{
 	private Model m;
 	private int mode;
+	private int hl;
 	public void setModel(Model m){
 		this.m = m;
 	}
@@ -27,11 +28,13 @@ public class Controller implements MouseListener{
 				
 			}
 		}
-		// BoardPanel panel = (BoardPanel)arg0.getSource();
-		// int x = panel.getRelativeX();
-	 //    int y = panel.getRelativeY();
-	 //    System.out.println("X" + x + "Y" + y);
-	 //    m.clickedPanel(x,y);
+		else{
+			BoardPanel panel = (BoardPanel)arg0.getSource();
+			int x = panel.getRelativeX();
+		    int y = panel.getRelativeY();
+		    System.out.println("X" + x + "Y" + y);
+		    m.clickedPanel(x,y);	
+		}
 	}
 	/**
      * Not implemented
@@ -39,7 +42,12 @@ public class Controller implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(mode == 0){
+			MenuText text = (MenuText)arg0.getSource();
+			int x = text.getRelativeX();
+			m.overText(x);
+			hl = x;
+		}
 	}
 	/**
      * Not implemented
@@ -47,7 +55,9 @@ public class Controller implements MouseListener{
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if(mode == 0){
+			m.leftText(hl);
+		}
 	}
 	/**
      * Not implemented

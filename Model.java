@@ -62,4 +62,10 @@ public final class Model{
 		v.desselectTile(1,1);
 		v.render();
 	}
+	public void overText(int x){
+		v.highlight(x);
+	}
+	public void leftText(int x){
+		v.unhighlight(x);
+	}
 }

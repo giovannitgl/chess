@@ -24,17 +24,18 @@ public class View{
         f = new JFrame();
         GridLayout layout = new GridLayout(3,0,-1,1);
         f.setTitle("Chess");
-        menuPanel[0] = new JPanel();
+        f.setLayout(new GridLayout(2,0));
+        menuPanel[0] = new JPanel();    
         menuPanel[1] = new JPanel();
-        // layout.setVgap(1);
         menuPanel[1].setLayout(layout);
+        menuPanel[0].setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        menuPanel[1].setBorder(BorderFactory.createLineBorder(Color.WHITE));
         for (int i = 0; i < 2; i++)
             this.menuPanel[i].setBackground(Color.BLACK);
-        menuPanel[0].add(new JLabel(new ImageIcon(getClass().getResource("/icons/menu.png"))));
+        menuPanel[0].add(new JLabel (new ImageIcon(getClass().getResource("/icons/menu.png"))));
         menuText[0] = new MenuText("Player vs Player",0);
         menuText[1] = new MenuText("Player vs AI",1);
         menuText[2] = new MenuText("Player vs Player (Online)",2);
-        // menuPanel[1].addMouseListener(control);
         for (int i = 0; i < 3; i++){
             menuText[i].setForeground(Color.WHITE);
             menuPanel[1].add(menuText[i]);
@@ -90,6 +91,12 @@ public class View{
     			this.panels[i][j].removeAll();
     		}
     	}
+    }
+    public void highlight(int x){
+        this.menuText[x].setForeground(Color.YELLOW);
+    }
+    public void unhighlight(int x){
+        this.menuText[x].setForeground(Color.WHITE);
     }
     public void render(){
     	//renders the screen
