@@ -66,11 +66,11 @@ public class Cavalo extends Piece{
 	}
 
 	public void evaluatePosition(int newX, int newY){
-		if (true)//Se a posicao que se deseja mover tem uma peca inimiga
+		//if (true)//Se a posicao que se deseja mover tem uma peca inimiga
 			validMoves.add(new Point(newX, newY));
 		//Or if the space is empty
-		else if(false)//Se a posicao que se deseja mover nao possui peca
-			validMoves.add(new Point(newX, newY));
+		//else if(false)//Se a posicao que se deseja mover nao possui peca
+		//	validMoves.add(new Point(newX, newY));
 	}
 
 }

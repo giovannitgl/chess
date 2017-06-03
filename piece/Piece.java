@@ -58,4 +58,7 @@ public class Piece{
 	protected void setTeam(int x){
 		this.team = x;
 	}
+	public ArrayList<Point> getValidMoves(){
+		return validMoves;
+	}
 }

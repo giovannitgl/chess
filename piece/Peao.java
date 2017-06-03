@@ -11,8 +11,8 @@ public class Peao extends Piece{
 		this.pt = PieceType.PAWN;
 		this.setTeam(time);
 		// System.out.println("TIME" + this.team);
-		if(time == 0){}//Time debaixo
-		else //Time de cima
+		//if(time == 0){}//Time debaixo
+		//else //Time de cima
 		firstMove = true;
 	}
 
@@ -20,31 +20,36 @@ public class Peao extends Piece{
 		validMoves.clear();
 
 		if(firstMove == true){
+			System.out.println("Entrei aqui minha gente");
 			if(x+2 < 8){
 				//desceu 2
+				System.out.println("Entrei aqui minha gente");
 				evaluatePosition(x+2, y);
 			}
 
 			if(x-2 >= 0){
+				evaluatePosition(x-2,y);
 				//subiu 2
 			}
 			firstMove = false;
 		}
 
 		if(x+1 < 8){
+			evaluatePosition(x+1,y);
 			//desce 1
 		}
 
 		if(x-1 >= 0){
+			evaluatePosition(x-1,y);
 			//sobe 1
 		}
 	}
 
 	public void evaluatePosition(int newX, int newY){
-		if (true)//Se a posicao que se deseja mover tem uma peca inimiga
+		//if (true)//Se a posicao que se deseja mover tem uma peca inimiga
 			validMoves.add(new Point(newX, newY));
 		//Or if the space is empty
-		else if(false)//Se a posicao que se deseja mover nao possui peca
-			validMoves.add(new Point(newX, newY));
+		//else if(false)//Se a posicao que se deseja mover nao possui peca
+		//	validMoves.add(new Point(newX, newY));
 	}
 }
