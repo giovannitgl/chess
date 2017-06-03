@@ -8,8 +8,8 @@ public class Jogador{
 	private int pieces_killed;
 	private int score;
 
-	Jogador(){
-		team = 0;
+	Jogador(int team){
+		this.team = team;
 		score = 0;
 		pieces_killed = 0;
 		playerPieces = new ArrayList<Piece>();

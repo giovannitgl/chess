@@ -1,9 +1,14 @@
+import piece.*;
+import java.awt.Point;
+import java.util.ArrayList;
+
 public final class Model{
-	private  Tabuleiro t;
+	private Tabuleiro t;
 	private View v;
 	private int currentTurn;
 	private int selX,selY;
 	private int dragX,dragY;
+	private ArrayList<Point> pieceList;
 	enum RoundState{
 		NOCLICK, FIRSTCLICK
 	} 
@@ -24,13 +29,27 @@ public final class Model{
 		switch(rs){
 			case NOCLICK:
 				if(t.isPlayerPiece(x,y,currentTurn)){
-					v.selectTile(x,y);
+					//System.out.println("ESFANOISFAOIJAOisjfIIII!!!!");		
+					//v.selectTile(x,y);
+					pieceList = t.evaluatePiece(x,y);
+					for(int i = 0; i < pieceList.size(); i++){
+						System.out.println("ENTREIIIII!!!!");
+						if(t.tabuleiro[(int)pieceList.get(i).getX()][(int)pieceList.get(i).getX()].getTeam() != currentTurn){
+							//System.out.println("TESTANDO");
+							//System.out.println("X = " + pieceList.get(i).getLocX());
+							//System.out.println("Y = " + pieceList.get(i).getLocY());
+							v.selectTile((int)pieceList.get(i).getX(),(int)pieceList.get(i).getY());
+						}
+					}
 					selX = x;
 					selY = y;
 					rs = RoundState.FIRSTCLICK;
 				}
 			break;
 			case FIRSTCLICK:
+				for(int i = 0; i < pieceList.size(); i++){
+					v.desselectTile((int)pieceList.get(i).getX(),(int)pieceList.get(i).getY());
+				}
 				// if(isValide(x,y,piece)){
 				// 	v.desselectTile(x,y);
 				// 	rs = RoundState.NOCLICK;
