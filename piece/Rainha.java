@@ -21,35 +21,35 @@ public class Rainha extends Piece{
     validMoves.clear();
     // Sul
     if( x + 1 < 8 ) {
-      evaluatePosition(x + 1, y, Sul);
+      evaluatePosition(x + 1, y, Direction.Sul);
     }
     // Norte
     if( x - 1 >= 0 ) {
-      evaluatePosition(x - 1, y, Norte);
+      evaluatePosition(x - 1, y, Direction.Norte);
     }
     // Direita
     if( y + 1 < 8 ) {
-      evaluatePosition(x, y + 1, Leste);
+      evaluatePosition(x, y + 1, Direction.Leste);
     }
     // Esquerda
     if( y - 1 >= 0 ) {
-      evaluatePosition(x, y - 1, Oeste);
+      evaluatePosition(x, y - 1, Direction.Oeste);
     }
     // Noroeste
     if( x - 1 >= 0 && y - 1 >= 0 )  {
-      evaluatePosition(x - 1, y - 1, Noroeste);
+      evaluatePosition(x - 1, y - 1, Direction.Noroeste);
     }
     // Nordeste
     if( x - 1 >= 0 && y + 1 < 8 )  {
-      evaluatePosition(x - 1, y + 1, Nordeste);
+      evaluatePosition(x - 1, y + 1, Direction.Nordeste);
     }
     // Sudoeste
     if( x + 1 >= 0 && y - 1 >= 0 )  {
-      evaluatePosition(x + 1, y - 1, Sudoeste);
+      evaluatePosition(x + 1, y - 1, Direction.Sudoeste);
     }
     // Sudeste
     if( x + 1 >= 0 && y + 1 < 8 )  {
-      evaluatePosition(x + 1, y + 1, Sudeste);
+      evaluatePosition(x + 1, y + 1, Direction.Sudeste);
     }
   //todo
   }
@@ -57,38 +57,47 @@ public class Rainha extends Piece{
 	public void evaluatePosition(int x, int y, Direction direction){
 	  validMoves.add( new Point(x,y) );
     switch(direction) {
-      Sul:
+      case Sul:
       if(x + 1 < 8) {
-        evaluatePosition(x + 1, y, Sul);
+        evaluatePosition(x + 1, y, direction.Sul);
       }
-      Norte:
+      break;
+      case Norte:
       if( x - 1 >= 0 ) {
-        evaluatePosition(x - 1, y, Norte);
+        evaluatePosition(x - 1, y, direction.Norte);
       }
-      Leste:
+      break;
+      case Leste:
       if( y + 1 < 8 ) {
-        evaluatePosition(x, y + 1, Leste);
+        evaluatePosition(x, y + 1, direction.Leste);
       }
-      Oeste:
+      break;
+      case Oeste:
       if( y - 1 >= 0 ) {
-        evaluatePosition(x, y - 1, Oeste);
+        evaluatePosition(x, y - 1, direction.Oeste);
       }
-      Noroeste:
+      break;
+      case Noroeste:
       if( x - 1 >= 0 && y - 1 >= 0 )  {
-        evaluatePosition(x - 1, y - 1, Noroeste);
+        evaluatePosition(x - 1, y - 1, direction.Noroeste);
       }
-      Nordeste:
+      break;
+      case Nordeste:
       if( x - 1 >= 0 && y + 1 < 8 )  {
-        evaluatePosition(x - 1, y + 1, Nordeste);
+        evaluatePosition(x - 1, y + 1, direction.Nordeste);
       }
-      Sudoeste:
+      break;
+      case Sudoeste:
       if( x + 1 >= 0 && y - 1 >= 0 )  {
-        evaluatePosition(x + 1, y - 1, Sudoeste);
+        evaluatePosition(x + 1, y - 1, direction.Sudoeste);
       }
-      Sudeste:
+      break;
+      case Sudeste:
       if( x + 1 >= 0 && y + 1 < 8 )  {
-        evaluatePosition(x + 1, y + 1, Sudeste);
+        evaluatePosition(x + 1, y + 1, direction.Sudeste);
       }
+      break;
     }
 	}
+
 }
