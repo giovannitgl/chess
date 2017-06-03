@@ -4,7 +4,7 @@ import java.awt.Point;
 import javax.swing.JLabel;
 
 public class Rainha extends Piece{
-	
+
   public enum Direction{
     Norte, Sul, Oeste, Leste, Nordeste, Sudeste, Noroeste, Sudoeste
   }
@@ -55,7 +55,7 @@ public class Rainha extends Piece{
   }
 
 	public void evaluatePosition(int x, int y, Direction direction){
-	  validMoves.add( new Point(x,y) )
+	  validMoves.add( new Point(x,y) );
     switch(direction) {
       Sul:
       if(x + 1 < 8) {
