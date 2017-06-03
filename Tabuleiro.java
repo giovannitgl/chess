@@ -77,13 +77,38 @@ public class Tabuleiro{
 		int x1 = p.getLocX();
 		int y1 = p.getLocY();
 		p.setLocation(x,y);
-		tabuleiro[x1][y1].deletePiece();
-    	tabuleiro[x][y] = p;
+		if(p.getType() == PieceType.PAWN){
+			tabuleiro[x][y] = new Peao(x,y,0);
+		}
+		tabuleiro[x][y].setTeam(p.getTeam());
+		tabuleiro[x][y].setType(p.getType());
+		tabuleiro[x][y].setLocation(p.getLocX(), p.getLocY());
+		tabuleiro[x][y].validMoves = p.validMoves;
+		tabuleiro[x1][y1].deletePiece(x1,y1);		
+		System.out.println("POSICAO ANTIGA: X = " + x1 + " Y = " + y1);
+		System.out.println("NOVA POSICAO: X = " + tabuleiro[x][y].getLocX() + " Y = " + tabuleiro[x][y].getLocY() + " TIME =" + tabuleiro[x][y].getTeam() + " TYPE = " + tabuleiro[x][y].getType());		
+		updateValidMove();
+	}
+
+	private void updateValidMove(){
+		for(int i = 4; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+				tabuleiro[i][j].updatePosition(i,j);
+			}
+		}
 	}
 
 	public boolean isValid(int newX, int newY, Piece p){
     	p.updatePosition(p.getLocX(),p.getLocY());
+    	System.out.println("NEW X =" + newX + " NEW Y = " + newY);
+    	System.out.println("ACT X =" + p.getLocX() + " ACT Y = " + p.getLocY());
+    	
 		ArrayList<Point> validMoves = p.validMoves;
+
+		for(int i = 0; i < validMoves.size(); i++){
+			System.out.println("x = " + validMoves.get(i).getX() + " y = " + validMoves.get(i).getY());
+		}
+
 		Point ponto;
 		for(int i = 0; i < validMoves.size(); i++){
 			ponto = validMoves.get(i);

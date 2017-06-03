@@ -40,5 +40,4 @@ public class Peao extends Piece{
 	public void evaluatePosition(int newX, int newY){
 		validMoves.add(new Point(newX, newY));
   }
-
 }

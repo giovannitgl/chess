@@ -1,3 +1,4 @@
+import piece.*;
 public final class Model{
 	private  Tabuleiro t;
 	private View v;
@@ -49,11 +50,14 @@ public final class Model{
 				}
         // Escolhe Dest
         if (!t.isPlayerPiece(x,y,currentTurn) && t.isValid(x, y, t.tabuleiro[selX][selY]) ) {
+          Piece p = t.tabuleiro[selX][selY];
           System.out.println("Valido");
           v.desselectTile(selX,selY);
           v.addPiece(x,y,t.tabuleiro[selX][selY].getType(),t.tabuleiro[selX][selY].getTeam());
           v.clearOneRende(selX,selY);
-          t.changePosition(x,y,t.tabuleiro[selX][selY]);
+          System.out.println("TIME PORRA =" + t.tabuleiro[selX][selY].getTeam());
+          t.changePosition(x,y,p);
+          System.out.println("TIME = " + t.tabuleiro[x][y].getTeam());
           rs = RoundState.NOCLICK;
           break;
         }

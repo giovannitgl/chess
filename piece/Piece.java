@@ -23,6 +23,12 @@ public class Piece{
 		location = null;
 	}
 
+	public Piece(Piece p){
+		this.location = p.location;
+		this.validMoves = p.validMoves;
+		this.team = p.team;
+	}
+
 	public void updatePosition(int x, int y){
 		return;
 	}
@@ -31,11 +37,11 @@ public class Piece{
 		return;
 	}
 
-	public void deletePiece(){
+	public void deletePiece(int x, int y){
 		team = -1;
 		icon = null;
-		validMoves = null;
-		location = null;
+		//validMoves = null;
+		location.setLocation(x,y);
 	}
 
 	public int getLocX(){
@@ -55,7 +61,11 @@ public class Piece{
 	public PieceType getType(){
 		return this.pt;
 	}
-	protected void setTeam(int x){
+
+	public void setType(PieceType type){
+		this.pt = type;
+	}
+	public void setTeam(int x){
 		this.team = x;
 	}
 }
