@@ -30,7 +30,7 @@ public class View{
         GridLayout layout = new GridLayout(3,0,-1,1);
         f.setTitle("Chess");
         f.setLayout(new GridLayout(2,0));
-        menuPanel[0] = new JPanel();    
+        menuPanel[0] = new JPanel();
         menuPanel[1] = new JPanel();
         menuPanel[1].setLayout(layout);
         menuPanel[0].setBorder(BorderFactory.createLineBorder(Color.WHITE));
@@ -73,10 +73,12 @@ public class View{
         this.f = f;
         show();
     }
+
     public void selectTile(int x, int y){
     	panels[x][y].setBackground(Color.YELLOW);
     	panels[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
     }
+
     public void desselectTile(int x, int y){
     	if((x+y)%2 == 0){
     		panels[x][y].setBackground(Color.WHITE);
@@ -85,6 +87,7 @@ public class View{
     		panels[x][y].setBackground(new Color(100,100,100));
     	panels[x][y].setBorder(null);
     }
+
     public void clearOneRende(int x, int y){
     	//Unrender one chess piece
     	this.panels[x][y].removeAll();
@@ -156,7 +159,7 @@ public class View{
         	break;
     	}
         if(pieceIcon != null)
-            panels[x][y].add(pieceIcon);   
+            panels[x][y].add(pieceIcon);
 	}
     public void changeCursor(){
         f.setCursor(Cursor.getDefaultCursor());

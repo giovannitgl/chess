@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Tabuleiro{
 	//Player p1
 	//Player p2
-	// Point 
+	// Point
 	protected Piece[][] tabuleiro;
 	Tabuleiro(){
 		tabuleiro = new Piece[8][8];
@@ -34,7 +34,7 @@ public class Tabuleiro{
 		tabuleiro[7][6] = c2;
 
 		Bispo b1 = new Bispo(7,2,0);
-		Bispo b2 = new Bispo(7,5,0);	
+		Bispo b2 = new Bispo(7,5,0);
 		tabuleiro[7][2] = b1;
 		tabuleiro[7][5] = b2;
 
@@ -59,7 +59,7 @@ public class Tabuleiro{
 		tabuleiro[0][6] = c2;
 
 		Bispo b1 = new Bispo(0,2,1);
-		Bispo b2 = new Bispo(0,5,1);	
+		Bispo b2 = new Bispo(0,5,1);
 		tabuleiro[0][2] = b1;
 		tabuleiro[0][5] = b2;
 		tabuleiro[0][3] = new Rainha(0,3,1);
@@ -75,11 +75,12 @@ public class Tabuleiro{
 
 	public void changePosition(int x, int y, Piece p){
 		tabuleiro[p.getLocX()][p.getLocY()].deletePiece();
-		tabuleiro[x][y] = p;
-		p.setLocation(x,y);
+    p.setLocation(x,y);
+    tabuleiro[x][y] = p;
 	}
 
 	public boolean isValid(int newX, int newY, Piece p){
+    p.updatePosition(p.getLocX(),p.getLocY());
 		ArrayList<Point> validMoves = p.validMoves;
 		Point ponto;
 		for(int i = 0; i < validMoves.size(); i++){

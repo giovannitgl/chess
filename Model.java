@@ -3,6 +3,7 @@ public final class Model{
 	private View v;
 	private int currentTurn;
 	private int selX,selY;
+  private int destX,destY;
 	private int dragX,dragY;
 	RoundState rs;
 	private static final Model INSTANCE = new Model();
@@ -16,8 +17,8 @@ public final class Model{
 	public void setView(View v){
 		this.v = v;
 	}
+
 	public void clickedPanel(int x, int y){
-		System.out.println(rs);
 		switch(rs){
 			case NOCLICK:
 				if(t.isPlayerPiece(x,y,currentTurn)){
@@ -25,22 +26,46 @@ public final class Model{
 					selX = x;
 					selY = y;
 					rs = RoundState.FIRSTCLICK;
+          System.out.println(rs);
 				}
 			break;
 			case FIRSTCLICK:
-				// if(isValide(x,y,piece)){
-				// 	v.desselectTile(x,y);
-				// 	rs = RoundState.NOCLICK;
-				// 	currentTurn = (currentTurn + 1) % 2;
-				// }
-				// else{
-					v.desselectTile(selX,selY);
-					selX = selY = -1;
-					rs = RoundState.NOCLICK;
-				// }
-			break;
-		}
+        // Deseleciona
+        if (x == selX && y == selY) {
+          v.desselectTile(x,y);
+          rs = RoundState.NOCLICK;
+          System.out.println(rs);
+          break;
+        }
+        // Reseleciona
+        if (t.isPlayerPiece(x,y,currentTurn)) {
+          v.desselectTile(selX,selY);
+          v.selectTile(x,y);
+					selX = x;
+					selY = y;
+          rs = RoundState.FIRSTCLICK;
+          System.out.println(rs);
+          break;
+				}
+        // Escolhe Dest
+        if (!t.isPlayerPiece(x,y,currentTurn) && t.isValid(x, y, t.tabuleiro[selX][selY]) ) {
+          System.out.println("Valido");
+          v.desselectTile(selX,selY);
+          v.addPiece(x,y,t.tabuleiro[selX][selY].getType(),t.tabuleiro[selX][selY].getTeam());
+          v.clearOneRende(selX,selY);
+          t.changePosition(x,y,t.tabuleiro[selX][selY]);
+          rs = RoundState.NOCLICK;
+          break;
+        }
+        else {
+          System.out.println("Invalido");
+          v.desselectTile(selX,selY);
+          rs = RoundState.NOCLICK;
+          break;
+        }
+    }
 	}
+
 	public void clickedMenu(int x){
 		if (x == 0){
 			this.buildTabuleiro();
@@ -72,11 +97,12 @@ public final class Model{
 			v.setPieceVisibility(x,y,false);
 			dragX = x;
 			dragY = y;
-			
+
 		}
 	}
 	public void cursorReleased(){
 		v.changeCursor();
 		v.setPieceVisibility(dragX,dragY,true);
 	}
+
 }
