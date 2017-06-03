@@ -74,13 +74,15 @@ public class Tabuleiro{
 	}
 
 	public void changePosition(int x, int y, Piece p){
-		tabuleiro[p.getLocX()][p.getLocY()].deletePiece();
-    p.setLocation(x,y);
-    tabuleiro[x][y] = p;
+		int x1 = p.getLocX();
+		int y1 = p.getLocY();
+		p.setLocation(x,y);
+		tabuleiro[x1][y1].deletePiece();
+    	tabuleiro[x][y] = p;
 	}
 
 	public boolean isValid(int newX, int newY, Piece p){
-    p.updatePosition(p.getLocX(),p.getLocY());
+    	p.updatePosition(p.getLocX(),p.getLocY());
 		ArrayList<Point> validMoves = p.validMoves;
 		Point ponto;
 		for(int i = 0; i < validMoves.size(); i++){
