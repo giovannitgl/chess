@@ -4,7 +4,7 @@ import java.awt.Point;
 import javax.swing.JLabel;
 
 public class Torre extends Piece{
-	
+
 	public enum Direction{
 		Norte, Sul, Esquerda, Direita
 	}
@@ -18,6 +18,64 @@ public class Torre extends Piece{
 	}
 
 	public void updatePosition(ArrayList<Piece> friend, ArrayList<Piece> enemy){
-		return;
+    validMoves.clear();
+    Point start = getLocation();
+    Point aux;
+    //Norte -> Sul
+    for (int x = (int)start.getX() + 1; x < 8; x++) {
+      aux = new Point( x, (int)start.getY() );
+      if( contains(friend, aux) ) {
+        break;
+      }
+      else if( contains(enemy, aux) ) {
+        validMoves.add(aux);
+        break;
+      }
+      else {
+        validMoves.add(aux);
+      }
+    }
+    //Sul -> Norte
+    for (int x = (int)start.getX() - 1; x >= 0; x--) {
+      aux = new Point( x, (int)start.getY() );
+      if( contains(friend, aux) ) {
+        break;
+      }
+      else if( contains(enemy, aux) ) {
+        validMoves.add(aux);
+        break;
+      }
+      else {
+        validMoves.add(aux);
+      }
+    }
+    //Oeste -> Leste
+    for (int y = (int)start.getY() + 1; y < 8; y++) {
+      aux = new Point( (int)start.getX(), y );
+      if( contains(friend, aux) ) {
+        break;
+      }
+      else if( contains(enemy, aux) ) {
+        validMoves.add(aux);
+        break;
+      }
+      else {
+        validMoves.add(aux);
+      }
+    }
+    //Leste -> Oeste
+    for (int y = (int)start.getY() - 1; y >= 0; y--) {
+      aux = new Point( (int)start.getX(), y );
+      if( contains(friend, aux) ) {
+        break;
+      }
+      else if( contains(enemy, aux) ) {
+        validMoves.add(aux);
+        break;
+      }
+      else {
+        validMoves.add(aux);
+      }
+    }
 	}
 }
