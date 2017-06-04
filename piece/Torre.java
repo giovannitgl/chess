@@ -25,7 +25,7 @@ public class Torre extends Piece{
 		}
 
 		if(y+1 < 8){
-			evaluatePosition(x+1, y, Direction.Direita);
+			evaluatePosition(x, y+1, Direction.Direita);
 		}
 
 		if(x-1 >= 0){
@@ -38,9 +38,9 @@ public class Torre extends Piece{
 	}
 
 	public void evaluatePosition(int x, int y, Direction direction){
-		if(true)//se existe uma peca inimiga
-			validMoves.add(new Point(x, y));
-		else if(false){//se nao existe inimigo mas a posicao esta vazia
+		//if(true)//se existe uma peca inimiga
+		//	validMoves.add(new Point(x, y));
+		//else if(false){//se nao existe inimigo mas a posicao esta vazia
 			validMoves.add(new Point(x, y));
 			switch(direction){
 				case Norte:
@@ -77,7 +77,7 @@ public class Torre extends Piece{
 				default:
 					System.out.println("Direcao Invalida");
 			}
-		}
+		//}
 	}
 
 	public static void main(String[]args){

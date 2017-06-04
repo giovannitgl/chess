@@ -75,7 +75,7 @@ public class Controller implements MouseListener{
 				BoardPanel panel = (BoardPanel)arg0.getSource();
 				int x = panel.getRelativeX();
 				int y = panel.getRelativeY();
-				m.cursorPressed(x,y);
+			//	m.cursorPressed(x,y);
 			}
 		}
 	}
@@ -86,7 +86,7 @@ public class Controller implements MouseListener{
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		if(mode == 1){
-			m.cursorReleased();
+		//	m.cursorReleased();
 			rs = RoundState.NOCLICK;
 		}
 

@@ -1,6 +1,8 @@
+package piece;
+
 public class Space{
 	private Piece piece;
-	public getX(){
+	/*public getX(){
 		return piece.getLocX();
 	}
 	public getY(){
@@ -11,13 +13,25 @@ public class Space{
 	}
 	public evaluatePosition(int x, int y){
 		piece.evaluatePosition(x,y);
-	}
-	public isPieceNull(){
+	}*/
+	public boolean isPieceNull(){
 		if(piece == null)
 			return true;
 		else return false;
 	}
-	Space(Piece p){
+	public Space(Piece p){
 		this.piece = p;
+	}
+
+	public Space(){
+		this.piece = null;
+	}
+
+	public Piece getPiece(){
+		return piece;
+	}
+
+	public void setPiece(Piece p){
+		piece = p;
 	}
 }

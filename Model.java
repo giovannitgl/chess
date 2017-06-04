@@ -49,15 +49,15 @@ public final class Model{
           break;
 				}
         // Escolhe Dest
-        if (!t.isPlayerPiece(x,y,currentTurn) && t.isValid(x, y, t.tabuleiro[selX][selY]) ) {
-          Piece p = t.tabuleiro[selX][selY];
+        if (!t.isPlayerPiece(x,y,currentTurn) && t.isValid(x, y, t.tabuleiro[selX][selY].getPiece()) ) {
+          Piece p = t.tabuleiro[selX][selY].getPiece();
           System.out.println("Valido");
           v.desselectTile(selX,selY);
-          v.addPiece(x,y,t.tabuleiro[selX][selY].getType(),t.tabuleiro[selX][selY].getTeam());
+          v.addPiece(x,y,t.tabuleiro[selX][selY].getPiece().getType(),t.tabuleiro[selX][selY].getPiece().getTeam());
           v.clearOneRende(selX,selY);
-          System.out.println("TIME PORRA =" + t.tabuleiro[selX][selY].getTeam());
+          System.out.println("TIME PORRA =" + t.tabuleiro[selX][selY].getPiece().getTeam());
           t.changePosition(x,y,p);
-          System.out.println("TIME = " + t.tabuleiro[x][y].getTeam());
+          System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
           rs = RoundState.NOCLICK;
           break;
         }
@@ -80,8 +80,8 @@ public final class Model{
 		v.createTable();
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
-				if(t.tabuleiro[i][j] != null){
-					v.addPiece(i,j,t.tabuleiro[i][j].getType(), t.tabuleiro[i][j].getTeam());
+				if(t.tabuleiro[i][j].getPiece() != null){
+					v.addPiece(i,j,t.tabuleiro[i][j].getPiece().getType(), t.tabuleiro[i][j].getPiece().getTeam());
 				}
 			}
 		}

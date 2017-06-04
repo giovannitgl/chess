@@ -31,15 +31,15 @@ public class Bispo extends Piece{
 			evaluatePosition(x-1, y+1, Direction.Nordeste);
 		}
 
-		if(x+1 > 8 && y+1 > 8){
+		if(x+1 < 8 && y+1 < 8){
 			evaluatePosition(x+1, y+1, Direction.Sudeste);
 		}	
 	}
 
 	public void evaluatePosition(int x, int y, Direction direction){
-		if(true)//se existe uma peca inimiga
-			validMoves.add(new Point(x, y));
-		else if(false){//se nao existe inimigo mas a posicao esta vazia
+		//if(true)//se existe uma peca inimiga
+		//	validMoves.add(new Point(x, y));
+		//else if(false){//se nao existe inimigo mas a posicao esta vazia
 			validMoves.add(new Point(x, y));
 			switch(direction){
 				case Noroeste:
@@ -79,6 +79,6 @@ public class Bispo extends Piece{
 				default:
 					System.out.println("Direcao Invalida");
 			}
-		}
+		//}
 	}
 }

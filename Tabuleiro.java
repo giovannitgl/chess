@@ -65,12 +65,12 @@ public class Tabuleiro{
 		tabuleiro[0][2] = new Space(new Bispo(0,2,1));
 		tabuleiro[0][5] = new Space(new Bispo(0,5,1));
 		tabuleiro[0][3] = new Space(new Rainha(0,3,1));
-		tabuleiro[0][4] = new Soace(new Rei(0,4,1));
+		tabuleiro[0][4] = new Space(new Rei(0,4,1));
 	}
 	private void buildMiddle(){
 		for(int i = 2; i < 6; i ++){
 			for(int j = 0; j < 8; j++){
-				tabuleiro[i][j] = new Piece(i,j,-1);
+				tabuleiro[i][j] = new Space();
 			}
 		}
 	}
@@ -78,24 +78,29 @@ public class Tabuleiro{
 	public void changePosition(int x, int y, Piece p){
 		int x1 = p.getLocX();
 		int y1 = p.getLocY();
+		// if(p.getType() == PieceType.PAWN){
+		// 	tabuleiro[x][y] = new Peao(x,y,0);
+		// }
+		// tabuleiro[x][y].setTeam(p.getTeam());
+		// tabuleiro[x][y].setType(p.getType());
+		// tabuleiro[x][y].setLocation(p.getLocX(), p.getLocY());
+		// tabuleiro[x][y].validMoves = p.validMoves;
+		// tabuleiro[x1][y1].deletePiece(x1,y1);		
+		// System.out.println("POSICAO ANTIGA: X = " + x1 + " Y = " + y1);
+		// System.out.println("NOVA POSICAO: X = " + tabuleiro[x][y].getLocX() + " Y = " + tabuleiro[x][y].getLocY() + " TIME =" + tabuleiro[x][y].getTeam() + " TYPE = " + tabuleiro[x][y].getType());		
+		tabuleiro[x][y].setPiece(p);
+		tabuleiro[x1][y1].setPiece(null);
 		p.setLocation(x,y);
-		if(p.getType() == PieceType.PAWN){
-			tabuleiro[x][y] = new Peao(x,y,0);
-		}
-		tabuleiro[x][y].setTeam(p.getTeam());
-		tabuleiro[x][y].setType(p.getType());
-		tabuleiro[x][y].setLocation(p.getLocX(), p.getLocY());
-		tabuleiro[x][y].validMoves = p.validMoves;
-		tabuleiro[x1][y1].deletePiece(x1,y1);		
-		System.out.println("POSICAO ANTIGA: X = " + x1 + " Y = " + y1);
-		System.out.println("NOVA POSICAO: X = " + tabuleiro[x][y].getLocX() + " Y = " + tabuleiro[x][y].getLocY() + " TIME =" + tabuleiro[x][y].getTeam() + " TYPE = " + tabuleiro[x][y].getType());		
+		
 		updateValidMove();
 	}
 
 	private void updateValidMove(){
 		for(int i = 4; i < 8; i++){
 			for(int j = 0; j < 8; j++){
-				tabuleiro[i][j].updatePosition(i,j);
+				if(tabuleiro[i][j].getPiece() != null){
+					tabuleiro[i][j].getPiece().updatePosition(i,j);
+				}
 			}
 		}
 	}
@@ -128,15 +133,20 @@ public class Tabuleiro{
 			return true;
 	}
 	public boolean isPlayerPiece(int x, int y,int p){
-		if(tabuleiro[x][y].getTeam() == p)
-			return true;
-		else
+		if(tabuleiro[x][y].getPiece() != null){
+			if(tabuleiro[x][y].getPiece().getTeam() == p){
+				return true;
+			}
 			return false;
+		}
+		else{
+			return false;
+		}
 	}
 	public PieceType getType(int x, int y){
-		return tabuleiro[x][y].getType();
+		return tabuleiro[x][y].getPiece().getType();
 	}
 	public int getTeam(int x, int y){
-		return tabuleiro[x][y].getTeam();
+		return tabuleiro[x][y].getPiece().getTeam();
 	}
 }
