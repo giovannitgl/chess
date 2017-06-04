@@ -151,8 +151,11 @@ public class Tabuleiro{
 		// 	}
 		// }
 		// return false;
-		if(validMoves.contains(new Point(newX,newY)))
+		if(validMoves.contains(new Point(newX,newY))){
+			if(p.getType() == PieceType.PAWN)
+				p.setFirstMove(false);
 			return true;
+		}
 		else return false;
 	}
 	public boolean pieceExists(int x, int y){

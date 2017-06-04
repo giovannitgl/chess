@@ -9,6 +9,7 @@ public class Piece{
 	protected int team;
 	public ArrayList<Point> validMoves;
 	protected JLabel icon;
+	protected boolean firstMove;
 
 	public Piece(int x, int y, int time){
 		team = time;
@@ -78,5 +79,8 @@ public class Piece{
 			}
 		}
 		return false;
+	}
+	public void setFirstMove(boolean t){
+		this.firstMove = t;
 	}
 }

@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 
 public class Peao extends Piece{
 
-	private boolean firstMove;
+	// private boolean firstMove;
 	public Peao(int x, int y, int time){
 		super(x, y, time);
 		this.pt = PieceType.PAWN;

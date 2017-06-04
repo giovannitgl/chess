@@ -14,7 +14,71 @@ public class Cavalo extends Piece{
 	}
 
 	public void updatePosition(ArrayList<Piece> friend, ArrayList<Piece> enemy){
-		return;
+		validMoves.clear();
+		Point p = this.getLocation();
+		Point aux = new Point((int)p.getX(), (int)p.getY());
+		// oo
+		//  o
+		//  o
+		int auxX = (int)p.getX() + 2;
+		int auxY = (int)p.getY() - 1;
+		aux.setLocation(auxX,auxY);
+		if(auxX < 8 && auxY >= 0 && !this.contains(friend,aux)){
+			validMoves.add(new Point(auxX,auxY));
+		}
+		// oo
+		// o
+		// o
+		auxX = (int)p.getX() + 2;
+		auxY = (int)p.getY() + 1;
+		if(auxX < 8 && auxY < 8 && !this.contains(friend,aux)){
+			validMoves.add(new Point(auxX,auxY));
+		}
+		// o
+		// o
+		// oo
+		auxX = (int)p.getX() - 2;
+		auxY = (int)p.getY() + 1;
+		if(auxX >= 0 && auxY < 8 && !this.contains(friend,aux)){
+			validMoves.add(new Point(auxX,auxY));
+		}
+		//  o
+		//  o
+		// oo
+		auxX = (int)p.getX() - 2;
+		auxY = (int)p.getY() - 1;
+		if(auxX >= 0 && auxY >= 0 && !this.contains(friend,aux)){
+			validMoves.add(new Point(auxX,auxY));
+		}
+		// o
+		// ooo
+		auxX = (int)p.getX() + 1;
+		auxY = (int)p.getY() - 2;
+		if(auxX < 8 && auxY >= 0 && !this.contains(friend,aux)){
+			validMoves.add(new Point(auxX,auxY));
+		}
+		// ooo
+		// o
+		auxX = (int)p.getX() - 1;
+		auxY = (int)p.getY() - 2;
+		if(auxX >= 0 && auxY >= 0 && !this.contains(friend,aux)){
+			validMoves.add(new Point(auxX, auxY));
+		}
+		//   o
+		// ooo
+		auxX = (int)p.getX() + 1;
+		auxY = (int)p.getY() + 2;
+		if(auxX < 8 && auxY < 8 && !this.contains(friend,aux)){
+			validMoves.add(new Point(auxX,auxY));
+		}
+		// ooo
+		//   o
+		auxX= (int)p.getX() - 1;
+		auxY= (int)p.getY() + 2;
+		if(auxX >= 0 && auxY < 8 && !this.contains(friend,aux)){
+			validMoves.add(new Point(auxX,auxY));
+		}
 	}
+
 
 }
