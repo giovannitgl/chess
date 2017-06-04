@@ -118,15 +118,20 @@ public class Tabuleiro{
 	private void updateValidMove(){
 		for(int i = 4; i < 8; i++){
 			for(int j = 0; j < 8; j++){
-				if(tabuleiro[i][j].getPiece() != null){
-					tabuleiro[i][j].getPiece().updatePosition(i,j);
+				Piece p = tabuleiro[i][j].getPiece();
+				if(p != null){
+					if(p.getTeam() == 0){
+						p.updatePosition(j0.getPlayerPieces(), j1.getPlayerPieces());
+					}
+					else p.updatePosition(j1.getPlayerPieces(), j0.getPlayerPieces());
+					// tabuleiro[i][j].getPiece().updatePosition(i,j);
 				}
 			}
 		}
 	}
 
 	public boolean isValid(int newX, int newY, Piece p){
-    	p.updatePosition(p.getLocX(),p.getLocY());
+    	// p.updatePosition(p.getLocX(),p.getLocY());
     	System.out.println("NEW X =" + newX + " NEW Y = " + newY);
     	System.out.println("ACT X =" + p.getLocX() + " ACT Y = " + p.getLocY());
     	

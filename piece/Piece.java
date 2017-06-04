@@ -29,13 +29,13 @@ public class Piece{
 		this.team = p.team;
 	}
 
-	public void updatePosition(int x, int y){
+	public void updatePosition(ArrayList<Piece> friend, ArrayList<Piece> enemy){
 		return;
 	}
 
-	public void evaluatePosition(int x, int y){
-		return;
-	}
+	// public void evaluatePosition(int x, int y){
+	// 	return;
+	// }
 
 	public void deletePiece(int x, int y){
 		team = -1;

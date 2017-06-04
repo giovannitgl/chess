@@ -15,28 +15,7 @@ public class Peao extends Piece{
 		if(time == 0){}//Time debaixo
 	}
 
-	public void updatePosition(int x, int y){
-		validMoves.clear();
-		System.out.println("FIRST = " + firstMove);
-		if(firstMove == true){
-			if(x+2 < 8){
-				evaluatePosition(x+2, y);
-			}
-			if(x-2 >= 0){
-        		evaluatePosition(x-2, y);
-			}
-			firstMove = false;
-		}
-		if(x+1 < 8){
-      		evaluatePosition(x+1,y);
-     		 //desce 1
-		}
-		if(x-1 >= 0){
-			evaluatePosition(x-1,y);
-		}
+	public void updatePosition(ArrayList<Piece> friend, ArrayList<Piece> enemy){
+		return;
 	}
-
-	public void evaluatePosition(int newX, int newY){
-		validMoves.add(new Point(newX, newY));
-  }
 }

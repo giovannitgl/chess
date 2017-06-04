@@ -13,44 +13,7 @@ public class Rei extends Piece{
 		else{} //Time de cima
 	}
 
-	public void updatePosition(int x, int y){
-    validMoves.clear();
-    // Sul
-    if( x + 1 < 8 ) {
-      evaluatePosition(x + 1, y);
-    }
-    // Norte
-    if( x - 1 >= 0 ) {
-      evaluatePosition(x - 1, y);
-    }
-    // Direita
-    if( y + 1 < 8 ) {
-      evaluatePosition(x, y + 1);
-    }
-    // Esquerda
-    if( y - 1 >= 0 ) {
-      evaluatePosition(x, y - 1);
-    }
-    // Noroeste
-    if( x - 1 >= 0 && y - 1 >= 0 )  {
-      evaluatePosition(x - 1, y - 1);
-    }
-    // Nordeste
-    if( x - 1 >= 0 && y + 1 < 8 )  {
-      evaluatePosition(x - 1, y + 1);
-    }
-    // Sudoeste
-    if( x + 1 >= 0 && y - 1 >= 0 )  {
-      evaluatePosition(x + 1, y - 1);
-    }
-    // Sudeste
-    if( x + 1 >= 0 && y + 1 < 8 )  {
-      evaluatePosition(x + 1, y + 1);
-    }
-	//todo
-	}
-
-	public void evaluatePosition(int x, int y){
-    validMoves.add( new Point(x,y) );
-	}
+	 public void updatePosition(ArrayList<Piece> friend, ArrayList<Piece> enemy){
+    return;
+  }
 }
