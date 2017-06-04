@@ -59,6 +59,8 @@ public final class Model{
           t.changePosition(x,y,p);
           System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
           rs = RoundState.NOCLICK;
+          v.clearAllRender();
+          this.buildIcons();
           break;
         }
         else {
@@ -72,12 +74,21 @@ public final class Model{
 
 	public void clickedMenu(int x){
 		if (x == 0){
+			v.dispose();
 			this.buildTabuleiro();
+			this.show();
 		}
 	}
 	public void buildTabuleiro(){
 		t = new Tabuleiro();
 		v.createTable();
+		this.buildIcons();
+		// }
+		// v.selectTile(1,1);
+		// v.desselectTile(1,1);
+		// v.render();
+	}
+	private void buildIcons(){
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if(t.tabuleiro[i][j].getPiece() != null){
@@ -85,9 +96,6 @@ public final class Model{
 				}
 			}
 		}
-		v.selectTile(1,1);
-		v.desselectTile(1,1);
-		v.render();
 	}
 	public void overText(int x){
 		v.highlight(x);
@@ -108,5 +116,7 @@ public final class Model{
 		v.changeCursor();
 		v.setPieceVisibility(dragX,dragY,true);
 	}
-
+	private void show(){
+		v.show();
+	}
 }

@@ -231,4 +231,7 @@ public class View{
         Component[] components = panels[x][y].getComponents();
         components[0].setVisible(f);
     }
+    public void dispose(){
+        this.f.dispose();
+    }
 }
