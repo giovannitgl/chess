@@ -58,6 +58,8 @@ public final class Model{
           System.out.println("TIME PORRA =" + t.tabuleiro[selX][selY].getPiece().getTeam());
           t.changePosition(x,y,p);
           System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
+          currentTurn++;
+          currentTurn = currentTurn % 2;
           rs = RoundState.NOCLICK;
           v.clearAllRender();
           this.buildIcons();
