@@ -31,6 +31,7 @@ public class Cavalo extends Piece{
 		// o
 		auxX = (int)p.getX() + 2;
 		auxY = (int)p.getY() + 1;
+		aux.setLocation(auxX,auxY);
 		if(auxX < 8 && auxY < 8 && !this.contains(friend,aux)){
 			validMoves.add(new Point(auxX,auxY));
 		}
@@ -39,6 +40,7 @@ public class Cavalo extends Piece{
 		// oo
 		auxX = (int)p.getX() - 2;
 		auxY = (int)p.getY() + 1;
+		aux.setLocation(auxX,auxY);
 		if(auxX >= 0 && auxY < 8 && !this.contains(friend,aux)){
 			validMoves.add(new Point(auxX,auxY));
 		}
@@ -47,6 +49,7 @@ public class Cavalo extends Piece{
 		// oo
 		auxX = (int)p.getX() - 2;
 		auxY = (int)p.getY() - 1;
+		aux.setLocation(auxX,auxY);
 		if(auxX >= 0 && auxY >= 0 && !this.contains(friend,aux)){
 			validMoves.add(new Point(auxX,auxY));
 		}
@@ -54,6 +57,7 @@ public class Cavalo extends Piece{
 		// ooo
 		auxX = (int)p.getX() + 1;
 		auxY = (int)p.getY() - 2;
+		aux.setLocation(auxX,auxY);
 		if(auxX < 8 && auxY >= 0 && !this.contains(friend,aux)){
 			validMoves.add(new Point(auxX,auxY));
 		}
@@ -61,6 +65,7 @@ public class Cavalo extends Piece{
 		// o
 		auxX = (int)p.getX() - 1;
 		auxY = (int)p.getY() - 2;
+		aux.setLocation(auxX,auxY);
 		if(auxX >= 0 && auxY >= 0 && !this.contains(friend,aux)){
 			validMoves.add(new Point(auxX, auxY));
 		}
@@ -68,6 +73,7 @@ public class Cavalo extends Piece{
 		// ooo
 		auxX = (int)p.getX() + 1;
 		auxY = (int)p.getY() + 2;
+		aux.setLocation(auxX,auxY);
 		if(auxX < 8 && auxY < 8 && !this.contains(friend,aux)){
 			validMoves.add(new Point(auxX,auxY));
 		}
@@ -75,6 +81,7 @@ public class Cavalo extends Piece{
 		//   o
 		auxX= (int)p.getX() - 1;
 		auxY= (int)p.getY() + 2;
+		aux.setLocation(auxX,auxY);
 		if(auxX >= 0 && auxY < 8 && !this.contains(friend,aux)){
 			validMoves.add(new Point(auxX,auxY));
 		}
