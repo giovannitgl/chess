@@ -22,8 +22,8 @@ public class Torre extends Piece{
     Point start = getLocation();
     Point aux;
     //Norte -> Sul
-    for (int i = (int)start.getX() + 1; i < 8; i++) {
-      aux = new Point( i, (int)start.getY() );
+    for (int x = (int)start.getX() + 1; x < 8; x++) {
+      aux = new Point( x, (int)start.getY() );
       if( contains(friend, aux) ) {
         break;
       }
@@ -36,8 +36,8 @@ public class Torre extends Piece{
       }
     }
     //Sul -> Norte
-    for (int i = (int)start.getX() - 1; i >= 0; i--) {
-      aux = new Point( i, (int)start.getY() );
+    for (int x = (int)start.getX() - 1; x >= 0; x--) {
+      aux = new Point( x, (int)start.getY() );
       if( contains(friend, aux) ) {
         break;
       }
@@ -50,8 +50,8 @@ public class Torre extends Piece{
       }
     }
     //Oeste -> Leste
-    for (int i = (int)start.getY() + 1; i < 8; i++) {
-      aux = new Point( (int)start.getX(), i );
+    for (int y = (int)start.getY() + 1; y < 8; y++) {
+      aux = new Point( (int)start.getX(), y );
       if( contains(friend, aux) ) {
         break;
       }
@@ -64,8 +64,8 @@ public class Torre extends Piece{
       }
     }
     //Leste -> Oeste
-    for (int i = (int)start.getY() - 1; i >= 0; i--) {
-      aux = new Point( (int)start.getX(), i );
+    for (int y = (int)start.getY() - 1; y >= 0; y--) {
+      aux = new Point( (int)start.getX(), y );
       if( contains(friend, aux) ) {
         break;
       }
