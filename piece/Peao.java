@@ -16,7 +16,7 @@ public class Peao extends Piece{
 	}
 
 	public void updatePosition(ArrayList<Piece> friend, ArrayList<Piece> enemy){
-
+		validMoves.clear();
 		if(this.getTeam() == 1){
 			//black pieces
 			Point pt = this.getLocation();
@@ -72,13 +72,5 @@ public class Peao extends Piece{
 				validMoves.add(new Point(auxX, auxY));
 			}
 		}
-	}
-	private boolean contains(ArrayList<Piece> p, Point pt){
-		for(Piece aux : p){
-			if (aux.getLocation().equals(pt)){
-				return true;
-			}
-		}
-		return false;
 	}
 }

@@ -71,4 +71,12 @@ public class Piece{
 	public Point getLocation(){
 		return this.location;
 	}
+	protected boolean contains(ArrayList<Piece> p, Point pt){
+		for(Piece aux : p){
+			if (aux.getLocation().equals(pt)){
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -117,7 +117,7 @@ public class Tabuleiro{
 	}
 
 	private void updateValidMove(){
-		for(int i = 4; i < 8; i++){
+		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				Piece p = tabuleiro[i][j].getPiece();
 				if(p != null){
