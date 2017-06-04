@@ -68,4 +68,7 @@ public class Piece{
 	public void setTeam(int x){
 		this.team = x;
 	}
+	public Point getLocation(){
+		return this.location;
+	}
 }

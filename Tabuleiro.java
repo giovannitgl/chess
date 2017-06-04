@@ -19,6 +19,7 @@ public class Tabuleiro{
 		buildWhite();
 		buildBlack();
 		buildMiddle();
+		updateValidMove();
 	}
 
 	private void buildWhite(){
@@ -141,15 +142,18 @@ public class Tabuleiro{
 			System.out.println("x = " + validMoves.get(i).getX() + " y = " + validMoves.get(i).getY());
 		}
 
-		Point ponto;
-		for(int i = 0; i < validMoves.size(); i++){
-			ponto = validMoves.get(i);
-			if(newX == (int)ponto.getX() && newY == (int)ponto.getY()){
-				//changePosition(x,y,p);
-				return true;
-			}
-		}
-		return false;
+		// Point ponto;
+		// for(int i = 0; i < validMoves.size(); i++){
+		// 	ponto = validMoves.get(i);
+		// 	if(newX == (int)ponto.getX() && newY == (int)ponto.getY()){
+		// 		//changePosition(x,y,p);
+		// 		return true;
+		// 	}
+		// }
+		// return false;
+		if(validMoves.contains(new Point(newX,newY)))
+			return true;
+		else return false;
 	}
 	public boolean pieceExists(int x, int y){
 		if (tabuleiro[x][y] == null)
