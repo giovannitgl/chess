@@ -5,9 +5,6 @@ import javax.swing.JLabel;
 
 public class Rainha extends Piece{
 
-  public enum Direction{
-    Norte, Sul, Oeste, Leste, Nordeste, Sudeste, Noroeste, Sudoeste
-  }
 
 	public Rainha(int x, int y, int time){
 		super(x, y, time);
@@ -18,7 +15,59 @@ public class Rainha extends Piece{
 	}
 
   public void updatePosition(ArrayList<Piece> friend, ArrayList<Piece> enemy){
-    return;
+    validMoves.clear();
+    Point p = this.getLocation();
+    Point aux = new Point((int)p.getX(), (int)p.getY());
+    int auxX = (int)p.getX();
+    int auxY = (int)p.getY();
+  
+  //esquerda
+    for(int i = auxX-1; i >= 0; i--){
+      aux.setLocation(i,auxY);
+      if(!this.contains(friend,aux)){
+        validMoves.add(new Point(i,auxY));
+      }
+      if(this.contains(enemy,aux)){
+        validMoves.add(new Point(i,auxY));
+        break;
+      }
+    }
+  //direita
+    for(int i = auxX+1; i < 8; i++){
+      aux.setLocation(i,auxY);
+      if(!this.contains(friend,aux)){
+        validMoves.add(new Point(i,auxY));
+      }
+      if(this.contains(enemy,aux)){
+        validMoves.add(new Point(i,auxY));
+        break;
+      }
+    }
+  //cima
+   for(int i = auxY+1; i < 8; i++){
+      aux.setLocation(auxX,i);
+      if(!this.contains(friend,aux)){
+        validMoves.add(new Point(auxX,i));
+      }
+      if(this.contains(enemy,aux)){
+        validMoves.add(new Point(auxX,i));
+        break;
+      }
+    }
+  //baixo
+    for(int i = auxY-1; i >= 0; i--){
+      aux.setLocation(auxX,i);
+      if(!this.contains(friend,aux)){
+        validMoves.add(new Point(auxX,i));
+      }
+      if(this.contains(enemy,aux)){
+        validMoves.add(new Point(auxX,i));
+        break;
+      }
+    }
+  //esquerda + cima
+  //esquerda + baixo
+  //direita + cima
+  //direita + baixo
   }
-
 }
