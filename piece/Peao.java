@@ -31,17 +31,17 @@ public class Peao extends Piece{
 			Point aux = new Point(auxX, auxY);
 			if(auxX < 8 && !this.contains(enemy, aux) && !this.contains(friend,aux)){
 				//square directly downward
-				validMoves.add(aux);
+				validMoves.add(new Point(auxX, auxY));
 			}
 			auxY -= 1; //left square downward
 			aux.setLocation(auxX,auxY);
 			if(auxY >= 0 && auxX < 8 && this.contains(enemy, aux)){
-				validMoves.add(aux);
+				validMoves.add(new Point(auxX, auxY));
 			}
 			auxY += 2; //right square downward
 			aux.setLocation(auxX, auxY);
 			if(auxY < 8 && auxX < 8 && this.contains(enemy, aux)){
-				validMoves.add(aux);
+				validMoves.add(new Point(auxX, auxY));
 			}
 
 		}
@@ -59,20 +59,17 @@ public class Peao extends Piece{
 			Point aux = new Point(auxX, auxY);
 			if(auxX >= 0 && !this.contains(enemy,aux) && !this.contains(friend,aux)){
 				//square directly forward
-								System.out.println("piece:" + this.getLocX() + this.getLocY() + " valid move " + auxX + auxY);
-
-				validMoves.add(aux);
+				validMoves.add(new Point(auxX, auxY));
 			}
 			auxY -= 1; //left square forward
 			aux.setLocation(auxX,auxY);
 			if(auxY >= 0 && auxX >= 0 && this.contains(enemy, aux)){
-				validMoves.add(aux);
+				validMoves.add(new Point(auxX, auxY));
 			}
 			auxY += 2; //right square forward
 			aux.setLocation(auxX, auxY);
 			if(auxY < 8 && auxX >= 0 && this.contains(enemy, aux)){
-				System.out.println("piece:" + this.getLocX() + this.getLocY() + " valid move " + auxX + auxY);
-				validMoves.add(aux);
+				validMoves.add(new Point(auxX, auxY));
 			}
 		}
 	}
