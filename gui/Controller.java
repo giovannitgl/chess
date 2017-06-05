@@ -1,3 +1,5 @@
+package gui;
+import model.*;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +14,7 @@ public class Controller implements MouseListener{
 	private int hl;
 	private int dndX,dndY;
 	RoundState rs;
-	Controller(){
+	public Controller(){
 		rs = RoundState.NOCLICK;
 	}
 	public void setModel(Model m){

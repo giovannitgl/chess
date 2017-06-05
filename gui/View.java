@@ -1,3 +1,4 @@
+package gui;
 import javax.swing.*;
 import java.awt.Color;
 import piece.PieceType;
@@ -21,7 +22,7 @@ public class View{
         this.f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    View(Controller controller){
+    public View(Controller controller){
         this.control = controller;
          createMenu();
     }

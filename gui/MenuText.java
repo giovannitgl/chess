@@ -1,3 +1,4 @@
+package gui;
 import javax.swing.JLabel;
 import java.awt.Color;
 public class MenuText extends JLabel{

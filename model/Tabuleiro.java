@@ -1,3 +1,6 @@
+package model;
+import gui.*;
+import jogador.*;
 import piece.*;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -109,10 +112,10 @@ public class Tabuleiro{
 		// tabuleiro[x1][y1].deletePiece(x1,y1);		
 		// System.out.println("POSICAO ANTIGA: X = " + x1 + " Y = " + y1);
 		// System.out.println("NOVA POSICAO: X = " + tabuleiro[x][y].getLocX() + " Y = " + tabuleiro[x][y].getLocY() + " TIME =" + tabuleiro[x][y].getTeam() + " TYPE = " + tabuleiro[x][y].getType());		
+		removePiece(x,y);
 		tabuleiro[x][y].setPiece(p);
 		tabuleiro[x1][y1].setPiece(null);
 		p.setLocation(x,y);
-		
 		updateValidMove();
 	}
 
@@ -131,10 +134,26 @@ public class Tabuleiro{
 		}
 	}
 
+
+	public void removePiece(int x, int y)
+	{
+		Piece piece = tabuleiro[x][y].getPiece();
+		if (piece == null)
+			return;
+		if (piece.getTeam()== 1)
+			j1.removePiece(piece);
+		else
+			j0.removePiece(piece);
+		tabuleiro[x][y].setPiece(null);
+	}
+
+
 	public boolean isValid(int newX, int newY, Piece p){
     	// p.updatePosition(p.getLocX(),p.getLocY());
-    	System.out.println("NEW X =" + newX + " NEW Y = " + newY);
-    	System.out.println("ACT X =" + p.getLocX() + " ACT Y = " + p.getLocY());
+    	if(tabuleiro[newX][newY].getPiece() != null){
+    		System.out.println("NEW X =" + newX + " NEW Y = " + newY + " TEAMMM = " + tabuleiro[newX][newY].getPiece().getTeam());
+    	}
+    	System.out.println("ACT X =" + p.getLocX() + " ACT Y = " + p.getLocY() + " TIME = " + p.getTeam());
     	
 		ArrayList<Point> validMoves = p.validMoves;
 

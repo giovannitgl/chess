@@ -1,3 +1,6 @@
+package MVC;
+import model.*;
+import gui.*;
 public class MVC {
   private Model m = Model.getInstance();
   private View  v;

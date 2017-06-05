@@ -86,6 +86,4 @@ public class Cavalo extends Piece{
 			validMoves.add(new Point(auxX,auxY));
 		}
 	}
-
-
 }

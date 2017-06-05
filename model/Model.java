@@ -1,10 +1,12 @@
+package model;
+import gui.*;
 import piece.*;
 public final class Model{
 	private  Tabuleiro t;
 	private View v;
 	private int currentTurn;
 	private int selX,selY;
-  private int destX,destY;
+    private int destX,destY;
 	private int dragX,dragY;
 	RoundState rs;
 	private static final Model INSTANCE = new Model();

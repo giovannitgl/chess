@@ -1,3 +1,5 @@
+package jogador;
+import gui.*;
 import piece.*;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -8,7 +10,7 @@ public class Jogador{
 	private int pieces_killed;
 	private int score;
 
-	Jogador(int team){
+	public Jogador(int team){
 		this.team = team;
 		score = 0;
 		pieces_killed = 0;
