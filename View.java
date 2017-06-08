@@ -30,14 +30,11 @@ public class View{
         GridLayout layout = new GridLayout(3,0,-1,1);
         f.setTitle("Chess");
         f.setLayout(new GridLayout(2,0));
-        menuPanel[0] = new JPanel();
+        menuPanel[0] = gameTitle();
         menuPanel[1] = new JPanel();
         menuPanel[1].setLayout(layout);
-        menuPanel[0].setBorder(BorderFactory.createLineBorder(Color.WHITE));
         menuPanel[1].setBorder(BorderFactory.createLineBorder(Color.WHITE));
-        for (int i = 0; i < 2; i++)
-            this.menuPanel[i].setBackground(Color.BLACK);
-        menuPanel[0].add(new JLabel (new ImageIcon(getClass().getResource("/icons/menu.png"))));
+        menuPanel[1].setBackground(Color.BLACK);
         menuText[0] = new MenuText("Player vs Player",0);
         menuText[1] = new MenuText("Player vs AI",1);
         menuText[2] = new MenuText("Player vs Player (Online)",2);
@@ -73,7 +70,36 @@ public class View{
         this.f = f;
         show();
     }
-
+    public void createMPMenu(){
+        JFrame f = new JFrame();
+        f.setTitle("Chess");
+        f.setSize(720,720);
+        f.setLayout(new GridLayout(2,0));
+        JPanel p = new JPanel();
+        p.setLayout(new GridLayout(3,0));
+        p.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        p.setBackground(Color.BLACK);
+        MenuText [] options = new MenuText[2];
+        menuText[0] = new MenuText("Host Game",0);
+        menuText[1] = new MenuText("Join Game",1);
+        menuText[2] = new MenuText("Return",2);
+        for(int i = 0; i < 3; i++){
+            menuText[i].setForeground(Color.WHITE);
+            p.add(menuText[i]);
+            menuText[i].addMouseListener(control);
+        }
+        f.getContentPane().add(gameTitle());
+        f.getContentPane().add(p);
+        this.f = f;
+        show();
+    }
+    private JPanel gameTitle(){
+        JPanel menuPanel = new JPanel();
+        menuPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+        menuPanel.setBackground(Color.BLACK);
+        menuPanel.add(new JLabel (new ImageIcon(getClass().getResource("/icons/menu.png"))));
+        return menuPanel;
+    }
     public void selectTile(int x, int y){
     	panels[x][y].setBackground(Color.YELLOW);
     	panels[x][y].setBorder(BorderFactory.createLineBorder(Color.black));

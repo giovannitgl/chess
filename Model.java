@@ -80,6 +80,18 @@ public final class Model{
 			this.buildTabuleiro();
 			this.show();
 		}
+		if (x == 2){
+			v.dispose();
+			v.createMPMenu();
+			this.show();
+		}
+	}
+	public void mpClickedMenu(int x){
+		if (x == 2){
+			v.dispose();
+			v.createMenu();
+			this.show();
+		}
 	}
 	public void buildTabuleiro(){
 		t = new Tabuleiro();
