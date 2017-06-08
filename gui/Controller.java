@@ -33,6 +33,10 @@ public class Controller implements MouseListener{
 				m.clickedMenu(x);
 				this.setMode(1);
 			}
+			else if(x == 1){
+				m.clickedMenu(x);
+				this.setMode(2);
+			}
 		}
 		else{
 			BoardPanel panel = (BoardPanel)arg0.getSource();
