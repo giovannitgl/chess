@@ -9,6 +9,8 @@ import java.awt.Image;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.Font;
+import javax.swing.JDialog;
 
 public class View{
     private BoardPanel [][] panels = new BoardPanel[8][8];
@@ -90,6 +92,18 @@ public class View{
             menuText[i].addMouseListener(control);
         }
         f.getContentPane().add(gameTitle());
+        f.getContentPane().add(p);
+        this.f = f;
+        show();
+    }
+    public void waitScreen(){
+        JFrame f = new JFrame("Chess");
+        JPanel p = new JPanel();
+        p.setBackground(Color.BLACK);
+        JLabel t = new JLabel("     Waiting...      ");
+        t.setFont(new Font("Serif", Font.BOLD, 30));
+        t.setForeground(Color.WHITE);
+        p.add(t);
         f.getContentPane().add(p);
         this.f = f;
         show();
@@ -187,7 +201,12 @@ public class View{
     	}
         if(pieceIcon != null)
             panels[x][y].add(pieceIcon);
-	}
+    }
+    public void makeDialog(){
+        String s = JOptionPane.showInputDialog(this.f,"Enter IP","127.0.0.1");
+        control.receivedIP(s);
+
+    }
     public void changeCursor(){
         f.setCursor(Cursor.getDefaultCursor());
     }

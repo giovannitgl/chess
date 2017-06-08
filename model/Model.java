@@ -3,15 +3,17 @@ import gui.*;
 import piece.*;
 import java.net.Socket;
 import java.net.ServerSocket;
+import java.io.IOException;
 public final class Model{
 	private  Tabuleiro t;
 	ServerSocket server;
-	Socket listener;
+	Socket client;
 	private View v;
 	private int currentTurn;
 	private int selX,selY;
     private int destX,destY;
 	private int dragX,dragY;
+	private final int PORT = 5000;
 	RoundState rs;
 	private static final Model INSTANCE = new Model();
 	private Model(){
@@ -93,7 +95,15 @@ public final class Model{
 		}
 	}
 	public void mpClickedMenu(int x){
-		if (x == 2){
+		if (x == 0){
+			v.dispose();
+			this.waitScreen();
+			this.startHost();
+		}
+		if (x == 1){
+			v.makeDialog();
+		}
+		else if (x == 2){
 			v.dispose();
 			v.createMenu();
 			this.show();
@@ -132,11 +142,46 @@ public final class Model{
 
 		}
 	}
+	private void waitScreen(){
+		v.waitScreen();
+	}
 	public void cursorReleased(){
 		v.changeCursor();
 		v.setPieceVisibility(dragX,dragY,true);
 	}
 	private void show(){
 		v.show();
+	}
+
+	private void startHost(){
+		try{
+			server = new ServerSocket(PORT);
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		try{
+			client = server.accept();
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		v.dispose();
+		this.buildTabuleiro();
+		this.show();
+	}
+
+	public void joinConnection(String s){
+		try{
+			client = new Socket(s,PORT);
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		if(client.isConnected()){
+			v.dispose();
+			this.buildTabuleiro();
+			this.show();
+		}
 	}
 }

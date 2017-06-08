@@ -23,6 +23,9 @@ public class Controller implements MouseListener{
 	public void setMode(int x){
 		this.mode = x;
 	}
+	public void receivedIP(String s){
+		m.joinConnection(s);
+	}
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if(mode == 0 ){
@@ -42,7 +45,15 @@ public class Controller implements MouseListener{
 			MenuText text = (MenuText)arg0.getSource();
 			int x = text.getRelativeX();
 			System.out.println("x " + x);
-			if(x == 2){
+			if (x == 0){
+				m.mpClickedMenu(x);
+				this.setMode(2);
+			}
+			else if (x == 1){
+				m.mpClickedMenu(x);
+				this.setMode(2);
+			}
+			else if(x == 2){
 				m.mpClickedMenu(x);
 				this.setMode(0);
 			}
