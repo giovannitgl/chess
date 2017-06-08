@@ -1,6 +1,10 @@
 import piece.*;
+import java.net.Socket;
+import java.net.ServerSocket;
 public final class Model{
 	private  Tabuleiro t;
+	ServerSocket server;
+	Socket listener;
 	private View v;
 	private int currentTurn;
 	private int selX,selY;
