@@ -1,8 +1,12 @@
 package model;
 import gui.*;
 import piece.*;
+import java.net.Socket;
+import java.net.ServerSocket;
 public final class Model{
 	private  Tabuleiro t;
+	ServerSocket server;
+	Socket listener;
 	private View v;
 	private int currentTurn;
 	private int selX,selY;
@@ -80,6 +84,18 @@ public final class Model{
 		if (x == 0){
 			v.dispose();
 			this.buildTabuleiro();
+			this.show();
+		}
+		if (x == 2){
+			v.dispose();
+			v.createMPMenu();
+			this.show();
+		}
+	}
+	public void mpClickedMenu(int x){
+		if (x == 2){
+			v.dispose();
+			v.createMenu();
 			this.show();
 		}
 	}

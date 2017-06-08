@@ -10,7 +10,7 @@ import piece.*;
 
 public class Controller implements MouseListener{
 	private Model m;
-	private int mode;
+	private int mode;//0 = menu, 1 = menu multiplayer, 2 = jogo
 	private int hl;
 	private int dndX,dndY;
 	RoundState rs;
@@ -25,13 +25,26 @@ public class Controller implements MouseListener{
 	}
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if(mode == 0){
+		if(mode == 0 ){
 			MenuText text = (MenuText)arg0.getSource();
 			int x = text.getRelativeX();
 			System.out.println("x" + x);
 			if(x == 0){
 				m.clickedMenu(x);
+				this.setMode(2);
+			}
+			else if (x == 2){
+				m.clickedMenu(x);
 				this.setMode(1);
+			}
+		}
+		else if (mode == 1){
+			MenuText text = (MenuText)arg0.getSource();
+			int x = text.getRelativeX();
+			System.out.println("x " + x);
+			if(x == 2){
+				m.mpClickedMenu(x);
+				this.setMode(0);
 			}
 		}
 		else{
@@ -49,7 +62,7 @@ public class Controller implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(mode == 0){
+		if(mode == 0 || mode == 1){
 			MenuText text = (MenuText)arg0.getSource();
 			int x = text.getRelativeX();
 			m.overText(x);
@@ -62,7 +75,7 @@ public class Controller implements MouseListener{
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(mode == 0){
+		if(mode == 0 || mode == 1){
 			m.leftText(hl);
 		}
 	}
@@ -72,7 +85,7 @@ public class Controller implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(mode == 1){
+		if(mode == 4){
 			if(rs == RoundState.NOCLICK){
 				BoardPanel panel = (BoardPanel)arg0.getSource();
 				int x = panel.getRelativeX();
@@ -87,7 +100,7 @@ public class Controller implements MouseListener{
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(mode == 1){
+		if(mode == 4){
 		//	m.cursorReleased();
 			rs = RoundState.NOCLICK;
 		}
