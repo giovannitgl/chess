@@ -123,6 +123,18 @@ public final class Model{
 				          System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
 				          currentTurn++;
 				          currentTurn = currentTurn % 2;
+				          
+			   			System.out.println("CHUPA PORRA! AGORA É AI NO COMANDO");
+			   			t.bestMove(x, y);
+			   			int xx = t.getBestX();
+			   			int yy = t.getBestY();
+			   			Piece pp = t.getBestPiece();
+			   			v.clearOneRende((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
+			   			t.changePosition(xx, yy, pp);
+			   			v.clearAllRender();
+						this.buildIcons();
+			   			currentTurn++;
+			   			currentTurn = currentTurn%2;
 				          rs = RoundState.NOCLICK;
 				          v.clearAllRender();
 				          this.buildIcons();
@@ -137,17 +149,6 @@ public final class Model{
 		    	}	
 	   		}
 	   		else{
-	   			System.out.println("CHUPA PORRA! AGORA É AI NO COMANDO");
-	   			t.bestMove(x, y);
-	   			int xx = t.getBestX();
-	   			int yy = t.getBestY();
-	   			Piece pp = t.getBestPiece();
-	   			v.clearOneRende((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
-	   			t.changePosition(xx, yy, pp);
-	   			v.clearAllRender();
-				this.buildIcons();
-	   			currentTurn++;
-	   			currentTurn = currentTurn%2;
 	   		}
 		}
 	}
