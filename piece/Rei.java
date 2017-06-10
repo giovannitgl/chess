@@ -70,7 +70,6 @@ public class Rei extends Piece{
   }
 
   public boolean checkBishop(Piece pc, Point p)  {
-    pc.updatePosition(friend,enemy);
     for (int i = 0; i < pc.validMoves.size() ; i++) {
       if ( pc.validMoves.get(i).getX() == p.getX() && pc.validMoves.get(i).getY() == p.getY()) {
         return false;
@@ -79,25 +78,25 @@ public class Rei extends Piece{
     return true;
   }
 
-  public boolean checkRook(Piece pc, Point p) {
-    pc.updatePosition(friend,enemy);
-    for (int j = 0; j < pc.validMoves.size() ; j++) {
-      if ( pc.validMoves.get(j).getX() == p.getX() && pc.validMoves.get(j).getY() == p.getY()) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  public boolean checkQueen(Piece pc, Point p) {
-    pc.updatePosition(friend,enemy);
-    for (int j = 0; j < pc.validMoves.size() ; j++) {
-      if ( pc.validMoves.get(j).getX() == p.getX() && pc.validMoves.get(j).getY() == p.getY()) {
-        return false;
-      }
-    }
-    return true;
-  }
+  // public boolean checkRook(Piece pc, Point p) {
+  //   pc.updatePosition(friend,enemy);
+  //   for (int j = 0; j < pc.validMoves.size() ; j++) {
+  //     if ( pc.validMoves.get(j).getX() == p.getX() && pc.validMoves.get(j).getY() == p.getY()) {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
+  //
+  // public boolean checkQueen(Piece pc, Point p) {
+  //   pc.updatePosition(friend,enemy);
+  //   for (int j = 0; j < pc.validMoves.size() ; j++) {
+  //     if ( pc.validMoves.get(j).getX() == p.getX() && pc.validMoves.get(j).getY() == p.getY()) {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
 
   public boolean isSafe(ArrayList<Piece> friend, ArrayList<Piece> enemy, Point p)  {
     for (int i = 0; i < enemy.size() ; i++ ) {
