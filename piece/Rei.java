@@ -33,7 +33,35 @@ public class Rei extends Piece{
     return true;
   }
 
-  public boolean
+  public boolean checkKnight(Piece enemy, Point p)  {
+    Point aux = enemy.getLocation();
+    if (aux.getX() + 2 == p.getX() && aux.getY() - 1 == p.getY()) {
+      return false;
+    }
+    if (aux.getX() + 2 == p.getX() && aux.getY() + 1 == p.getY()) {
+      return false;
+    }
+    if (aux.getX() - 2 == p.getX() && aux.getY() + 1 == p.getY()) {
+      return false;
+    }
+    if (aux.getX() - 2 == p.getX() && aux.getY() - 1 == p.getY()) {
+      return false;
+    }
+    if (aux.getX() + 1 == p.getX() && aux.getY() - 2 == p.getY()) {
+      return false;
+    }
+    if (aux.getX() - 1 == p.getX() && aux.getY() - 2 == p.getY()) {
+      return false;
+    }
+    if (aux.getX() + 1 == p.getX() && aux.getY() + 2 == p.getY()) {
+      return false;
+    }
+    if (aux.getX() - 1 == p.getX() && aux.getY() + 2 == p.getY()) {
+      return false;
+    }
+    return true;
+  }
+
   public boolean isSafe(ArrayList<Piece> enemy, Point p)  {
     for (int i = 0; i < enemy.size() ; i++ ) {
       Piece pc = enemy.get(i);
@@ -41,7 +69,7 @@ public class Rei extends Piece{
         case PAWN:
           if(checkPawn(pc, p) == false)  {return false;}
         case KNIGHT:
-
+          if(checkKnight(pc,p) == false) {return false;}
         case BISHOP:
 
         case ROOK:
