@@ -4,10 +4,12 @@ import piece.*;
 import java.net.Socket;
 import java.net.ServerSocket;
 import java.io.IOException;
+
 public final class Model{
 	private  Tabuleiro t;
-	ServerSocket server;
+	ServerThread server;
 	Socket client;
+	Thread thread;
 	private View v;
 	private int currentTurn;
 	private int selX,selY;
@@ -154,23 +156,39 @@ public final class Model{
 	}
 
 	private void startHost(){
-		try{
-			server = new ServerSocket(PORT);
-		}
-		catch(IOException e){
-			System.out.println(e);
-		}
-		try{
-			client = server.accept();
-		}
-		catch(IOException e){
-			System.out.println(e);
-		}
+		server = new ServerThread(this.client, this);
+		thread = new Thread(server);
+		thread.start();
+		// System.out.println("AQUI");
+		// try{
+		// 	server = new ServerSocket(PORT);
+		// }
+		// catch(IOException e){
+		// 	System.out.println(e);
+		// }
+		// try{
+		// 	client = server.accept();
+		// }
+		// catch(IOException e){
+		// 	System.out.println(e);
+		// }
+		// do{
+		// 	v.show();
+		// 	System.out.println(client.isConnected());
+		// }while(!client.isConnected());
+		// do{
+		// 	// v.show();
+		// 	System.out.println("Client = null");
+		// }while(client == null);
+		// v.dispose();
+		// this.buildTabuleiro();
+		// this.show();
+	}
+	public void connected(){
 		v.dispose();
 		this.buildTabuleiro();
 		this.show();
 	}
-
 	public void joinConnection(String s){
 		try{
 			client = new Socket(s,PORT);
