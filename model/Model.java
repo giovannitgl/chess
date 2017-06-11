@@ -4,13 +4,23 @@ import piece.*;
 import java.net.Socket;
 import java.net.ServerSocket;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.awt.Point;
 
 public final class Model{
 	private  Tabuleiro t;
-	ServerThread server;
-	Socket client;
-	Thread thread;
-	private View v;
+	private ServerSocket server;
+	private Socket client;
+	private boolean multiplayer;
+	private boolean isHost;
+	private DataOutputStream out;
+	private DataInputStream in;
+	private Thread synch;
+	public View v;
+	private Thread roundSych;
+	private boolean isFirstRound;
 	private int currentTurn;
 	private int selX,selY;
     private int destX,destY;
@@ -20,6 +30,8 @@ public final class Model{
 	private static final Model INSTANCE = new Model();
 	private Model(){
 		currentTurn = 0;
+		this.isHost = false;
+		this.isFirstRound = false;
 		rs = RoundState.NOCLICK;
 	}
 	public static Model getInstance(){
@@ -28,60 +40,97 @@ public final class Model{
 	public void setView(View v){
 		this.v = v;
 	}
-
+	public void nextRound(){
+		this.currentTurn++;
+		this.currentTurn = currentTurn % 2;
+	}
+	public Piece getPiece(int x,int y){
+		return this.t.tabuleiro[x][y].getPiece();
+	}
+	public void changePosition(int x, int y, Piece p){
+		this.t.changePosition(x,y,p);
+	}
 	public void clickedPanel(int x, int y){
 		switch(rs){
 			case NOCLICK:
+				//condicional checa se a peça é do jogador da vez, o segundo condicional assegura
+				//que o round esta condizente com a peça clicada no multiplayer
 				if(t.isPlayerPiece(x,y,currentTurn)){
-					v.selectTile(x,y);
-					selX = x;
-					selY = y;
-					rs = RoundState.FIRSTCLICK;
-          System.out.println(rs);
+					if(multiplayer){
+						if((isHost && currentTurn == 0) ||(!isHost && currentTurn == 1)){
+							v.selectTile(x,y);
+							selX = x;
+							selY = y;
+							rs = RoundState.FIRSTCLICK;
+						}
+					}
+					else{
+						v.selectTile(x,y);
+						selX = x;
+						selY = y;
+						rs = RoundState.FIRSTCLICK;
+		      			System.out.println(rs);
+					}
 				}
 			break;
 			case FIRSTCLICK:
         // Deseleciona
-        if (x == selX && y == selY) {
-          v.desselectTile(x,y);
-          rs = RoundState.NOCLICK;
-          System.out.println(rs);
-          break;
-        }
-        // Reseleciona
-        if (t.isPlayerPiece(x,y,currentTurn)) {
-          v.desselectTile(selX,selY);
-          v.selectTile(x,y);
+	        if (x == selX && y == selY) {
+	          v.desselectTile(x,y);
+	          rs = RoundState.NOCLICK;
+	          System.out.println(rs);
+	          break;
+	        }
+	        // Reseleciona
+	        if (t.isPlayerPiece(x,y,currentTurn)) {
+	        	if(multiplayer){
+	        		if((isHost && currentTurn == 0) || (!isHost && currentTurn == 1)){
+			          	v.desselectTile(selX,selY);
+			         	v.selectTile(x,y);
+						selX = x;
+						selY = y;
+			          	rs = RoundState.FIRSTCLICK;
+	        		}
+	        	}
+	        	else{
+			      	v.desselectTile(selX,selY);
+			     	v.selectTile(x,y);
 					selX = x;
 					selY = y;
-          rs = RoundState.FIRSTCLICK;
-          System.out.println(rs);
-          break;
+			      	rs = RoundState.FIRSTCLICK;
+	        	}
+		      	System.out.println(rs);
+	          	break;
 				}
-        // Escolhe Dest
-        if (!t.isPlayerPiece(x,y,currentTurn) && t.isValid(x, y, t.tabuleiro[selX][selY].getPiece()) ) {
-          Piece p = t.tabuleiro[selX][selY].getPiece();
-          System.out.println("Valido");
-          v.desselectTile(selX,selY);
-          v.addPiece(x,y,t.tabuleiro[selX][selY].getPiece().getType(),t.tabuleiro[selX][selY].getPiece().getTeam());
-          v.clearOneRende(selX,selY);
-          System.out.println("TIME PORRA =" + t.tabuleiro[selX][selY].getPiece().getTeam());
-          t.changePosition(x,y,p);
-          System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
-          currentTurn++;
-          currentTurn = currentTurn % 2;
-          rs = RoundState.NOCLICK;
-          v.clearAllRender();
-          this.buildIcons();
-          break;
-        }
-        else {
-          System.out.println("Invalido");
-          v.desselectTile(selX,selY);
-          rs = RoundState.NOCLICK;
-          break;
-        }
-    }
+	        // Escolhe Dest
+	        if (!t.isPlayerPiece(x,y,currentTurn) && t.isValid(x, y, t.tabuleiro[selX][selY].getPiece()) ) {
+	        	if(multiplayer){
+	        		sendMove(selX,selY);
+	        		sendMove(x,y);
+	        	}
+			    Piece p = t.tabuleiro[selX][selY].getPiece();
+			    System.out.println("Valido");
+			    v.desselectTile(selX,selY);
+			    v.addPiece(x,y,t.tabuleiro[selX][selY].getPiece().getType(),t.tabuleiro[selX][selY].getPiece().getTeam());
+			    v.clearOneRende(selX,selY);
+			    System.out.println("TIME PORRA =" + t.tabuleiro[selX][selY].getPiece().getTeam());
+			    t.changePosition(x,y,p);
+			    System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
+			    this.nextRound();
+			    this.sendNextRound();
+			    rs = RoundState.NOCLICK;
+			    v.clearAllRender();
+			    this.buildIcons();
+			    System.out.println("PRESO?");
+			    break;
+	        }
+	        else {
+	          System.out.println("Invalido");
+	          v.desselectTile(selX,selY);
+	          rs = RoundState.NOCLICK;
+	          break;
+	        }
+	    }
 	}
 
 	public void clickedMenu(int x){
@@ -120,7 +169,7 @@ public final class Model{
 		// v.desselectTile(1,1);
 		// v.render();
 	}
-	private void buildIcons(){
+	public void buildIcons(){
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if(t.tabuleiro[i][j].getPiece() != null){
@@ -156,22 +205,33 @@ public final class Model{
 	}
 
 	private void startHost(){
-		server = new ServerThread(this.client, this);
-		thread = new Thread(server);
-		thread.start();
+		// server = new ServerThread(this.client, this);
+		// thread = new Thread(server);
+		// thread.start();
 		// System.out.println("AQUI");
-		// try{
-		// 	server = new ServerSocket(PORT);
-		// }
-		// catch(IOException e){
-		// 	System.out.println(e);
-		// }
-		// try{
-		// 	client = server.accept();
-		// }
-		// catch(IOException e){
-		// 	System.out.println(e);
-		// }
+		try{
+			server = new ServerSocket(PORT);
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		try{
+			client = server.accept();
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		this.connected();
+		try{
+			in = new DataInputStream(client.getInputStream());
+			out = new DataOutputStream(client.getOutputStream());
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		// this.multiplayer = true;
+		this.isHost = true;
+		this.connected();
 		// do{
 		// 	v.show();
 		// 	System.out.println(client.isConnected());
@@ -185,6 +245,9 @@ public final class Model{
 		// this.show();
 	}
 	public void connected(){
+		synch = new Thread(new MessageListener(in));
+		synch.start();
+		this.multiplayer = true;
 		v.dispose();
 		this.buildTabuleiro();
 		this.show();
@@ -197,9 +260,49 @@ public final class Model{
 			System.out.println(e);
 		}
 		if(client.isConnected()){
-			v.dispose();
-			this.buildTabuleiro();
-			this.show();
+			try{
+				in = new DataInputStream(client.getInputStream());
+				out = new DataOutputStream(client.getOutputStream());
+				
+			}
+			catch(IOException e){
+				System.out.println(e);
+			}
+			this.connected();
+		}
+	}
+	public void getMove(){
+		int x = 0;
+		int y = 0;
+		try{
+			x = in.readInt();
+			y = in.readInt();
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+		System.out.println("Recebi" + x + " " + y);
+	}
+	public void sendMove(int x, int y){
+		try{
+			out.writeInt(x);
+			out.flush();
+			out.writeInt(y);
+			out.flush();
+		}
+		catch(IOException e){
+			System.out.println(e);
+		}
+	}
+	public void sendNextRound(){
+		try{
+			out.writeInt(10);
+			out.writeInt(10);
+			out.writeInt(11);
+			out.writeInt(11);
+		}
+		catch(IOException e){
+			System.out.println(e);
 		}
 	}
 }
