@@ -38,7 +38,7 @@ public class MessageListener implements Runnable{
 			    m.buildIcons();
 			    m.v.show();
 		}
-		System.out.println("Recebi selX" + selX + " selY " + selY + " X "  + x + " Y " + y);
+		// System.out.println("Recebi selX" + selX + " selY " + selY + " X "  + x + " Y " + y);
 		}
 	}
 }

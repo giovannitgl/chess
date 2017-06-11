@@ -67,7 +67,7 @@ public final class Model{
 						selX = x;
 						selY = y;
 						rs = RoundState.FIRSTCLICK;
-		      			System.out.println(rs);
+		      			// System.out.println(rs);
 					}
 				}
 			break;
@@ -76,7 +76,7 @@ public final class Model{
 	        if (x == selX && y == selY) {
 	          v.desselectTile(x,y);
 	          rs = RoundState.NOCLICK;
-	          System.out.println(rs);
+	          // System.out.println(rs);
 	          break;
 	        }
 	        // Reseleciona
@@ -97,7 +97,7 @@ public final class Model{
 					selY = y;
 			      	rs = RoundState.FIRSTCLICK;
 	        	}
-		      	System.out.println(rs);
+		      	// System.out.println(rs);
 	          	break;
 				}
 	        // Escolhe Dest
@@ -107,24 +107,24 @@ public final class Model{
 	        		sendMove(x,y);
 	        	}
 			    Piece p = t.tabuleiro[selX][selY].getPiece();
-			    System.out.println("Valido");
+			    // System.out.println("Valido");
 			    v.desselectTile(selX,selY);
 			    v.addPiece(x,y,t.tabuleiro[selX][selY].getPiece().getType(),t.tabuleiro[selX][selY].getPiece().getTeam());
 			    v.clearOneRende(selX,selY);
-			    System.out.println("TIME PORRA =" + t.tabuleiro[selX][selY].getPiece().getTeam());
+			    // System.out.println("TIME PORRA =" + t.tabuleiro[selX][selY].getPiece().getTeam());
 			    t.changePosition(x,y,p);
-			    System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
+			    // System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
 			    this.nextRound();
 			    if(multiplayer)
 				    this.sendNextRound();
 			    rs = RoundState.NOCLICK;
 			    v.clearAllRender();
 			    this.buildIcons();
-			    System.out.println("PRESO?");
+			    // System.out.println("PRESO?");
 			    break;
 	        }
 	        else {
-	          System.out.println("Invalido");
+	          // System.out.println("Invalido");
 	          v.desselectTile(selX,selY);
 	          rs = RoundState.NOCLICK;
 	          break;
@@ -202,7 +202,7 @@ public final class Model{
 		// server = new ServerThread(this.client, this);
 		// thread = new Thread(server);
 		// thread.start();
-		// System.out.println("AQUI");
+		System.out.println("AQUI");
 		try{
 			server = new ServerSocket(PORT);
 		}
@@ -228,11 +228,11 @@ public final class Model{
 		this.connected();
 		// do{
 		// 	v.show();
-		// 	System.out.println(client.isConnected());
+			System.out.println(client.isConnected());
 		// }while(!client.isConnected());
 		// do{
 		// 	// v.show();
-		// 	System.out.println("Client = null");
+			System.out.println("Client = null");
 		// }while(client == null);
 		// v.dispose();
 		// this.buildTabuleiro();
@@ -274,7 +274,7 @@ public final class Model{
 		catch(IOException e){
 			System.out.println(e);
 		}
-		System.out.println("Recebi" + x + " " + y);
+		// System.out.println("Recebi" + x + " " + y);
 	}
 	public void sendMove(int x, int y){
 		try{

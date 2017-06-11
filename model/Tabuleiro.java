@@ -151,14 +151,14 @@ public class Tabuleiro{
 	public boolean isValid(int newX, int newY, Piece p){
     	// p.updatePosition(p.getLocX(),p.getLocY());
     	if(tabuleiro[newX][newY].getPiece() != null){
-    		System.out.println("NEW X =" + newX + " NEW Y = " + newY + " TEAMMM = " + tabuleiro[newX][newY].getPiece().getTeam());
+    		// System.out.println("NEW X =" + newX + " NEW Y = " + newY + " TEAMMM = " + tabuleiro[newX][newY].getPiece().getTeam());
     	}
-    	System.out.println("ACT X =" + p.getLocX() + " ACT Y = " + p.getLocY() + " TIME = " + p.getTeam());
+    	// System.out.println("ACT X =" + p.getLocX() + " ACT Y = " + p.getLocY() + " TIME = " + p.getTeam());
     	
 		ArrayList<Point> validMoves = p.validMoves;
 
 		for(int i = 0; i < validMoves.size(); i++){
-			System.out.println("x = " + validMoves.get(i).getX() + " y = " + validMoves.get(i).getY());
+			// System.out.println("x = " + validMoves.get(i).getX() + " y = " + validMoves.get(i).getY());
 		}
 
 		// Point ponto;

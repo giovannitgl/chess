@@ -31,7 +31,7 @@ public class Controller implements MouseListener{
 		if(mode == 0 ){
 			MenuText text = (MenuText)arg0.getSource();
 			int x = text.getRelativeX();
-			System.out.println("x" + x);
+			// System.out.println("x" + x);
 			if(x == 0){
 				m.clickedMenu(x);
 				this.setMode(2);
@@ -44,7 +44,7 @@ public class Controller implements MouseListener{
 		else if (mode == 1){
 			MenuText text = (MenuText)arg0.getSource();
 			int x = text.getRelativeX();
-			System.out.println("x " + x);
+			// System.out.println("x " + x);
 			if (x == 0){
 				m.mpClickedMenu(x);
 				this.setMode(2);
@@ -62,7 +62,7 @@ public class Controller implements MouseListener{
 			BoardPanel panel = (BoardPanel)arg0.getSource();
 			int x = panel.getRelativeX();
 		    int y = panel.getRelativeY();
-		    System.out.println("X" + x + "Y" + y);
+		    // System.out.println("X" + x + "Y" + y);
 		    m.clickedPanel(x,y);
 		    rs = RoundState.FIRSTCLICK;	
 		}
