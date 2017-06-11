@@ -67,9 +67,9 @@ public class AI_Player{
 		int [][]positionWeightAux =
 		{	{1,1,1,1,1,1,1,1}
 		,	{2,2,2,2,2,2,2,2}
-		,	{2,2,3,3,3,3,2,2}
-		,	{2,2,3,4,4,3,2,2}
-		,	{2,2,3,4,4,3,2,2}
+		,	{2,3,3,3,3,3,3,2}
+		,	{2,3,4,5,5,4,3,2}
+		,	{2,3,3,5,5,4,3,2}
 		,	{2,2,3,3,3,3,2,2}
 		,	{2,2,2,2,2,2,2,2}
 		,	{1,1,1,1,1,1,1,1}
@@ -91,7 +91,7 @@ public class AI_Player{
 		switch(piece_type){
 			case PAWN: return 10;
 			case KNIGHT: return 30;
-			case BISHOP: return 30;
+			case BISHOP: return 40;
 			case ROOK: return 50;
 			case QUEEN: return 90;
 			case KING: return 99999;

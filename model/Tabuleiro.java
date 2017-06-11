@@ -4,6 +4,7 @@ import jogador.*;
 import piece.*;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Tabuleiro{
 	Jogador j0;
@@ -177,14 +178,11 @@ public class Tabuleiro{
 		int y1 = p.getLocY();
 		lastPoint = new Point(x1, y1);
 		if(tabuleiro[x][y].getPiece()!=null){
-			System.out.println("ENTREI NESSA BIROSKA");
 			lastPieceTaken = tabuleiro[x][y].getPiece();
 		}
 		removePiece(x,y);
 		tabuleiro[x][y].setPiece(p);
 		tabuleiro[x1][y1].setPiece(null);
-		System.out.println("REMOVI PECA");
-		System.out.println("X = " + x1 + " Y = " + y1);
 		p.setLocation(x,y);
 		if(mode == 0){
 			updateValidMove();
@@ -197,7 +195,7 @@ public class Tabuleiro{
 	private void undoMove(int index){
 		removePiece((int)lastPieceMoved.getLocation().getX(), (int)lastPieceMoved.getLocation().getY());	
 		if(lastPieceTaken!=null){//se movimento comeu alguma peca
-			System.out.println("Entrei aqui gente!!!");
+			//System.out.println("Entrei aqui gente!!!");
 			addPiece(lastPieceTaken, (int)lastPieceMoved.getLocation().getX(), (int)lastPieceMoved.getLocation().getY());
 		}
 		// System.out.print("LP = ");
@@ -209,7 +207,7 @@ public class Tabuleiro{
 		// System.out.print("X = " + lastPoint.getX());
 		// System.out.println(" Y = " + lastPoint.getY());
 		
-		System.out.println(lastPieceMoved.getType());
+		//System.out.println(lastPieceMoved.getType());
 
 		AIupdateValidMove();
 	}
@@ -234,14 +232,13 @@ public class Tabuleiro{
 
 	private void addPiece(Piece piece, int x, int y){
 		tabuleiro[x][y].setPiece(piece);
-		System.out.println("X peca = " + x + " Y peca = " + y);
 		piece.setLocation(x,y);
 		if (piece.getTeam()== 1){
 			//System.out.println("Entrei errado gentii");
 			AI.addPiece(piece);
 		}
 		else{
-			System.out.println("Entrei certo aqui para time = " + piece.getTeam());
+		//	System.out.println("Entrei certo aqui para time = " + piece.getTeam());
 			j0.addPiece(piece);
 		}
 
@@ -310,27 +307,14 @@ public class Tabuleiro{
 
 
 	public boolean isValid(int newX, int newY, Piece p){
-    	// p.updatePosition(p.getLocX(),p.getLocY());
     	if(tabuleiro[newX][newY].getPiece() != null){
-    		System.out.println("NEW X =" + newX + " NEW Y = " + newY + " TEAMMM = " + tabuleiro[newX][newY].getPiece().getTeam());
+//    		System.out.println("NEW X =" + newX + " NEW Y = " + newY + " TEAMMM = " + tabuleiro[newX][newY].getPiece().getTeam());
     	}
-    	System.out.println("ACT X =" + p.getLocX() + " ACT Y = " + p.getLocY() + " TIME = " + p.getTeam());
-    	
 		ArrayList<Point> validMoves = p.validMoves;
 
 		for(int i = 0; i < validMoves.size(); i++){
-			System.out.println("x = " + validMoves.get(i).getX() + " y = " + validMoves.get(i).getY());
+//			System.out.println("x = " + validMoves.get(i).getX() + " y = " + validMoves.get(i).getY());
 		}
-
-		// Point ponto;
-		// for(int i = 0; i < validMoves.size(); i++){
-		// 	ponto = validMoves.get(i);
-		// 	if(newX == (int)ponto.getX() && newY == (int)ponto.getY()){
-		// 		//changePosition(x,y,p);
-		// 		return true;
-		// 	}
-		// }
-		// return false;
 		if(validMoves.contains(new Point(newX,newY))){
 			if(p.getType() == PieceType.PAWN)
 				p.setFirstMove(false);
@@ -346,9 +330,7 @@ public class Tabuleiro{
 	}	
 	public boolean isPlayerPiece(int x, int y,int p){
 		if(tabuleiro[x][y].getPiece() != null){
-			System.out.println("ENTREI NA METADE para time = " + tabuleiro[x][y].getPiece().getTeam());
 			if(tabuleiro[x][y].getPiece().getTeam() == p){
-				System.out.println("ENTREI INTEIRO PARA TIME = " + p);
 				return true;
 			}
 			return false;
@@ -368,11 +350,12 @@ public class Tabuleiro{
 		int[][] positionWeight = AI.getPositionWeight();
 		ArrayList<Piece> AI_pieces = AI.getPlayerPieces();
 		ArrayList<Piece> j0_pieces = j0.getPlayerPieces();
-		int newWhiteScore = 0;//Jogador
-		int maxWhiteScore = 9999999;
+		int newWhiteScore = -90;//Jogador
+		int flag_piece = 0;
+		int maxWhiteScore = -9999;
 
-		int newBlackScore = 0;//AI
-		int maxBlackScore = 0;
+		int newBlackScore = -90;//AI
+		int maxBlackScore = -9999;
 
 		int blackX = 0, blackY = 0;
 		Piece blackPiece = null;
@@ -380,84 +363,82 @@ public class Tabuleiro{
 		int whiteX = 0, whiteY = 0;
 
 		int totalScore = 0;
-		int bestMoveX = 0, bestMoveY = 0;
+		int bestMoveX = 0;
+		int bestMoveY = 0;
 		Piece bestPiece = null;
 
 		for(int i = 0; i < AI_pieces.size(); i++){
-			//int x1 = (int)AI_pieces.get(i).getLocation().getX();
-			//int y1 = (int)AI_pieces.get(i).getLocation().getY();
-			//if(x == x1 && y == y1){
-			//if(isPlayerPiece((int)AI_pieces.get(i).getLocation().getX(), (int)AI_pieces.get(i).getLocation().getY(), 1)){				
 				for(int j = 0; j < AI_pieces.get(i).validMoves.size(); j++){
-					System.out.println("Size = " + AI_pieces.get(i).validMoves.size());
 					int newX = (int)AI_pieces.get(i).validMoves.get(j).getX();
 					int newY = (int)AI_pieces.get(i).validMoves.get(j).getY();
-					// System.out.print("X = " + AI_pieces.get(i).validMoves.get(j).getX());
-					// System.out.println(" Y = " + AI_pieces.get(i).validMoves.get(j).getY());
-					// System.out.println(" TYPE = " + AI_pieces.get(i).getType());
-					// System.out.println("ENTREI CU!");
 					if(tabuleiro[newX][newY].getPiece() != null){
+						flag_piece = 1;
 						newBlackScore += AI.getPieceScore(tabuleiro[newX][newY].getPiece().getType());
 					}
 					newBlackScore += positionWeight[newX][newY];
 					if(newBlackScore > maxBlackScore){
+						System.out.println("ENTREI PRIMEIRO");
+						System.out.println("SCORE = " + newBlackScore);
 						maxBlackScore = newBlackScore;
 						blackX = newX;
 						blackY = newY;
 						blackPiece = AI_pieces.get(i);
-						System.out.println("ACHEI UMA PECA DO CARILHOOOOOOOOO");
+					}
+					else if( newBlackScore == maxBlackScore && flag_piece == 1){
+						System.out.println("ENTREI SEGUNDO");
+						System.out.println("SCORE SEGUNDO = " + newBlackScore);
+						maxBlackScore = newBlackScore;
+						blackX = newX;
+						blackY = newY;
+						blackPiece = AI_pieces.get(i);
 					}
 					changePosition(newX, newY, AI_pieces.get(i));
 					for(int m = 0; m < j0_pieces.size(); m++){
 						for(int n = 0; n < j0_pieces.get(m).validMoves.size(); n++){
 							int newXp = (int)j0_pieces.get(m).validMoves.get(n).getX();
 							int newYp = (int)j0_pieces.get(m).validMoves.get(n).getY();
-							System.out.print("X = " + j0_pieces.get(m).validMoves.get(n).getX());
-							System.out.println(" Y = " + j0_pieces.get(m).validMoves.get(n).getY());
-							System.out.println(" TYPE = " + j0_pieces.get(m).getType());
 							if(tabuleiro[newXp][newYp].getPiece() != null && tabuleiro[newXp][newYp].getPiece().getTeam() == 1){
 								newWhiteScore += AI.getPieceScore(tabuleiro[newXp][newYp].getPiece().getType());
-								System.out.println(" COMI A PECINHA DO VIADINHO = " + tabuleiro[newXp][newYp].getPiece().getType());
 							}
 							newWhiteScore += positionWeight[newXp][newYp];
-							System.out.println("------------------------MISTERIO DO WHITE SCORE = " + newWhiteScore);
-							
-							if(newWhiteScore < maxWhiteScore){
+							if(newWhiteScore > maxWhiteScore){
+								System.out.println("SCORE BRANCO = " + newWhiteScore);
 								maxWhiteScore = newWhiteScore;
 								whiteX = newXp;
 								whiteY = newYp;
 							}
-							newWhiteScore = 0;
+							newWhiteScore = -90;
 						}
 					}
-					System.out.println("SCORES: -----------------------------------------");
-					System.out.println("BLACK SCORE = " + newBlackScore);
-					System.out.println("WHITE SCORE = " + newWhiteScore);
-					if(totalScore < (maxBlackScore - maxWhiteScore)){
+					if(totalScore <= (maxBlackScore - maxWhiteScore)){
 						totalScore = maxBlackScore - maxWhiteScore;
 						bestMoveX = blackX;
 						bestMoveY = blackY;
 						bestPiece = blackPiece;
 					}
 					undoMove(i);
-					System.out.println("SCOREE = " + newBlackScore);
-					newWhiteScore = 0;
-					newBlackScore = 0;
+					//newWhiteScore = 0;
+					newBlackScore = -90;
 				}
-				maxWhiteScore = 999999;
-				maxBlackScore = 0;
-					//return;
-		//	}
-				System.out.println();
-			//}
+				flag_piece = 0;
+				maxWhiteScore = -9999;
+				maxBlackScore = -9999;
 		}
-		System.out.println("BEST X = " + bestMoveX + " BEST Y = " + bestMoveY);
-		System.out.print("PIECE X = " + bestPiece.getLocation().getX());
-		System.out.println(" PIECE Y = " + bestPiece.getLocation().getY());
-		//changePosition(bestMoveX, bestMoveY, bestPiece);
+		if(bestPiece == null){
+			Random rand = new Random();
+			int n = rand.nextInt((AI_pieces.size()-1) + 0);
+			while(AI_pieces.get(n).validMoves.size() == 0){
+				n = rand.nextInt(AI_pieces.size());
+			}
+			bestPiece = AI_pieces.get(n);
+			bestMoveX = (int)AI_pieces.get(n).validMoves.get(0).getX();
+			bestMoveY = (int)AI_pieces.get(n).validMoves.get(0).getY();
+		}
+		if(bestPiece.getType() == PieceType.PAWN)
+				bestPiece.setFirstMove(false);
 		this.bestMoveX = bestMoveX;
 		this.bestMoveY = bestMoveY;
-		this.bestPiece = bestPiece;
+		this.bestPiece = bestPiece;		
 	}
 
 	public Piece getBestPiece(){
