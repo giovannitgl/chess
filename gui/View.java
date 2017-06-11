@@ -11,27 +11,52 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Font;
 import javax.swing.JDialog;
+import java.awt.CardLayout;
 
 public class View{
+    // private CardLayout screensLayout;
     private BoardPanel [][] panels = new BoardPanel[8][8];
-    private MenuText [] menuText = new MenuText[3];
-    private JPanel [] menuPanel = new JPanel[2];
+    // private MenuText [] menuText = new MenuText[3];
+    // private JPanel [] menuPanel = new JPanel[2];
     private JFrame f;
+    private JPanel cards;
+    private JPanel currentPanel;
+    private Thread renderThread;
     private Controller control;
     public void show(){
         this.f.pack();
         this.f.setVisible(true);
         this.f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+    private void cardsMake(){
+        cards = new JPanel(new CardLayout());
+        cards.add(createMenu(),"MENU");
+        cards.add(createTable(),"TABLE");
+        cards.add(createMPMenu(),"MP");
+        cards.add(waitScreen(),"WAIT");
+    }
 
     public View(Controller controller){
         this.control = controller;
-         createMenu();
+        f = new JFrame("Chess");
+        this.f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // f.add()
+        cardsMake();
+        f.getContentPane().add(cards);
+        CardLayout l = (CardLayout) cards.getLayout();
+        l.show(cards,"MENU");
+        renderThread = new Thread(new RenderWorker(cards));
+        renderThread.start();
+         // createMenu();
+        this.show();
     }
-    public void createMenu(){
-        f = new JFrame();
+    public JPanel createMenu(){
+        JPanel f = new JPanel();
+        MenuText [] menuText = new MenuText[3];
+        JPanel [] menuPanel = new JPanel[2];
         GridLayout layout = new GridLayout(3,0,-1,1);
-        f.setTitle("Chess");
+        // f.setTitle("Chess");
         f.setLayout(new GridLayout(2,0));
         menuPanel[0] = gameTitle();
         menuPanel[1] = new JPanel();
@@ -46,14 +71,15 @@ public class View{
             menuPanel[1].add(menuText[i]);
             menuText[i].addMouseListener(control);
         }
-        f.getContentPane().add(menuPanel[0]);
-        f.getContentPane().add(menuPanel[1]);
-        show();
+        f.add(menuPanel[0]);
+        f.add(menuPanel[1]);
+        return f;
     }
-    public void createTable(){
-        JFrame f = new JFrame();
-        f.setTitle("Chess");
-        f.setLayout(new GridLayout(8,8));
+    public JPanel createTable(){
+        JPanel f = new JPanel(new GridLayout(8,8));
+        // BoardPanel [][] panels = new BoardPanel[8][8];
+        // f.setTitle("Chess");
+        // f.setLayout(new GridLayout(8,8));
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 Color clr;
@@ -66,18 +92,19 @@ public class View{
                 }
                 panels[i][j] = new BoardPanel(clr, i, j);
                 panels[i][j].addMouseListener(control);
-                f.getContentPane().add(panels[i][j]);
+                f.add(panels[i][j]);
 
             }
         }
-        this.f = f;
-        show();
+        return f;
     }
-    public void createMPMenu(){
-        JFrame f = new JFrame();
-        f.setTitle("Chess");
-        f.setSize(720,720);
-        f.setLayout(new GridLayout(2,0));
+    public JPanel createMPMenu(){
+        JPanel f = new JPanel(new GridLayout(2,0));
+        MenuText [] menuText = new MenuText[3];
+
+        // f.setTitle("Chess");
+        // f.setSize(720,720);
+        // f.setLayout(new GridLayout(2,0));
         JPanel p = new JPanel();
         p.setLayout(new GridLayout(3,0));
         p.setBorder(BorderFactory.createLineBorder(Color.WHITE));
@@ -91,22 +118,45 @@ public class View{
             p.add(menuText[i]);
             menuText[i].addMouseListener(control);
         }
-        f.getContentPane().add(gameTitle());
-        f.getContentPane().add(p);
-        this.f = f;
-        show();
+        f.add(gameTitle());
+        f.add(p);
+        return f;
     }
-    public void waitScreen(){
-        JFrame f = new JFrame("Chess");
+    public JPanel waitScreen(){
+        JPanel f = new JPanel(new GridLayout(2,0));
         JPanel p = new JPanel();
         p.setBackground(Color.BLACK);
+        p.setBorder(BorderFactory.createLineBorder(Color.WHITE));
         JLabel t = new JLabel("     Waiting...      ");
         t.setFont(new Font("Serif", Font.BOLD, 30));
         t.setForeground(Color.WHITE);
         p.add(t);
-        f.getContentPane().add(p);
-        this.f = f;
-        show();
+        f.add(gameTitle());
+        f.add(p);
+        return f;
+    }
+    public void setMenu(){
+        CardLayout l = (CardLayout) cards.getLayout();
+        l.show(cards,"MENU");
+        // menuText[0] = new MenuText("Player vs Player",0);
+        // menuText[1] = new MenuText("Player vs AI",1);
+        // menuText[2] = new MenuText("Player vs Player (Online)",2);
+
+    }
+    public void setTable(){
+        CardLayout l = (CardLayout) cards.getLayout();
+        l.show(cards,"TABLE");
+    }
+    public void setMPMenu(){
+        CardLayout l = (CardLayout) cards.getLayout();
+        l.show(cards,"MP");
+        // menuText[0] = new MenuText("Host Game",0);
+        // menuText[1] = new MenuText("Join Game",1);
+        // menuText[2] = new MenuText("Return",2);
+    }
+    public void setWaitScreen(){
+        CardLayout l = (CardLayout) cards.getLayout();
+        l.show(cards,"WAIT");
     }
     private JPanel gameTitle(){
         JPanel menuPanel = new JPanel();
@@ -141,12 +191,12 @@ public class View{
     		}
     	}
     }
-    public void highlight(int x){
-        this.menuText[x].setForeground(Color.YELLOW);
-    }
-    public void unhighlight(int x){
-        this.menuText[x].setForeground(Color.WHITE);
-    }
+    // public void highlight(int x){
+    //     this.menuText[x].setForeground(Color.YELLOW);
+    // }
+    // public void unhighlight(int x){
+    //     this.menuText[x].setForeground(Color.WHITE);
+    // }
     public void render(){
     	//renders the screen
     	this.show();

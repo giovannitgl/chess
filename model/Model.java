@@ -20,7 +20,6 @@ public final class Model{
 	private Thread synch;
 	public View v;
 	private Thread roundSych;
-	private boolean isFirstRound;
 	private int currentTurn;
 	private int selX,selY;
     private int destX,destY;
@@ -31,7 +30,6 @@ public final class Model{
 	private Model(){
 		currentTurn = 0;
 		this.isHost = false;
-		this.isFirstRound = false;
 		rs = RoundState.NOCLICK;
 	}
 	public static Model getInstance(){
@@ -117,7 +115,8 @@ public final class Model{
 			    t.changePosition(x,y,p);
 			    System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
 			    this.nextRound();
-			    this.sendNextRound();
+			    if(multiplayer)
+				    this.sendNextRound();
 			    rs = RoundState.NOCLICK;
 			    v.clearAllRender();
 			    this.buildIcons();
@@ -135,34 +134,30 @@ public final class Model{
 
 	public void clickedMenu(int x){
 		if (x == 0){
-			v.dispose();
 			this.buildTabuleiro();
 			this.show();
 		}
 		if (x == 2){
-			v.dispose();
-			v.createMPMenu();
+			v.setMPMenu();
 			this.show();
 		}
 	}
 	public void mpClickedMenu(int x){
 		if (x == 0){
-			v.dispose();
-			this.waitScreen();
+			v.setWaitScreen();
 			this.startHost();
 		}
 		if (x == 1){
 			v.makeDialog();
 		}
 		else if (x == 2){
-			v.dispose();
-			v.createMenu();
+			v.setMenu();
 			this.show();
 		}
 	}
 	public void buildTabuleiro(){
 		t = new Tabuleiro();
-		v.createTable();
+		v.setTable();
 		this.buildIcons();
 		// }
 		// v.selectTile(1,1);
@@ -170,6 +165,7 @@ public final class Model{
 		// v.render();
 	}
 	public void buildIcons(){
+		v.clearAllRender();
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
 				if(t.tabuleiro[i][j].getPiece() != null){
@@ -178,12 +174,12 @@ public final class Model{
 			}
 		}
 	}
-	public void overText(int x){
-		v.highlight(x);
-	}
-	public void leftText(int x){
-		v.unhighlight(x);
-	}
+	// public void overText(int x){
+	// 	v.highlight(x);
+	// }
+	// public void leftText(int x){
+	// 	v.unhighlight(x);
+	// }
 	public void cursorPressed(int x, int y){
 		if(t.getTeam(x,y) != -1){
 			v.changeCursor(t.getType(x,y), t.getTeam(x,y));
@@ -192,9 +188,6 @@ public final class Model{
 			dragY = y;
 
 		}
-	}
-	private void waitScreen(){
-		v.waitScreen();
 	}
 	public void cursorReleased(){
 		v.changeCursor();
@@ -248,7 +241,6 @@ public final class Model{
 		synch = new Thread(new MessageListener(in));
 		synch.start();
 		this.multiplayer = true;
-		v.dispose();
 		this.buildTabuleiro();
 		this.show();
 	}

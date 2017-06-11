@@ -75,10 +75,12 @@ public class Controller implements MouseListener{
 		// TODO Auto-generated method stub
 		if(mode == 0 || mode == 1){
 			MenuText text = (MenuText)arg0.getSource();
-			int x = text.getRelativeX();
-			m.overText(x);
-			hl = x;
+			text.highlight();
 		}
+		// 	int x = text.getRelativeX();
+		// 	m.overText(x);
+		// 	hl = x;
+		// }
 	}
 	/**
      * Not implemented
@@ -87,8 +89,11 @@ public class Controller implements MouseListener{
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		if(mode == 0 || mode == 1){
-			m.leftText(hl);
+			MenuText text = (MenuText)arg0.getSource();
+			text.unhighlight();
 		}
+		// 	m.leftText(hl);
+		// }
 	}
 	/**
      * Not implemented

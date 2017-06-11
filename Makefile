@@ -1,5 +1,5 @@
 all:
-	javac *.java piece/*.java jogador/*.java model/*.java gui/*.java MVC/*.java 
+	javac *.java piece/*.java jogador/*.java model/*.java gui/*.java MVC/*.java
  
 clean:
 	rm -rf *.class
