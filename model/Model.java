@@ -145,6 +145,7 @@ public final class Model{
 	public void mpClickedMenu(int x){
 		if (x == 0){
 			v.setWaitScreen();
+			this.show();
 			this.startHost();
 		}
 		if (x == 1){
