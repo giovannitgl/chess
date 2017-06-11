@@ -25,6 +25,7 @@ public final class Model{
     private int destX,destY;
 	private int dragX,dragY;
 	private final int PORT = 5000;
+	private int mode;
 	RoundState rs;
 	private static final Model INSTANCE = new Model();
 	private Model(){
@@ -47,6 +48,10 @@ public final class Model{
 	}
 	public void changePosition(int x, int y, Piece p){
 		this.t.changePosition(x,y,p);
+	}
+
+	private void setMode(int mode){
+		this.mode = mode;
 	}
 	public void clickedPanel(int x, int y){
 		switch(rs){
@@ -120,6 +125,20 @@ public final class Model{
 			    rs = RoundState.NOCLICK;
 			    v.clearAllRender();
 			    this.buildIcons();
+			    if(mode == 1){
+		    		t.bestMove(x, y);
+		   			int xx = t.getBestX();
+		   			int yy = t.getBestY();
+		   			Piece pp = t.getBestPiece();
+		   			v.selectTile((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
+		   			v.desselectTile((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
+		   			t.changePosition(xx, yy, pp);
+		   			v.clearOneRende((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
+		   			v.clearAllRender();
+					this.buildIcons();
+		   			currentTurn++;
+		   			currentTurn = currentTurn%2;
+			    }
 			    // System.out.println("PRESO?");
 			    break;
 	        }
@@ -130,12 +149,75 @@ public final class Model{
 	          break;
 	        }
 	    }
+		/*else if(mode == 1){
+			if(currentTurn == 0){
+				switch(rs){
+					case NOCLICK:
+						if(t.isPlayerPiece(x,y,currentTurn)){
+							v.selectTile(x,y);
+							selX = x;
+							selY = y;
+							rs = RoundState.FIRSTCLICK;
+		          			System.out.println(rs);
+						}
+					break;
+					case FIRSTCLICK:
+				        // Deseleciona
+				        if (x == selX && y == selY) {
+				          v.desselectTile(x,y);
+				          rs = RoundState.NOCLICK;
+				          System.out.println(rs);
+				          break;
+				        }
+				        // Reseleciona
+				        if (t.isPlayerPiece(x,y,currentTurn)) {
+				          v.desselectTile(selX,selY);
+				          v.selectTile(x,y);
+									selX = x;
+									selY = y;
+				          rs = RoundState.FIRSTCLICK;
+				          System.out.println(rs);
+				          break;
+						}
+				        // Escolhe Dest
+				        if (!t.isPlayerPiece(x,y,currentTurn) && t.isValid(x, y, t.tabuleiro[selX][selY].getPiece()) ) {
+					        Piece p = t.tabuleiro[selX][selY].getPiece();
+					        System.out.println("Valido");
+					        v.desselectTile(selX,selY);
+					        v.addPiece(x,y,t.tabuleiro[selX][selY].getPiece().getType(),t.tabuleiro[selX][selY].getPiece().getTeam());
+					        v.clearOneRende(selX,selY);
+				            t.changePosition(x,y,p);
+					        currentTurn++;
+					        currentTurn = currentTurn % 2;
+					        
+					        rs = RoundState.NOCLICK;
+					        break;
+				        }
+				        else {
+				          System.out.println("Invalido");
+				          v.desselectTile(selX,selY);
+				          rs = RoundState.NOCLICK;
+				          break;
+				        }
+		    	}	
+	   		}
+		}
+		*/
 	}
 
 	public void clickedMenu(int x){
 		if (x == 0){
-			this.buildTabuleiro();
+			//this.buildTabuleiro();
+			v.dispose();
+			this.buildTabuleiro(0);
 			this.show();
+			setMode(0);
+		}
+		if(x == 1){
+			v.dispose();
+			this.buildTabuleiro(1);
+			this.show();
+			setMode(1);
 		}
 		if (x == 2){
 			v.setMPMenu();
@@ -156,14 +238,14 @@ public final class Model{
 			this.show();
 		}
 	}
-	public void buildTabuleiro(){
-		t = new Tabuleiro();
-		v.setTable();
+	// public void buildTabuleiro(){
+	// 	t = new Tabuleiro();
+	// 	v.setTable();
+	// }
+	public void buildTabuleiro(int x){
+		t = new Tabuleiro(x);
+		v.createTable();
 		this.buildIcons();
-		// }
-		// v.selectTile(1,1);
-		// v.desselectTile(1,1);
-		// v.render();
 	}
 	public void buildIcons(){
 		v.clearAllRender();
@@ -242,7 +324,7 @@ public final class Model{
 		synch = new Thread(new MessageListener(in));
 		synch.start();
 		this.multiplayer = true;
-		this.buildTabuleiro();
+		this.buildTabuleiro(2);
 		this.show();
 	}
 	public void joinConnection(String s){

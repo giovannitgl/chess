@@ -21,6 +21,10 @@ public class Jogador{
 		playerPieces.add(p);
 	}
 
+	public void addPiece(int index, Piece p){
+		playerPieces.add(index, p);
+	}
+
 	public void removePiece(Piece p){
 		for(int i = 0; i < playerPieces.size(); i++){
 			Piece player_pieces = playerPieces.get(i);
