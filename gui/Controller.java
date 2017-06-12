@@ -40,6 +40,10 @@ public class Controller implements MouseListener{
 				m.clickedMenu(x);
 				this.setMode(1);
 			}
+			else if(x == 1){
+				m.clickedMenu(x);
+				this.setMode(2);
+			}
 		}
 		else if (mode == 1){
 			MenuText text = (MenuText)arg0.getSource();

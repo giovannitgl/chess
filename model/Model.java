@@ -24,6 +24,7 @@ public final class Model{
 	private int selX,selY;
     private int destX,destY;
 	private int dragX,dragY;
+	private int mode;
 	private final int PORT = 5000;
 	RoundState rs;
 	private static final Model INSTANCE = new Model();
@@ -35,6 +36,11 @@ public final class Model{
 	public static Model getInstance(){
 		return INSTANCE;
 	}
+
+	private void setMode(int mode){
+		this.mode = mode;
+	}
+
 	public void setView(View v){
 		this.v = v;
 	}
@@ -114,6 +120,20 @@ public final class Model{
 			    // System.out.println("TIME PORRA =" + t.tabuleiro[selX][selY].getPiece().getTeam());
 			    t.changePosition(x,y,p);
 			    // System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
+			    if(mode == 1){
+		          		t.bestMove(x, y);
+			   			int xx = t.getBestX();
+			   			int yy = t.getBestY();
+			   			Piece pp = t.getBestPiece();
+			   			v.selectTile((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
+			   			v.desselectTile((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
+			   			t.changePosition(xx, yy, pp);
+			   			v.clearOneRende((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
+			   			v.clearAllRender();
+						this.buildIcons();
+			   			currentTurn++;
+			   			currentTurn = currentTurn%2;
+			   	  }
 			    this.nextRound();
 			    if(multiplayer)
 				    this.sendNextRound();
@@ -136,6 +156,13 @@ public final class Model{
 		if (x == 0){
 			this.buildTabuleiro();
 			this.show();
+		}
+		if(x == 1){
+			System.out.println("ENTREI AQUI BIROSKI");
+			v.dispose();
+			this.buildTabuleiro(1);
+			this.show();
+			setMode(1);
 		}
 		if (x == 2){
 			v.setMPMenu();
@@ -160,11 +187,14 @@ public final class Model{
 		t = new Tabuleiro();
 		v.setTable();
 		this.buildIcons();
-		// }
-		// v.selectTile(1,1);
-		// v.desselectTile(1,1);
-		// v.render();
 	}
+
+	public void buildTabuleiro(int x){
+		t = new Tabuleiro(x);
+		v.setTable();
+		this.buildIcons();
+	}
+	
 	public void buildIcons(){
 		v.clearAllRender();
 		for(int i = 0; i < 8; i++){
