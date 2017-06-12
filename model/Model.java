@@ -130,10 +130,14 @@ public final class Model{
 			   			t.changePosition(xx, yy, pp);
 			   			v.clearOneRende((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
 			   			v.clearAllRender();
-						this.buildIcons();
+						  this.buildIcons();
 			   			currentTurn++;
 			   			currentTurn = currentTurn%2;
-			   	  }
+              // TERMINOU
+              if (t.checkKings() == false) {
+                
+              }
+			   	}
 			    this.nextRound();
 			    if(multiplayer)
 				    this.sendNextRound();
@@ -194,7 +198,7 @@ public final class Model{
 		v.setTable();
 		this.buildIcons();
 	}
-	
+
 	public void buildIcons(){
 		v.clearAllRender();
 		for(int i = 0; i < 8; i++){
@@ -286,7 +290,7 @@ public final class Model{
 			try{
 				in = new DataInputStream(client.getInputStream());
 				out = new DataOutputStream(client.getOutputStream());
-				
+
 			}
 			catch(IOException e){
 				System.out.println(e);

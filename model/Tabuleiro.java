@@ -10,22 +10,40 @@ public class Tabuleiro{
 	Jogador j1;
 	AI_Player AI;
 	int mode;
-	
+
 	private int bestMoveX = 0, bestMoveY = 0;
 	private Piece bestPiece = null;
 
 	private Piece lastPieceMoved;
 	private Piece lastPieceTaken;
 	private Point lastPoint;
-	
+
 	// Point
 	// protected Piece[][] tabuleiro;
 	protected Space[][] tabuleiro;
-	
+
 	Tabuleiro(){
 		tabuleiro = new Space[8][8];
 		buildTabuleiro();
 	}
+
+  public boolean checkKings() {
+    ArrayList<Piece> check;
+    check = j0.getPlayerPieces();
+    for (int i = 0; i < check.size(); i++) {
+      if( check.get(i).getType() == PieceType.KING ) {
+        return true;
+      }
+    }
+    check = j1.getPlayerPieces();
+    for (int i = 0; i < check.size(); i++) {
+      if( check.get(i).getType() == PieceType.KING ) {
+        return true;
+      }
+    }
+    return false;
+
+  }
 
 	Tabuleiro(int x){
 		tabuleiro = new Space[8][8];
@@ -60,7 +78,7 @@ public class Tabuleiro{
 			buildAIPieces();
 			buildMiddle();
 			AIupdateValidMove();
-		}	
+		}
 	}
 
 	private void setMode(int mode){
@@ -110,7 +128,7 @@ public class Tabuleiro{
 		AI.addPiece(tabuleiro[0][3].getPiece());
 		AI.addPiece(tabuleiro[0][4].getPiece());
 	}
-	
+
 	private void buildMiddle(){
 		for(int i = 2; i < 6; i ++){
 			for(int j = 0; j < 8; j++){
@@ -209,7 +227,7 @@ public class Tabuleiro{
 	}
 
 	private void undoMove(int index){
-		removePiece((int)lastPieceMoved.getLocation().getX(), (int)lastPieceMoved.getLocation().getY());	
+		removePiece((int)lastPieceMoved.getLocation().getX(), (int)lastPieceMoved.getLocation().getY());
 		if(lastPieceTaken!=null){//se movimento comeu alguma peca
 			//System.out.println("Entrei aqui gente!!!");
 			addPiece(lastPieceTaken, (int)lastPieceMoved.getLocation().getX(), (int)lastPieceMoved.getLocation().getY());
@@ -222,7 +240,7 @@ public class Tabuleiro{
 		// System.out.print("LAST Point = ");
 		// System.out.print("X = " + lastPoint.getX());
 		// System.out.println(" Y = " + lastPoint.getY());
-		
+
 		//System.out.println(lastPieceMoved.getType());
 
 		AIupdateValidMove();
@@ -262,7 +280,7 @@ public class Tabuleiro{
 			updateValidMove();
 		}
 		else{
-			AIupdateValidMove();	
+			AIupdateValidMove();
 		}
 	}
 
@@ -312,7 +330,7 @@ public class Tabuleiro{
 		}
 		tabuleiro[x][y].setPiece(null);
 		if(mode == 1){
-			AIupdateValidMove();	
+			AIupdateValidMove();
 		}
 		else{
 			updateValidMove();
@@ -326,7 +344,7 @@ public class Tabuleiro{
     		// System.out.println("NEW X =" + newX + " NEW Y = " + newY + " TEAMMM = " + tabuleiro[newX][newY].getPiece().getTeam());
     	}
     	// System.out.println("ACT X =" + p.getLocX() + " ACT Y = " + p.getLocY() + " TIME = " + p.getTeam());
-    	
+
 		ArrayList<Point> validMoves = p.validMoves;
 
 		for(int i = 0; i < validMoves.size(); i++){
@@ -465,7 +483,7 @@ public class Tabuleiro{
 				bestPiece.setFirstMove(false);
 		this.bestMoveX = bestMoveX;
 		this.bestMoveY = bestMoveY;
-		this.bestPiece = bestPiece;		
+		this.bestPiece = bestPiece;
 	}
 
 	public Piece getBestPiece(){
