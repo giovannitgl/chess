@@ -73,7 +73,6 @@ public final class Model{
 						selX = x;
 						selY = y;
 						rs = RoundState.FIRSTCLICK;
-		      			// System.out.println(rs);
 					}
 				}
 			break;
@@ -82,7 +81,6 @@ public final class Model{
 	        if (x == selX && y == selY) {
 	          v.desselectTile(x,y);
 	          rs = RoundState.NOCLICK;
-	          // System.out.println(rs);
 	          break;
 	        }
 	        // Reseleciona
@@ -103,7 +101,6 @@ public final class Model{
 					selY = y;
 			      	rs = RoundState.FIRSTCLICK;
 	        	}
-		      	// System.out.println(rs);
 	          	break;
 				}
 	        // Escolhe Dest
@@ -113,13 +110,9 @@ public final class Model{
 	        		sendMove(x,y);
 	        	}
 			    Piece p = t.tabuleiro[selX][selY].getPiece();
-			    // System.out.println("Valido");
 			    v.desselectTile(selX,selY);
 			    v.addPiece(x,y,t.tabuleiro[selX][selY].getPiece().getType(),t.tabuleiro[selX][selY].getPiece().getTeam());
-			    v.clearOneRende(selX,selY);
-			    // System.out.println("TIME PORRA =" + t.tabuleiro[selX][selY].getPiece().getTeam());
 			    t.changePosition(x,y,p);
-			    // System.out.println("TIME = " + t.tabuleiro[x][y].getPiece().getTeam());
 			    if(mode == 1){
 		          		t.bestMove(x, y);
 			   			int xx = t.getBestX();
@@ -128,8 +121,6 @@ public final class Model{
 			   			v.selectTile((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
 			   			v.desselectTile((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
 			   			t.changePosition(xx, yy, pp);
-			   			v.clearOneRende((int)pp.getLocation().getX(),(int)pp.getLocation().getY());
-			   			v.clearAllRender();
 						  this.buildIcons();
 			   			currentTurn++;
 			   			currentTurn = currentTurn%2;
@@ -142,13 +133,10 @@ public final class Model{
 			    if(multiplayer)
 				    this.sendNextRound();
 			    rs = RoundState.NOCLICK;
-			    v.clearAllRender();
 			    this.buildIcons();
-			    // System.out.println("PRESO?");
 			    break;
 	        }
 	        else {
-	          // System.out.println("Invalido");
 	          v.desselectTile(selX,selY);
 	          rs = RoundState.NOCLICK;
 	          break;
@@ -164,7 +152,6 @@ public final class Model{
 		}
 		if(x == 1){
 			System.out.println("ENTREI AQUI BIROSKI");
-			// v.dispose();
 			this.buildTabuleiro(1);
 			this.show();
 			setMode(1);
@@ -177,6 +164,7 @@ public final class Model{
 	public void mpClickedMenu(int x){
 		if (x == 0){
 			v.setWaitScreen();
+			v.repaint();
 			this.show();
 			this.startHost();
 		}
@@ -210,33 +198,11 @@ public final class Model{
 			}
 		}
 	}
-	// public void overText(int x){
-	// 	v.highlight(x);
-	// }
-	// public void leftText(int x){
-	// 	v.unhighlight(x);
-	// }
-	// public void cursorPressed(int x, int y){
-	// 	if(t.getTeam(x,y) != -1){
-	// 		v.changeCursor(t.getType(x,y), t.getTeam(x,y));
-	// 		v.setPieceVisibility(x,y,false);
-	// 		dragX = x;
-	// 		dragY = y;
-
-	// 	}
-	// }
-	// public void cursorReleased(){
-	// 	v.changeCursor();
-	// 	v.setPieceVisibility(dragX,dragY,true);
-	// }
 	private void show(){
 		v.show();
 	}
 
 	private void startHost(){
-		// server = new ServerThread(this.client, this);
-		// thread = new Thread(server);
-		// thread.start();
 		System.out.println("AQUI");
 		try{
 			server = new ServerSocket(PORT);
@@ -258,20 +224,10 @@ public final class Model{
 		catch(IOException e){
 			System.out.println(e);
 		}
-		// this.multiplayer = true;
 		this.isHost = true;
 		this.connected();
-		// do{
-		// 	v.show();
 			System.out.println(client.isConnected());
-		// }while(!client.isConnected());
-		// do{
-		// 	// v.show();
 			System.out.println("Client = null");
-		// }while(client == null);
-		// v.dispose();
-		// this.buildTabuleiro();
-		// this.show();
 	}
 	public void connected(){
 		synch = new Thread(new MessageListener(in));
@@ -309,7 +265,6 @@ public final class Model{
 		catch(IOException e){
 			System.out.println(e);
 		}
-		// System.out.println("Recebi" + x + " " + y);
 	}
 	public void sendMove(int x, int y){
 		try{

@@ -30,15 +30,13 @@ public class MessageListener implements Runnable{
 		}
 		else if( x < 10 && y < 10 && selX < 10 && selY < 10){
 			Piece p = m.getPiece(selX,selY);
-			    // m.v.desselectTile(selX,selY);
 			    m.v.clearOneRende(selX,selY);
 
 			    m.changePosition(x,y,p);
 			    m.v.clearAllRender();
 			    m.buildIcons();
 			    m.v.show();
-		}
-		// System.out.println("Recebi selX" + selX + " selY " + selY + " X "  + x + " Y " + y);
+			}
 		}
 	}
 }

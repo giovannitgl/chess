@@ -14,10 +14,7 @@ import javax.swing.JDialog;
 import java.awt.CardLayout;
 
 public class View{
-    // private CardLayout screensLayout;
     private BoardPanel [][] panels = new BoardPanel[8][8];
-    // private MenuText [] menuText = new MenuText[3];
-    // private JPanel [] menuPanel = new JPanel[2];
     private JFrame f;
     private JPanel cards;
     private JPanel currentPanel;
@@ -41,14 +38,10 @@ public class View{
         f = new JFrame("Chess");
         this.f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // f.add()
         cardsMake();
         f.getContentPane().add(cards);
         CardLayout l = (CardLayout) cards.getLayout();
         l.show(cards,"MENU");
-        renderThread = new Thread(new RenderWorker(cards));
-        renderThread.start();
-         // createMenu();
         this.show();
     }
     public JPanel createMenu(){
@@ -56,7 +49,6 @@ public class View{
         MenuText [] menuText = new MenuText[3];
         JPanel [] menuPanel = new JPanel[2];
         GridLayout layout = new GridLayout(3,0,-1,1);
-        // f.setTitle("Chess");
         f.setLayout(new GridLayout(2,0));
         menuPanel[0] = gameTitle();
         menuPanel[1] = new JPanel();
@@ -77,9 +69,6 @@ public class View{
     }
     public JPanel createTable(){
         JPanel f = new JPanel(new GridLayout(8,8));
-        // BoardPanel [][] panels = new BoardPanel[8][8];
-        // f.setTitle("Chess");
-        // f.setLayout(new GridLayout(8,8));
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 Color clr;
@@ -102,9 +91,6 @@ public class View{
         JPanel f = new JPanel(new GridLayout(2,0));
         MenuText [] menuText = new MenuText[3];
 
-        // f.setTitle("Chess");
-        // f.setSize(720,720);
-        // f.setLayout(new GridLayout(2,0));
         JPanel p = new JPanel();
         p.setLayout(new GridLayout(3,0));
         p.setBorder(BorderFactory.createLineBorder(Color.WHITE));
@@ -138,9 +124,6 @@ public class View{
     public void setMenu(){
         CardLayout l = (CardLayout) cards.getLayout();
         l.show(cards,"MENU");
-        // menuText[0] = new MenuText("Player vs Player",0);
-        // menuText[1] = new MenuText("Player vs AI",1);
-        // menuText[2] = new MenuText("Player vs Player (Online)",2);
 
     }
     public void setTable(){
@@ -150,9 +133,6 @@ public class View{
     public void setMPMenu(){
         CardLayout l = (CardLayout) cards.getLayout();
         l.show(cards,"MP");
-        // menuText[0] = new MenuText("Host Game",0);
-        // menuText[1] = new MenuText("Join Game",1);
-        // menuText[2] = new MenuText("Return",2);
     }
     public void setWaitScreen(){
         CardLayout l = (CardLayout) cards.getLayout();
@@ -191,11 +171,6 @@ public class View{
     		}
     	}
     }
-    // public void highlight(int x){
-    //     this.menuText[x].setForeground(Color.YELLOW);
-    // }
-    // public void unhighlight(int x){
-    //     this.menuText[x].setForeground(Color.WHITE);
     // }
     public void render(){
     	//renders the screen
