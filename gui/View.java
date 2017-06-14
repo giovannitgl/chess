@@ -257,77 +257,7 @@ public class View{
         control.receivedIP(s);
 
     }
-    public void changeCursor(){
-        f.setCursor(Cursor.getDefaultCursor());
-    }
-    public void changeCursor(PieceType p, int team){
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Image cursor;
-        switch(team){
-            case 0:
-            switch(p){
-                case PAWN:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/whitePawn.png"));
-                break;
-                case KNIGHT:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/whiteKnight.png"));
-                break;
-                case BISHOP:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/whiteBishop.png"));
-                break;
-                case ROOK:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/whiteRook.png"));
-                break;
-                case QUEEN:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/whiteQueen.png"));
-                break;
-                case KING:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/whiteKing.png"));
-                break;
-                default:
-                    cursor = null;
-                break;
-                }
-            break;
-            case 1:
-            switch(p){
-                case PAWN:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/blackPawn.png"));
-                break;
-                case KNIGHT:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/blackKnight.png"));
-                break;
-                case BISHOP:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/blackBishop.png"));
-                break;
-                case ROOK:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/blackRook.png"));
-                break;
-                case QUEEN:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/blackQueen.png"));
-                break;
-                case KING:
-                    cursor = tk.getImage(getClass().getResource("/icons/images/blackKing.png"));
-                break;
-                default:
-                    cursor = null;
-                break;
-            }
-        break;
-        default:
-            cursor = null;
-        break;
-        }
-        if(cursor != null){
-            Cursor c = tk.createCustomCursor(cursor , new Point(32,32), "cursor");
-            f.setCursor(c);
-        }
-    }
-    public void setPieceVisibility(int x, int y, boolean f){
-        Component[] components = panels[x][y].getComponents();
-        components[0].setVisible(f);
-    }
-    public void dispose(){
-        this.f.dispose();
+    public void repaint(){
+        this.cards.repaint();
     }
 }

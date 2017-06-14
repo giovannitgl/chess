@@ -105,14 +105,14 @@ public class Controller implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(mode == 4){
-			if(rs == RoundState.NOCLICK){
-				BoardPanel panel = (BoardPanel)arg0.getSource();
-				int x = panel.getRelativeX();
-				int y = panel.getRelativeY();
-			//	m.cursorPressed(x,y);
-			}
-		}
+		// if(mode == 4){
+		// 	if(rs == RoundState.NOCLICK){
+		// 		BoardPanel panel = (BoardPanel)arg0.getSource();
+		// 		int x = panel.getRelativeX();
+		// 		int y = panel.getRelativeY();
+		// 	//	m.cursorPressed(x,y);
+		// 	}
+		// }
 	}
 	/**
      * Not implemented
@@ -120,10 +120,10 @@ public class Controller implements MouseListener{
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		if(mode == 4){
-		//	m.cursorReleased();
-			rs = RoundState.NOCLICK;
-		}
+		// if(mode == 4){
+		// //	m.cursorReleased();
+		// 	rs = RoundState.NOCLICK;
+		// }
 
 	}
 }

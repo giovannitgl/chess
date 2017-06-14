@@ -154,6 +154,7 @@ public final class Model{
 	          break;
 	        }
 	    }
+	    v.repaint();
 	}
 
 	public void clickedMenu(int x){
@@ -163,7 +164,7 @@ public final class Model{
 		}
 		if(x == 1){
 			System.out.println("ENTREI AQUI BIROSKI");
-			v.dispose();
+			// v.dispose();
 			this.buildTabuleiro(1);
 			this.show();
 			setMode(1);
@@ -215,19 +216,19 @@ public final class Model{
 	// public void leftText(int x){
 	// 	v.unhighlight(x);
 	// }
-	public void cursorPressed(int x, int y){
-		if(t.getTeam(x,y) != -1){
-			v.changeCursor(t.getType(x,y), t.getTeam(x,y));
-			v.setPieceVisibility(x,y,false);
-			dragX = x;
-			dragY = y;
+	// public void cursorPressed(int x, int y){
+	// 	if(t.getTeam(x,y) != -1){
+	// 		v.changeCursor(t.getType(x,y), t.getTeam(x,y));
+	// 		v.setPieceVisibility(x,y,false);
+	// 		dragX = x;
+	// 		dragY = y;
 
-		}
-	}
-	public void cursorReleased(){
-		v.changeCursor();
-		v.setPieceVisibility(dragX,dragY,true);
-	}
+	// 	}
+	// }
+	// public void cursorReleased(){
+	// 	v.changeCursor();
+	// 	v.setPieceVisibility(dragX,dragY,true);
+	// }
 	private void show(){
 		v.show();
 	}
