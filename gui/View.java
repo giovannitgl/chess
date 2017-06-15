@@ -12,13 +12,15 @@ import java.awt.Toolkit;
 import java.awt.Font;
 import javax.swing.JDialog;
 import java.awt.CardLayout;
+import java.awt.BorderLayout;
 
 public class View{
     private BoardPanel [][] panels = new BoardPanel[8][8];
     private JFrame f;
     private JPanel cards;
     private JPanel currentPanel;
-    private Thread renderThread;
+    private JLabel p_turn;
+    private JLabel checkText;
     private Controller control;
     public void show(){
         this.f.pack();
@@ -68,7 +70,17 @@ public class View{
         return f;
     }
     public JPanel createTable(){
-        JPanel f = new JPanel(new GridLayout(8,8));
+        JPanel f = new JPanel(new BorderLayout());
+        p_turn = new JLabel();
+        checkText = new JLabel();
+        this.setPlayerTurn(0);
+        // this.setCheck(true,0);
+        JPanel header = new JPanel(new BorderLayout());
+        header.add(p_turn,BorderLayout.LINE_START);
+        header.add(checkText,BorderLayout.LINE_END);
+        header.setBackground(new Color(200,100,10));
+        f.add(header,BorderLayout.PAGE_START);
+        JPanel board = new JPanel(new GridLayout(8,8));
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 Color clr;
@@ -81,11 +93,34 @@ public class View{
                 }
                 panels[i][j] = new BoardPanel(clr, i, j);
                 panels[i][j].addMouseListener(control);
-                f.add(panels[i][j]);
+                board.add(panels[i][j]);
 
             }
         }
+        f.add(board, BorderLayout.CENTER);
         return f;
+    }
+    public void setPlayerTurn(int x){
+        if(x == 0){
+            p_turn.setText("<html>Player Turn: <font color=white>White</font>");
+        }
+        else{
+            p_turn.setText("Player Turn: Black");
+
+        }
+    }
+    public void setCheck(boolean t, int x){
+        if (!t){
+            this.checkText.setText(" ");
+        }
+        else{
+            if(x == 0){
+                checkText.setText("<html><font color = white> White King</font> in Check</html>");
+            }
+            else{
+                checkText.setText("Black King in Check");
+            }
+        }
     }
     public JPanel createMPMenu(){
         JPanel f = new JPanel(new GridLayout(2,0));

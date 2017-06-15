@@ -142,6 +142,7 @@ public final class Model{
 	          break;
 	        }
 	    }
+	    v.setPlayerTurn(this.currentTurn);
 	    v.repaint();
 	}
 
