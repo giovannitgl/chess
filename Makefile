@@ -10,4 +10,4 @@ clean:
 	rm -rf MVC/*.class
 
 run:
-	java Teste
+	java Main
