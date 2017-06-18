@@ -584,8 +584,14 @@ public class Tabuleiro{
 			return this.lastPieceMoved2;
 		}
 	}
-	public boolean whiteKingCheck(){
-		ArrayList<Piece> pieces = j1.getPlayerPieces();
+	public boolean whiteKingCheck(boolean isAI){
+		ArrayList<Piece> pieces;
+		if(isAI){
+			pieces = AI.getPlayerPieces();
+		}
+		else{
+		 	pieces = j1.getPlayerPieces();
+		}
 		for(Piece pEval : pieces){
 			ArrayList<Point> moves = pEval.validMoves;
 			for(Point p : moves){

@@ -145,8 +145,8 @@ public final class Model{
 	          rs = RoundState.NOCLICK;
 	          break;
 	        }
-	    }
-	    boolean whiteKingCheck = t.whiteKingCheck();
+	    }bolean isAI = mode == 1 ? true : false;
+	    boolean whiteKingCheck = t.whiteKingCheck(isAI);
 	    boolean blackKingCheck = t.blackKingCheck();
 	    v.setCheck(whiteKingCheck,blackKingCheck);
 	    v.setPlayerTurn(this.currentTurn);
