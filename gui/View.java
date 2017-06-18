@@ -105,13 +105,21 @@ public class View {
     }
 
     public void setCheck(boolean wkc, boolean bkc){
-        String s = " ";
-        if(wkc){
-            s += "<html><font color = white> White King</font> in Check</html> ";
+        String s;
+        if(wkc && bkc){
+            s = "<html><font color = white> White King</font> in Check and Black King in Check</html>";
         }
-        if(bkc){
-            s += "Black King in Check";
+        else{
+            if(wkc){
+                s = "<html><font color = white> White King</font> in Check</html> ";
+            }
+            else if(bkc){
+                s = "Black King in Check";
+            }
+            else
+                s = " ";
         }
+
         checkText.setText(s);
     }
 
