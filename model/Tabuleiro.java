@@ -370,14 +370,20 @@ public class Tabuleiro{
 		return tabuleiro[x][y].getPiece().getTeam();
 	}
 
-	public boolean white_check_mate(){
+	public boolean white_check_mate(boolean isAI){
 		ArrayList<Piece> friend = null;
 		ArrayList<Piece> enemy = null;
 		int check_cont = 0;
 		int flag_move_check = 0;
 		int indice_king = 0;
 		friend = j0.getPlayerPieces();
-		enemy = j1.getPlayerPieces();
+		if(isAI){
+			enemy = AI.getPlayerPieces();
+		}
+		else{
+			enemy = j1.getPlayerPieces();
+			
+		}
 		for(int i = 0; i < friend.size(); i++){
 			for(int j = 0; j < friend.get(i).validMoves.size(); j++){
 				if( friend.get(i).getType() == PieceType.KING ){
