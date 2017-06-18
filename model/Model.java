@@ -159,7 +159,6 @@ public final class Model{
 			this.show();
 		}
 		if(x == 1){
-			System.out.println("ENTREI AQUI BIROSKI");
 			this.buildTabuleiro(1);
 			this.show();
 			setMode(1);
@@ -215,7 +214,6 @@ public final class Model{
 
   // Socket
 	private void startHost(){
-		System.out.println("AQUI");
 		try{
 			server = new ServerSocket(PORT);
 		}
@@ -238,8 +236,6 @@ public final class Model{
 		}
 		this.isHost = true;
 		this.connected();
-			System.out.println(client.isConnected());
-			System.out.println("Client = null");
 	}
 
   public void connected(){
