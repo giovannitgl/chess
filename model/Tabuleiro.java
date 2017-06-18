@@ -454,7 +454,9 @@ public class Tabuleiro{
 			}
 			undoMove(indice_king);
 		}
-		if(check_cont == (friend.get(indice_king).validMoves.size()-1)){
+		//System.out.println("Check Cont = " + check_cont);
+		//System.out.println("Size = " + (friend.get(indice_king).validMoves.size()-1));
+		if(check_cont >= (friend.get(indice_king).validMoves.size()-1)){
 			return true;	
 		}
 		else{
