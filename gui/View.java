@@ -104,18 +104,15 @@ public class View {
         }
     }
 
-    public void setCheck(boolean t, int x){
-        if (!t){
-            this.checkText.setText(" ");
+    public void setCheck(boolean wkc, boolean bkc){
+        String s = " ";
+        if(wkc){
+            s += "<html><font color = white> White King</font> in Check</html> ";
         }
-        else{
-            if(x == 0){
-                checkText.setText("<html><font color = white> White King</font> in Check</html>");
-            }
-            else{
-                checkText.setText("Black King in Check");
-            }
+        if(bkc){
+            s += "Black King in Check";
         }
+        checkText.setText(s);
     }
 
     public JPanel createMPMenu(){

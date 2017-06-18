@@ -142,28 +142,9 @@ public final class Model{
 	          break;
 	        }
 	    }
-	    if(t.whiteKingCheck()){
-	    	if(t.white_check_mate()){
-	    		System.out.println("WHITE CHECK MATE");
-	    	}
-	    	System.out.println("White Check");
-	    	v.setCheck(true,0);
-	    }
-	    else{
-	    	System.out.println("NAO CHEQUE");
-	    	v.setCheck(false,0);
-	    }	    
-	    if(t.blackKingCheck()){
-	    	if(t.black_check_mate()){
-	    		System.out.println("Black Check Mate");
-	    	}
-	    	System.out.println("Black Check");
-	    	v.setCheck(true,1);
-	    }
-	    else{
-	    	System.out.println("NAO CHEQUE");
-	    	v.setCheck(false,1);
-	    }
+	    boolean whiteKingCheck = t.whiteKingCheck();
+	    boolean blackKingCheck = t.blackKingCheck();
+	    v.setCheck(whiteKingCheck,blackKingCheck);
 	    v.setPlayerTurn(this.currentTurn);
 	    v.repaint();
 	}
