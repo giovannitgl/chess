@@ -58,4 +58,5 @@ public class Jogador{
 	public int getScore(){
 		return score;
 	}
+  
 }

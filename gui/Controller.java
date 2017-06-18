@@ -8,25 +8,31 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import piece.*;
 
-public class Controller implements MouseListener{
+public class Controller implements MouseListener {
+
 	private Model m;
 	private int mode;//0 = menu, 1 = menu multiplayer, 2 = jogo
 	private int hl;
 	private int dndX,dndY;
 	RoundState rs;
+
 	public Controller(){
 		rs = RoundState.NOCLICK;
 	}
-	public void setModel(Model m){
+
+  public void setModel(Model m){
 		this.m = m;
 	}
-	public void setMode(int x){
+
+  public void setMode(int x){
 		this.mode = x;
 	}
-	public void receivedIP(String s){
+
+  public void receivedIP(String s){
 		m.joinConnection(s);
 	}
-	@Override
+
+  @Override
 	public void mouseClicked(MouseEvent arg0) {
 		if(mode == 0 ){
 			MenuText text = (MenuText)arg0.getSource();
@@ -65,13 +71,11 @@ public class Controller implements MouseListener{
 			int x = panel.getRelativeX();
 		    int y = panel.getRelativeY();
 		    m.clickedPanel(x,y);
-		    rs = RoundState.FIRSTCLICK;	
+		    rs = RoundState.FIRSTCLICK;
 		}
 	}
-	/**
-     * Not implemented
-     */
-	@Override
+
+  @Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		if(mode == 0 || mode == 1){
@@ -79,10 +83,8 @@ public class Controller implements MouseListener{
 			text.highlight();
 		}
 	}
-	/**
-     * Not implemented
-     */
-	@Override
+
+  @Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		if(mode == 0 || mode == 1){
@@ -90,19 +92,13 @@ public class Controller implements MouseListener{
 			text.unhighlight();
 		}
 	}
-	/**
-     * Not implemented
-     */
-	@Override
+
+  @Override
 	public void mousePressed(MouseEvent arg0) {
-
 	}
-	/**
-     * Not implemented
-     */
-	@Override
+
+  @Override
 	public void mouseReleased(MouseEvent arg0) {
+  }
 
-	}
 }
-

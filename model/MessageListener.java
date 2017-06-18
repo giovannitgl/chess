@@ -3,13 +3,16 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import piece.Piece;
 
-public class MessageListener implements Runnable{
-	Model m;
+public class MessageListener implements Runnable {
+
+  Model m;
 	DataInputStream in;
+  
 	MessageListener(DataInputStream in){
 		this.in = in;
 		this.m = Model.getInstance();
 	}
+
 	public void run(){
 		while (true){
 		int selX = 0;
@@ -39,4 +42,5 @@ public class MessageListener implements Runnable{
 			}
 		}
 	}
+
 }

@@ -4,14 +4,15 @@ import piece.*;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class AI_Player{
+public class AI_Player {
 	private ArrayList<Piece> playerPieces;
 	private int team;
 	private int pieces_killed;
 	private int score;
 	private int[][] positionWeight;
 	private int[] pieceScore;
-	public AI_Player(int team){
+
+	public AI_Player(int team) {
 		this.team = team;
 		score = 0;
 		pieces_killed = 0;
@@ -99,4 +100,3 @@ public class AI_Player{
 		}
 	}
 }
-
