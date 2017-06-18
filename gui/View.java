@@ -46,6 +46,8 @@ public class View{
         l.show(cards,"MENU");
         this.show();
     }
+
+    // Cria o menu principal
     public JPanel createMenu(){
         JPanel f = new JPanel();
         MenuText [] menuText = new MenuText[3];
@@ -69,6 +71,7 @@ public class View{
         f.add(menuPanel[1]);
         return f;
     }
+    // Cria os quadros no tabuleiro
     public JPanel createTable(){
         JPanel f = new JPanel(new BorderLayout());
         p_turn = new JLabel();
@@ -100,6 +103,7 @@ public class View{
         f.add(board, BorderLayout.CENTER);
         return f;
     }
+
     public void setPlayerTurn(int x){
         if(x == 0){
             p_turn.setText("<html>Player Turn: <font color=white>White</font>");
@@ -122,10 +126,10 @@ public class View{
             }
         }
     }
+    // 
     public JPanel createMPMenu(){
         JPanel f = new JPanel(new GridLayout(2,0));
         MenuText [] menuText = new MenuText[3];
-
         JPanel p = new JPanel();
         p.setLayout(new GridLayout(3,0));
         p.setBorder(BorderFactory.createLineBorder(Color.WHITE));
