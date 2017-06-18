@@ -493,16 +493,12 @@ public class Tabuleiro{
 					}
 					newBlackScore += positionWeight[newX][newY];
 					if(newBlackScore > maxBlackScore){
-						System.out.println("ENTREI PRIMEIRO");
-						System.out.println("SCORE = " + newBlackScore);
 						maxBlackScore = newBlackScore;
 						blackX = newX;
 						blackY = newY;
 						blackPiece = AI_pieces.get(i);
 					}
 					else if( newBlackScore == maxBlackScore && flag_piece == 1){
-						System.out.println("ENTREI SEGUNDO");
-						System.out.println("SCORE SEGUNDO = " + newBlackScore);
 						maxBlackScore = newBlackScore;
 						blackX = newX;
 						blackY = newY;
@@ -518,7 +514,6 @@ public class Tabuleiro{
 							}
 							newWhiteScore += positionWeight[newXp][newYp];
 							if(newWhiteScore > maxWhiteScore){
-								System.out.println("SCORE BRANCO = " + newWhiteScore);
 								maxWhiteScore = newWhiteScore;
 								whiteX = newXp;
 								whiteY = newYp;
