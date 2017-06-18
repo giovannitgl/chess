@@ -347,20 +347,60 @@ public class Tabuleiro{
 		return tabuleiro[x][y].getPiece().getTeam();
 	}
 
-	public boolean check_mate(int round, int modo_jogo){
+	public boolean white_check_mate(){
 		ArrayList<Piece> friend = null;
 		ArrayList<Piece> enemy = null;
 		int check_cont = 0;
 		int flag_move_check = 0;
 		int indice_king = 0;
-		if(round == 0){
-			friend = j0.getPlayerPieces();
-			enemy = j1.getPlayerPieces();
+		friend = j0.getPlayerPieces();
+		enemy = j1.getPlayerPieces();
+		for(int i = 0; i < friend.size(); i++){
+			for(int j = 0; j < friend.get(i).validMoves.size(); j++){
+				if( friend.get(i).getType() == PieceType.KING ){
+					indice_king = i;
+					break;
+				}
+			}
 		}
-		else if(round == 1){
-			friend = j1.getPlayerPieces();
-			enemy = j0.getPlayerPieces();
+
+		for(int j = 0; j < friend.get(indice_king).validMoves.size(); j++){
+			int newX = (int)friend.get(indice_king).validMoves.get(j).getX();
+			int newY = (int)friend.get(indice_king).validMoves.get(j).getY();
+			changePosition(newX, newY, friend.get(indice_king));
+			for(int m = 0; m < enemy.size(); m++){
+				for(int n = 0; n < enemy.get(m).validMoves.size(); n++){
+					int newXp = (int)enemy.get(m).validMoves.get(n).getX();
+					int newYp = (int)enemy.get(m).validMoves.get(n).getY();
+					if(newX == newXp && newY == newYp){
+						check_cont++;
+						flag_move_check = 1;
+						break;
+					}
+				}
+				if(flag_move_check == 1){
+					flag_move_check = 0;
+					break;
+				}
+			}
+			undoMove(indice_king);
 		}
+		if(check_cont == (friend.get(indice_king).validMoves.size()-1)){
+			return true;	
+		}
+		else{
+			return false;
+		}
+	}
+
+	public boolean black_check_mate(){
+		ArrayList<Piece> friend = null;
+		ArrayList<Piece> enemy = null;
+		int check_cont = 0;
+		int flag_move_check = 0;
+		int indice_king = 0;
+		enemy = j0.getPlayerPieces();
+		friend = j1.getPlayerPieces();
 		for(int i = 0; i < friend.size(); i++){
 			for(int j = 0; j < friend.get(i).validMoves.size(); j++){
 				if( friend.get(i).getType() == PieceType.KING ){
