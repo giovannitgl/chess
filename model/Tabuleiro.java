@@ -590,13 +590,13 @@ public class Tabuleiro{
 		}
 	}
 	public boolean whiteKingCheck(){
-		ArrayList<Piece> pieces = j0.getPlayerPieces();
+		ArrayList<Piece> pieces = j1.getPlayerPieces();
 		for(Piece pEval : pieces){
 			ArrayList<Point> moves = pEval.validMoves;
 			for(Point p : moves){
 				Piece kingAux = tabuleiro[(int)p.getX()][(int)p.getY()].getPiece();
 				if(kingAux != null){
-					if(kingAux.getType() == PieceType.KING){
+					if(kingAux.getType() == PieceType.KING && kingAux.getTeam() == 0){
 						return true;
 					}
 				}
@@ -605,13 +605,13 @@ public class Tabuleiro{
 		return false;
 	}
 	public boolean blackKingCheck(){
-		ArrayList<Piece> pieces = j1.getPlayerPieces();
+		ArrayList<Piece> pieces = j0.getPlayerPieces();
 		for(Piece pEval : pieces){
 			ArrayList<Point> moves = pEval.validMoves;
 			for(Point p : moves){
 				Piece kingAux = tabuleiro[(int)p.getX()][(int)p.getY()].getPiece();
 				if(kingAux != null){
-					if(kingAux.getType() == PieceType.KING){
+					if(kingAux.getType() == PieceType.KING && kingAux.getTeam() == 1){
 						return true;
 					}
 				}
