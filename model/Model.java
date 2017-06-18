@@ -22,17 +22,21 @@ public final class Model{
 	private Thread roundSych;
 	private int currentTurn;
 	private int selX,selY;
-    private int destX,destY;
+  private int destX,destY;
 	private int dragX,dragY;
 	private int mode;
 	private final int PORT = 5000;
 	RoundState rs;
-	private static final Model INSTANCE = new Model();
-	private Model(){
+
+  private static final Model INSTANCE = new Model();
+
+  // Singleton
+  private Model(){
 		currentTurn = 0;
 		this.isHost = false;
 		rs = RoundState.NOCLICK;
 	}
+
 	public static Model getInstance(){
 		return INSTANCE;
 	}
@@ -44,16 +48,20 @@ public final class Model{
 	public void setView(View v){
 		this.v = v;
 	}
+
 	public void nextRound(){
 		this.currentTurn++;
 		this.currentTurn = currentTurn % 2;
 	}
+
 	public Piece getPiece(int x,int y){
 		return this.t.tabuleiro[x][y].getPiece();
 	}
+
 	public void changePosition(int x, int y, Piece p){
 		this.t.changePosition(x,y,p);
 	}
+
 	public void clickedPanel(int x, int y){
 		switch(rs){
 			case NOCLICK:
@@ -124,10 +132,6 @@ public final class Model{
 						  this.buildIcons();
 			   			currentTurn++;
 			   			currentTurn = currentTurn%2;
-              // TERMINOU
-              if (t.checkKings() == false) {
-                
-              }
 			   	}
 			    this.nextRound();
 			    if(multiplayer)
@@ -165,6 +169,7 @@ public final class Model{
 			this.show();
 		}
 	}
+
 	public void mpClickedMenu(int x){
 		if (x == 0){
 			v.setWaitScreen();
@@ -180,6 +185,7 @@ public final class Model{
 			this.show();
 		}
 	}
+
 	public void buildTabuleiro(){
 		t = new Tabuleiro();
 		v.setTable();
@@ -202,10 +208,12 @@ public final class Model{
 			}
 		}
 	}
+
 	private void show(){
 		v.show();
 	}
 
+  // Socket
 	private void startHost(){
 		System.out.println("AQUI");
 		try{
@@ -233,14 +241,16 @@ public final class Model{
 			System.out.println(client.isConnected());
 			System.out.println("Client = null");
 	}
-	public void connected(){
+
+  public void connected(){
 		synch = new Thread(new MessageListener(in));
 		synch.start();
 		this.multiplayer = true;
 		this.buildTabuleiro();
 		this.show();
 	}
-	public void joinConnection(String s){
+
+  public void joinConnection(String s){
 		try{
 			client = new Socket(s,PORT);
 		}
@@ -259,7 +269,8 @@ public final class Model{
 			this.connected();
 		}
 	}
-	public void getMove(){
+
+  public void getMove(){
 		int x = 0;
 		int y = 0;
 		try{
@@ -270,7 +281,8 @@ public final class Model{
 			System.out.println(e);
 		}
 	}
-	public void sendMove(int x, int y){
+
+  public void sendMove(int x, int y){
 		try{
 			out.writeInt(x);
 			out.flush();
@@ -281,7 +293,8 @@ public final class Model{
 			System.out.println(e);
 		}
 	}
-	public void sendNextRound(){
+
+  public void sendNextRound(){
 		try{
 			out.writeInt(10);
 			out.writeInt(10);
@@ -292,4 +305,6 @@ public final class Model{
 			System.out.println(e);
 		}
 	}
+  //
+
 }
