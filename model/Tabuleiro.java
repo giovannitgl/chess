@@ -227,11 +227,21 @@ public class Tabuleiro{
 	{
 		tabuleiro[x][y].setPiece(piece);
 		piece.setLocation(x,y);
-		if (piece.getTeam()== 1){
-			AI.addPiece(index, piece);
+		if(mode == 1){
+			if (piece.getTeam()== 1){
+				AI.addPiece(index, piece);
+			}
+			else{
+				j0.addPiece(index, piece);
+			}
 		}
 		else{
-			j0.addPiece(index, piece);
+			if(piece.getTeam()== 1){
+				j1.addPiece(index, piece);
+			}
+			else{
+				j0.addPiece(index, piece);
+			}
 		}
 		if(mode == 0){
 			updateValidMove();
@@ -244,13 +254,22 @@ public class Tabuleiro{
 	private void addPiece(Piece piece, int x, int y){
 		tabuleiro[x][y].setPiece(piece);
 		piece.setLocation(x,y);
-		if (piece.getTeam()== 1){
-			AI.addPiece(piece);
+		if(mode == 1){
+			if (piece.getTeam()== 1){
+				AI.addPiece(piece);
+			}
+			else{
+				j0.addPiece(piece);
+			}
 		}
 		else{
-			j0.addPiece(piece);
+			if(piece.getTeam()== 1){
+				j1.addPiece(piece);
+			}
+			else{
+				j0.addPiece(piece);
+			}
 		}
-
 		if(mode == 0){
 			updateValidMove();
 		}
