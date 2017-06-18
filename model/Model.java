@@ -142,6 +142,13 @@ public final class Model{
 	          break;
 	        }
 	    }
+	    if(t.whiteKingCheck()){
+	    	v.setCheck(true,0);
+	    }
+	    else{
+	    	System.out.println("NAO CHEQUE");
+	    	v.setCheck(false,0);
+	    }
 	    v.setPlayerTurn(this.currentTurn);
 	    v.repaint();
 	}
