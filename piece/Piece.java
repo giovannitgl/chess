@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.awt.Point;
 import javax.swing.JLabel;
 
-public class Piece{
-	protected Point location;
+public class Piece {
+  protected Point location;
 	protected PieceType pt;
 	protected int team;
 	public ArrayList<Point> validMoves;
@@ -34,14 +34,9 @@ public class Piece{
 		return;
 	}
 
-	// public void evaluatePosition(int x, int y){
-	// 	return;
-	// }
-
 	public void deletePiece(int x, int y){
 		team = -1;
 		icon = null;
-		//validMoves = null;
 		location.setLocation(x,y);
 	}
 
@@ -56,9 +51,11 @@ public class Piece{
 	public void setLocation(int x, int y){
 		location.setLocation(x,y);
 	}
+
 	public int getTeam(){
 		return this.team;
 	}
+
 	public PieceType getType(){
 		return this.pt;
 	}
@@ -66,13 +63,16 @@ public class Piece{
 	public void setType(PieceType type){
 		this.pt = type;
 	}
+
 	public void setTeam(int x){
 		this.team = x;
 	}
-	public Point getLocation(){
+
+  public Point getLocation(){
 		return this.location;
 	}
-	protected boolean contains(ArrayList<Piece> p, Point pt){
+
+  protected boolean contains(ArrayList<Piece> p, Point pt){
 		for(Piece aux : p){
 			if (aux.getLocation().equals(pt)){
 				return true;
@@ -80,7 +80,9 @@ public class Piece{
 		}
 		return false;
 	}
+
 	public void setFirstMove(boolean t){
 		this.firstMove = t;
 	}
+
 }

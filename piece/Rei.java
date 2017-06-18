@@ -9,8 +9,6 @@ public class Rei extends Piece{
 		super(x, y, time);
 		this.setTeam(time);
 		this.pt = PieceType.KING;
-		if(time == 0){}//Time debaixo
-		else{} //Time de cima
 	}
 
   public void updatePosition(ArrayList<Piece> friends, ArrayList<Piece> enemy){
@@ -19,6 +17,7 @@ public class Rei extends Piece{
     Point aux;
     int newX;
     int newY;
+
     // Norte
     newX = (int)start.getX() - 1;
     newY = (int)start.getY();
@@ -33,6 +32,7 @@ public class Rei extends Piece{
         validMoves.add(aux);
       }
     }
+
     // Sul
     newX = (int)start.getX() + 1;
     newY = (int)start.getY();
@@ -47,6 +47,7 @@ public class Rei extends Piece{
         validMoves.add(aux);
       }
     }
+
     // Leste
     newX = (int)start.getX();
     newY = (int)start.getY() + 1;
@@ -61,6 +62,7 @@ public class Rei extends Piece{
         validMoves.add(aux);
       }
     }
+
     // Oeste
     newX = (int)start.getX();
     newY = (int)start.getY() - 1;
@@ -75,6 +77,7 @@ public class Rei extends Piece{
         validMoves.add(aux);
       }
     }
+
     // Nordeste
     newX = (int)start.getX() - 1;
     newY = (int)start.getY() + 1;
@@ -89,6 +92,7 @@ public class Rei extends Piece{
         validMoves.add(aux);
       }
     }
+
     // Noroeste
     newX = (int)start.getX() - 1;
     newY = (int)start.getY() - 1;
@@ -103,6 +107,7 @@ public class Rei extends Piece{
         validMoves.add(aux);
       }
     }
+
     // Sudeste
     newX = (int)start.getX() + 1;
     newY = (int)start.getY() + 1;
@@ -117,6 +122,7 @@ public class Rei extends Piece{
         validMoves.add(aux);
       }
     }
+
     // Sudoeste
     newX = (int)start.getX() + 1;
     newY = (int)start.getY() - 1;
@@ -132,5 +138,6 @@ public class Rei extends Piece{
       }
     }
     return;
+
   }
 }
