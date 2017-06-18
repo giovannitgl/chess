@@ -216,7 +216,11 @@ public class Tabuleiro{
 		}
 		addPiece(lastPieceMoved, (int)lastPoint.getX(), (int)lastPoint.getY(), index);
 
-		AIupdateValidMove();
+		if(mode == 1)
+			AIupdateValidMove();
+		else{
+			updateValidMove();
+		}
 	}
 
 	private void addPiece(Piece piece, int x, int y, int index)
