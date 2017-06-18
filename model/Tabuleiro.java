@@ -347,9 +347,9 @@ public class Tabuleiro{
 		return tabuleiro[x][y].getPiece().getTeam();
 	}
 
-	public void check_mate(int round, int modo_jogo){
-		ArrayList<Piece> friend;
-		ArrayList<Piece> enemy;
+	public boolean check_mate(int round, int modo_jogo){
+		ArrayList<Piece> friend = null;
+		ArrayList<Piece> enemy = null;
 		int check_cont = 0;
 		int flag_move_check = 0;
 		int indice_king = 0;
@@ -389,7 +389,7 @@ public class Tabuleiro{
 					break;
 				}
 			}
-			undo(indice_king);
+			undoMove(indice_king);
 		}
 		if(check_cont == (friend.get(indice_king).validMoves.size()-1)){
 			return true;	
