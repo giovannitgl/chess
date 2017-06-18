@@ -1,20 +1,10 @@
 package gui;
-import javax.swing.*;
-import java.awt.Color;
 import piece.PieceType;
-import javax.swing.BorderFactory;
-import java.awt.Component;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Cursor;
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.Font;
-import javax.swing.JDialog;
-import java.awt.CardLayout;
-import java.awt.BorderLayout;
 
-public class View{
+import java.awt.*;
+import javax.swing.*;
+
+public class View {
     private BoardPanel [][] panels = new BoardPanel[8][8];
     private JFrame f;
     private JPanel cards;
@@ -46,6 +36,8 @@ public class View{
         l.show(cards,"MENU");
         this.show();
     }
+
+    // Cria o menu principal
     public JPanel createMenu(){
         JPanel f = new JPanel();
         MenuText [] menuText = new MenuText[3];
@@ -69,6 +61,7 @@ public class View{
         f.add(menuPanel[1]);
         return f;
     }
+    // Cria os quadros no tabuleiro
     public JPanel createTable(){
         JPanel f = new JPanel(new BorderLayout());
         p_turn = new JLabel();
@@ -100,6 +93,7 @@ public class View{
         f.add(board, BorderLayout.CENTER);
         return f;
     }
+
     public void setPlayerTurn(int x){
         if(x == 0){
             p_turn.setText("<html>Player Turn: <font color=white>White</font>");
@@ -109,6 +103,7 @@ public class View{
 
         }
     }
+
     public void setCheck(boolean t, int x){
         if (!t){
             this.checkText.setText(" ");
@@ -122,10 +117,10 @@ public class View{
             }
         }
     }
+
     public JPanel createMPMenu(){
         JPanel f = new JPanel(new GridLayout(2,0));
         MenuText [] menuText = new MenuText[3];
-
         JPanel p = new JPanel();
         p.setLayout(new GridLayout(3,0));
         p.setBorder(BorderFactory.createLineBorder(Color.WHITE));
@@ -143,6 +138,7 @@ public class View{
         f.add(p);
         return f;
     }
+
     public JPanel waitScreen(){
         JPanel f = new JPanel(new GridLayout(2,0));
         JPanel p = new JPanel();
@@ -156,23 +152,28 @@ public class View{
         f.add(p);
         return f;
     }
+
     public void setMenu(){
         CardLayout l = (CardLayout) cards.getLayout();
         l.show(cards,"MENU");
 
     }
+
     public void setTable(){
         CardLayout l = (CardLayout) cards.getLayout();
         l.show(cards,"TABLE");
     }
+
     public void setMPMenu(){
         CardLayout l = (CardLayout) cards.getLayout();
         l.show(cards,"MP");
     }
+
     public void setWaitScreen(){
         CardLayout l = (CardLayout) cards.getLayout();
         l.show(cards,"WAIT");
     }
+
     private JPanel gameTitle(){
         JPanel menuPanel = new JPanel();
         menuPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
@@ -180,6 +181,7 @@ public class View{
         menuPanel.add(new JLabel (new ImageIcon(getClass().getResource("/icons/menu.png"))));
         return menuPanel;
     }
+
     public void selectTile(int x, int y){
     	panels[x][y].setBackground(Color.YELLOW);
     	panels[x][y].setBorder(BorderFactory.createLineBorder(Color.black));
@@ -194,23 +196,24 @@ public class View{
     	panels[x][y].setBorder(null);
     }
 
+    // Limpa a peca de um quadrado
     public void clearOneRende(int x, int y){
-    	//Unrender one chess piece
     	this.panels[x][y].removeAll();
     }
+    // Limpa todas as pecas
     public void clearAllRender(){
-    	//Unrender all chess pieces
     	for(int i = 0; i < 8; i ++){
     		for(int j = 0; j < 8; j++){
     			this.panels[i][j].removeAll();
     		}
     	}
     }
-    // }
+
     public void render(){
     	//renders the screen
     	this.show();
     }
+
     public void addPiece(int x, int y, PieceType t, int player){
         JLabel pieceIcon = null;
         switch(player){
@@ -262,12 +265,15 @@ public class View{
         if(pieceIcon != null)
             panels[x][y].add(pieceIcon);
     }
+
     public void makeDialog(){
         String s = JOptionPane.showInputDialog(this.f,"Enter IP","127.0.0.1");
         control.receivedIP(s);
 
     }
+
     public void repaint(){
         this.cards.repaint();
     }
+
 }
