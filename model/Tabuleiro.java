@@ -10,7 +10,7 @@ public class Tabuleiro{
 	Jogador j1;
 	AI_Player AI;
 	int mode;
-
+	Memento m;
 	private int bestMoveX = 0, bestMoveY = 0;
 	private Piece bestPiece = null;
 
@@ -183,6 +183,7 @@ public class Tabuleiro{
 	}
 
 	public void changePosition(int x, int y, Piece p){
+		
 		lastPoint = null;
 		lastPieceTaken = null;
 		lastPieceMoved = p;
@@ -192,6 +193,7 @@ public class Tabuleiro{
 		if(tabuleiro[x][y].getPiece()!=null){
 			lastPieceTaken = tabuleiro[x][y].getPiece();
 		}
+		m = new Memento(lastPieceMoved, lastPieceTaken, lastPoint);
 		removePiece(x,y);
 		tabuleiro[x][y].setPiece(p);
 		tabuleiro[x1][y1].setPiece(null);
@@ -205,6 +207,9 @@ public class Tabuleiro{
 	}
 
 	private void undoMove(int index){
+		lastPieceMoved = m.getPieceMovedSaved();
+		lastPieceTaken = m.getPieceTakenSaved();
+		lastPoint = m.getPointSaved();
 		removePiece((int)lastPieceMoved.getLocation().getX(), (int)lastPieceMoved.getLocation().getY());
 		if(lastPieceTaken!=null){//se movimento comeu alguma peca
 			addPiece(lastPieceTaken, (int)lastPieceMoved.getLocation().getX(), (int)lastPieceMoved.getLocation().getY());
@@ -448,4 +453,29 @@ public class Tabuleiro{
 	public int getBestY(){
 		return this.bestMoveY;
 	}
+
+	public static class Memento{
+		private Piece lastPieceMoved2;
+		private Piece lastPieceTaken2;
+		private Point lastPoint2;
+		public Memento(Piece lastPieceMoved, Piece lastPieceTaken, Point lastPoint){
+			lastPieceMoved2 = lastPieceMoved;
+			lastPieceTaken2 = lastPieceTaken;
+			lastPoint2 = lastPoint;
+		}
+
+		protected Point getPointSaved(){
+			return this.lastPoint2;
+		}  
+		protected Piece getPieceTakenSaved(){
+			return this.lastPieceTaken2;
+		}
+		protected Piece getPieceMovedSaved(){
+			return this.lastPieceMoved2;
+		}
+	}
 }
+
+
+
+
