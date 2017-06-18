@@ -10,8 +10,6 @@ public class Rainha extends Piece{
 		super(x, y, time);
 		this.setTeam(time);
 		this.pt = PieceType.QUEEN;
-		if(time == 0){}//Time debaixo
-		else{} //Time de cima
 	}
 
   public void updatePosition(ArrayList<Piece> friend, ArrayList<Piece> enemy){
@@ -20,8 +18,7 @@ public class Rainha extends Piece{
     Point aux = new Point((int)p.getX(), (int)p.getY());
     int auxX = (int)p.getX();
     int auxY = (int)p.getY();
-  
-  //esquerda
+    //Oeste
     for(int i = auxY-1; i >= 0; i--){
       aux.setLocation(auxX,i);
       if(this.contains(enemy,aux)){
@@ -34,7 +31,8 @@ public class Rainha extends Piece{
       else
         validMoves.add(new Point(auxX,i));
     }
-  //direita
+
+    //Leste
     for(int i = auxY+1; i < 8; i++){
       aux.setLocation(auxX,i);
       if(this.contains(enemy,aux)){
@@ -47,8 +45,9 @@ public class Rainha extends Piece{
       else
         validMoves.add(new Point(auxX,i));
     }
-  //cima
-     for(int i = auxX+1; i < 8; i++){
+
+    //Norte
+    for(int i = auxX+1; i < 8; i++){
       aux.setLocation(i,auxY);
       if(this.contains(enemy,aux)){
         validMoves.add(new Point(i,auxY));
@@ -60,8 +59,9 @@ public class Rainha extends Piece{
       else
         validMoves.add(new Point(i,auxY));
     }
-    //baixo
-      for(int i = auxX-1; i >= 0; i--){
+
+    //Sul
+    for(int i = auxX-1; i >= 0; i--){
       aux.setLocation(i,auxY);
       if(this.contains(enemy,aux)){
         validMoves.add(new Point(i,auxY));
@@ -73,10 +73,11 @@ public class Rainha extends Piece{
       else
         validMoves.add(new Point(i,auxY));
     }
-    //esquerda + cima
-      int i = auxX + 1; // linha
-      int j = auxY - 1; // coluna
-      for(; i < 8 && j >= 0; i++, j--){
+
+    //Sudoeste
+    int i = auxX + 1; // linha
+    int j = auxY - 1; // coluna
+    for(; i < 8 && j >= 0; i++, j--){
       aux.setLocation(i,j);
       if(this.contains(enemy,aux)){
         validMoves.add(new Point(i,j));
@@ -88,9 +89,10 @@ public class Rainha extends Piece{
       else
         validMoves.add(new Point(i,j));
     }
-    //esquerda + baixo
-      i = auxX - 1; // linha
-      j = auxY - 1; // coluna
+
+    //Noroeste
+    i = auxX - 1; // linha
+    j = auxY - 1; // coluna
     for(; i >= 0 && j >= 0; i--, j--){
       aux.setLocation(i,j);
       if(this.contains(enemy,aux)){
@@ -103,7 +105,8 @@ public class Rainha extends Piece{
       else
         validMoves.add(new Point(i,j));
     }
-    //direita + cima
+
+    //Sudeste
     i = auxX + 1; // linha
     j = auxY + 1; // coluna
     for(; i < 8 && j < 8; i++, j++){
@@ -118,7 +121,8 @@ public class Rainha extends Piece{
       else
         validMoves.add(new Point(i,j));
     }
-     //direita + baixo
+
+    //Nordeste
     i = auxX - 1; // linha
     j = auxY + 1; // coluna
     for(; i >= 0 && j < 8; i--, j++){
@@ -134,4 +138,5 @@ public class Rainha extends Piece{
         validMoves.add(new Point(i,j));
     }
   }
+
 }

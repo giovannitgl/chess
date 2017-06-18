@@ -5,14 +5,11 @@ import javax.swing.JLabel;
 
 public class Peao extends Piece{
 
-	// private boolean firstMove;
 	public Peao(int x, int y, int time){
 		super(x, y, time);
 		this.pt = PieceType.PAWN;
 		this.setTeam(time);
 		firstMove = true;
-		// System.out.println("TIME" + this.team);
-		if(time == 0){}//Time debaixo
 	}
 
 	public void updatePosition(ArrayList<Piece> friend, ArrayList<Piece> enemy){
@@ -26,7 +23,7 @@ public class Peao extends Piece{
 					validMoves.add(aux);
 				}
 			}
-			int auxX = (int)pt.getX()+1; 
+			int auxX = (int)pt.getX()+1;
 			int auxY = (int)pt.getY();
 			Point aux = new Point(auxX, auxY);
 			if(auxX < 8 && !this.contains(enemy, aux) && !this.contains(friend,aux)){
@@ -54,7 +51,7 @@ public class Peao extends Piece{
 					validMoves.add(aux);
 				}
 			}
-			int auxX = (int)pt.getX()-1; 
+			int auxX = (int)pt.getX()-1;
 			int auxY = (int)pt.getY();
 			Point aux = new Point(auxX, auxY);
 			if(auxX >= 0 && !this.contains(enemy,aux) && !this.contains(friend,aux)){
