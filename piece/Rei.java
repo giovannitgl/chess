@@ -79,7 +79,7 @@ public class Rei extends Piece{
     newX = (int)start.getX() - 1;
     newY = (int)start.getY() + 1;
     aux  = new Point(newX, newY);
-    if( newY >= 0 && newY < 8 ) {
+    if( newX >= 0 && newY < 8 ) {
       if( contains(friends, aux) ) {
       }
       else if ( contains(enemy, aux) ) {
@@ -93,7 +93,7 @@ public class Rei extends Piece{
     newX = (int)start.getX() - 1;
     newY = (int)start.getY() - 1;
     aux  = new Point(newX, newY);
-    if( newY >= 0 && newY >= 0 ) {
+    if( newX >= 0 && newY >= 0 ) {
       if( contains(friends, aux) ) {
       }
       else if ( contains(enemy, aux) ) {
@@ -107,7 +107,7 @@ public class Rei extends Piece{
     newX = (int)start.getX() + 1;
     newY = (int)start.getY() + 1;
     aux  = new Point(newX, newY);
-    if( newY < 8 && newY < 8 ) {
+    if( newX < 8 && newY < 8 ) {
       if( contains(friends, aux) ) {
       }
       else if ( contains(enemy, aux) ) {
@@ -121,7 +121,7 @@ public class Rei extends Piece{
     newX = (int)start.getX() + 1;
     newY = (int)start.getY() - 1;
     aux  = new Point(newX, newY);
-    if( newY < 8 && newY >= 0 ) {
+    if( newX < 8 && newY >= 0 ) {
       if( contains(friends, aux) ) {
       }
       else if ( contains(enemy, aux) ) {
