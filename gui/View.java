@@ -122,7 +122,28 @@ public class View {
 
         checkText.setText(s);
     }
-
+    public void endGame(int x){
+        String s;
+        if (x == 0){
+            s = "Winner: White Player";
+        }
+        else{
+            s = "Winner: Black Player";
+        }
+        Object[] options = {"End Game"};
+        int n = JOptionPane.showOptionDialog(f,
+        s,
+        "Game Over",
+        JOptionPane.PLAIN_MESSAGE,
+        JOptionPane.DEFAULT_OPTION,
+        null,
+        options,
+        options[0]);
+        if(n == 0){
+            f.dispose();
+        }
+        
+    }
     public JPanel createMPMenu(){
         JPanel f = new JPanel(new GridLayout(2,0));
         MenuText [] menuText = new MenuText[3];

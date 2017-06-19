@@ -149,6 +149,12 @@ public final class Model{
 	    boolean isAI = mode == 1 ? true : false;
 	    boolean whiteKingCheck = t.whiteKingCheck(isAI);
 	    boolean blackKingCheck = t.blackKingCheck();
+	    if(whiteKingCheck){
+	    	v.endGame(1);
+	    }
+	    else if(blackKingCheck){
+	    	v.endGame(0);
+	    }
 	    v.setCheck(whiteKingCheck,blackKingCheck);
 	    v.setPlayerTurn(this.currentTurn);
 	    v.repaint();
