@@ -79,7 +79,6 @@ public class AI_Player {
 			for(int j = 0; j < 8; j++){
 				positionWeight[i][j] = positionWeightAux[i][j];
 			}
-			System.out.println();
 		}
 	}
 
